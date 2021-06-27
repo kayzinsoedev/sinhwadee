@@ -24,7 +24,37 @@
     font-display: swap;
 }
 
-/* by kay */
+
+/*Mega Menu Style*/
+/******* dropdown menu *******/
+
+/* .dropdown-menu.mega-menu{
+  display: block !important;
+} */
+
+.custom-mega-menu{
+  padding-top: 10px;
+}
+
+.dropdown-menu.mega-menu .container{
+  /* width: 1300px; */
+}
+/*
+#main-menu > li.cat-menu {
+  position: inherit !important;
+  height: 150%;
+  display: flex;
+} */
+
+.header-container .header-menu #main-menu li:hover .mega-menu {
+  display: block !important;
+}
+
+
+
+/*Mega Menu Style*/
+
+
 html {
   scroll-behavior: smooth;
 }
@@ -76,17 +106,25 @@ ul.no-dropdown li a {
 .no-dropdown{
   margin-bottom: 0;
 }
-.header-container .header-menu #main-menu a:hover ~ .dropdown-menu.mega-menu{
-      display: block;
-}
+
 .dropdown-menu.mega-menu{
     /* display: block; */
 }
 .custom-category-box h3 {
     display: flex;
     flex-direction: column;
+    color: #121212;
+    font-family: 'Celeste';
+    text-transform: uppercase;
+    font-size: calc(18px + (14 - 12) * (100vw - 320px) / (1920 - 320))!important;
 }
 
+.custom-mega-menu a{
+    color: #000000;
+    font-size: calc(12px + (14 - 12) * (100vw - 320px) / (1920 - 320))!important;
+    font-family: 'Helvetica';
+    text-transform: uppercase;
+}
 .menu-img{
   width: 50%;
 }
@@ -406,7 +444,7 @@ body.product-product #related_blog .slick-nav.right{
     top: calc(50% - 2px);
 }
 
-/* by kay */
+
 
 .container-fluid {
     padding: 0 5vw;

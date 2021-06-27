@@ -38,7 +38,7 @@
                         <div class="col-sm-5">
                             <img src="image/<?= $service['top_image']; ?>" class="img-responsive" alt="oem_image"/>
                         </div>
-                        <div class="infor-desc desc-right w-100">
+                        <div class="infor-desc desc-right w-100 col-sm-7">
                             <h3><?= $service['sub_title']; ?></h3>
                             <div class="desc-container">
                                 <span class="abt-desc"><?php echo html($service['description']); ?></span>

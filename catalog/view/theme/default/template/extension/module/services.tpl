@@ -15,7 +15,7 @@
   </div>
 
     <div class="col-md-9 about-main-div">
-
+      <div class="">
       <?php foreach ($main_categories as $key=> $main_category){ ?>
         <div id="<?=$main_category['main_category_name'];?>" class="category-div">
 
@@ -25,28 +25,32 @@
           <?php if($service['module_status'] == "1"){ ?>
           <?php if ($service['alignment'] == '0') { ?>
               <div id="about-sub-title<?=$key;?>" class="flex about-container">
-                  <div class="infor-desc desc-left w-100">
-                      <h3><?= $service['title']; ?></h3>
-                      <div class="desc-container">
-                          <?php echo html($service['description']); ?>
+                  <div class="section2-desc desc-left col-sm-7">
+                      <div class="desc-container desc-read-more-section1">
+                          <h3><?= $service['title']; ?></h3>
+                          <div class="desc-container">
+                              <span class="abt-desc"><?php echo html($service['description']); ?></span>
+                          </div><br>
                       </div><br>
                   </div>
-                  <div class="w-100 rightimage">
+                  <div class="col-sm-5 rightimage">
                       <img src="image/<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                   </div>
               </div>
           <?php } elseif($service['alignment'] == '1') { ?>
+
               <div id="about-sub-title<?=$key;?>" class="flex about-container">
-                  <div class="w-100">
+                  <div class="col-sm-5">
                       <img src="image/<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                   </div>
-                  <div class="infor-desc desc-right w-100">
+                  <div class="infor-desc desc-right w-100 col-sm-7">
                       <h3><?= $service['title']; ?></h3>
                       <div class="desc-container">
-                          <?php echo html($service['description']); ?>
+                          <span class="abt-desc"><?php echo html($service['description']); ?></span>
                       </div><br>
                   </div>
               </div>
+
           <?php }else{ ?>
               <div id="about-sub-title<?=$key;?>" class="flex about-container">
                   <div class="section3-desc desc-right col-sm-12">
@@ -66,6 +70,8 @@
 
       <?php } ?>
       <!-- main category -->
+
+  </div>
 
   </div>
 

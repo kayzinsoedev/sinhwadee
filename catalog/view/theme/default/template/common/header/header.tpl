@@ -132,3 +132,13 @@
 	<div id="pg-banner-wrap">
 	<?= $page_banner; ?>
 	</div>
+
+
+	<script>
+		$(function() {
+			$('#main-menu li:first-child').addClass('cat-menu');
+			$('#main-menu li:nth-child(2)').addClass('cat-menu');
+			$('#main-menu li:nth-child(3)').addClass('cat-menu');
+			$('#main-menu li:nth-child(4)').addClass('cat-menu');
+		});
+	</script>

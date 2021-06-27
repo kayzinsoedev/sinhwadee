@@ -521,7 +521,7 @@
                                 if($level == 1){
                                     if($sub_menu) {
                                             $menus .= '<div class="custom-category-box">';
-                                            $menus .= '<h3 onclick="window.location.href=\''.$href.'\'" style="cursor:pointer">' . $name . '<img src=image/'.$image.' class="img-responsive menu-img"></h3>'.$sub_menu;
+                                            $menus .= '<h3 onclick="window.location.href=\''.$href.'\'" style="cursor:pointer">' . $name . '</h3><div><img src=image/'.$image.' class="img-responsive menu-img"></div>'.$sub_menu;
                                     }
                                     else{
                                             $menus .= '<div class="custom-category-box">';
@@ -901,8 +901,8 @@
 					$subs_childs = array();
 					$active = '';
 					$sub_categories =  $Modulehelper->get_field ( $oc, $modulename, $language_id, 'slogans');
-
-					foreach($sub_categories as $sub_category){
+					// debug(count($sub_categories));die;
+					foreach($sub_categories as $key=> $sub_category){
 						$sub_active = '';
 
 						if($category['id'] == $sub_category['main_categories'] ){
@@ -914,7 +914,7 @@
 										'new_tab'	=>	0,
 										'child'		=>	'',
 										'active'	=>	$sub_active,
-										'href'		=>	$this->url->link('information/information&information_id=4'),
+										'href'		=>	$this->url->link('information/information&information_id=4#about-sub-title'.$key),
 										'image'  =>   ''
 									);
 						}
@@ -942,7 +942,7 @@
 
 		private function fill_service_categories(&$menus){
 
-			/* call about us module */
+			/* call servie module */
 			$this->load->library('modulehelper');
 			$Modulehelper = Modulehelper::get_instance($this->registry);
 			$oc = $this;
@@ -985,7 +985,7 @@
 					$active = '';
 					$sub_categories =  $Modulehelper->get_field ( $oc, $modulename, $language_id, 'services');
 
-					foreach($sub_categories as $sub_category){
+					foreach($sub_categories as  $key=> $sub_category){
 						$sub_active = '';
 
 						if($category['id'] == $sub_category['main_categories'] ){
@@ -997,7 +997,7 @@
 										'new_tab'	=>	0,
 										'child'		=>	'',
 										'active'	=>	$sub_active,
-										'href'		=>	$this->url->link('information/information&information_id=7'),
+										'href'		=>	$this->url->link('information/information&information_id=7#about-sub-title'.$key),
 										'image'  =>   ''
 									);
 						}
@@ -1069,7 +1069,7 @@
 					$active = '';
 					$sub_categories =  $Modulehelper->get_field ( $oc, $modulename, $language_id, 'oem_services');
 
-					foreach($sub_categories as $sub_category){
+					foreach($sub_categories as $key=> $sub_category){
 						$sub_active = '';
 							// debug($sub_category);
 						if($category['id'] == $sub_category['main_categories'] ){
@@ -1081,7 +1081,7 @@
 										'new_tab'	=>	0,
 										'child'		=>	'',
 										'active'	=>	$sub_active,
-										'href'		=>	$this->url->link('information/information&information_id=8'),
+										'href'		=>	$this->url->link('information/information&information_id=8#about-sub-title'.$key),
 										'image'  =>   ''
 									);
 						}
