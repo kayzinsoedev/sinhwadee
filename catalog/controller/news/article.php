@@ -143,6 +143,7 @@ class ControllerNewsArticle extends Controller {
 					$data['route']=$this->request->get['route'];
 			}
 
+
 			if (!$this->config->get('ncategory_bnews_tplpick')) {
 				if (version_compare(VERSION, '2.2.0.0') >= 0) {
 					$this->response->setOutput($this->load->view('news/layout', $data));

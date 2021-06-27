@@ -8,8 +8,10 @@
   </ul>
   <br><br><br>
   <h2 class="hidden"><?php echo $heading_title; ?></h2>
-
+  <!-- <?php debug($route);?> -->
   <?php if($cat_id == "59"){ ?>
+      <?php if(isset($route)){ ?>
+      <?php if($route != "news/article" ){ ?>
       <div class="container-fluid">
             <form action="<?=$action;?>" method="post">
                   <div class="row filter-section">
@@ -25,8 +27,7 @@
            								 <div class="form-group">
            										<label for="recipes_sauce" class="recipes-filter">Sauces</label>
            											<select name="recipes_sauce" class="form-control">
-                                  <option value="All Sauces">All Sauces</option>
-
+                                  <option value="all">All Sauces</option>
            												<?php foreach($recipes_sauces as $key=> $recipes_sauce){ ?>
                                         <?php if($recipes_sauce['id'] === $recipes_filter_sauce){ ?>
                                             <?php $selected ="selected"; ?>
@@ -43,7 +44,7 @@
            								 <div class="form-group">
            											<label for="recipes_sauce" class="recipes-filter">Cooking Method</label>
            												<select name="recipes_cooking_method" class="form-control">
-                                         <option value="All Cooking Method">All Cooking Method</option>
+                                         <option value="all">All Cooking Method</option>
            												 <?php foreach($recipes_cooking_methods as $key=> $recipes_cooking_method){ ?>
 
                                          <?php if($recipes_cooking_method['id'] === $recipes_filter_cooking_method){ ?>
@@ -62,7 +63,7 @@
            								<div class="form-group">
            										 <label for="recipes_sauce" class="recipes-filter">Main Ingredients</label>
            											 <select name="recipes_main_ingredient" class="form-control">
-                                        <option value="All Main Ingredients">All Main Ingredients</option>
+                                        <option value="all">All Main Ingredients</option>
            												 <?php foreach($recipes_main_ingredients as $key=> $recipes_main_ingredient){ ?>
                                        <?php if($recipes_main_ingredient['id'] === $recipes_filter_main_ingredient){ ?>
                                            <?php $selected ="selected"; ?>
@@ -84,6 +85,8 @@
                </div>
             </form>
         </div>
+        <?php } ?>
+        <?php } ?>
 
   <?php } ?>
 
@@ -105,7 +108,7 @@
 
 
 
-    <!-- <?php include_once('filter_recipes_list.tpl'); ?> -->
+    <?php include_once('filter_recipes_list.tpl'); ?>
 
 
 

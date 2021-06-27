@@ -63,15 +63,28 @@ class ModelCatalogncategory extends Model {
 
 
 	public function getSauceNews($id){
-			$query = $this->db->query("SELECT news_id FROM news_recipes_sauces WHERE sauce_id = '" . (int)$id . "' ");
+			if($id == "all"){
+					$query = $this->db->query("SELECT news_id FROM news_recipes_sauces");
+			}else{
+					$query = $this->db->query("SELECT news_id FROM news_recipes_sauces WHERE sauce_id = '" . (int)$id . "' ");
+			}
 			return $query->rows;
 	}
 	public function getCookingMethodNews($id){
-			$query = $this->db->query("SELECT news_id FROM news_recipes_cooking_method WHERE 	cooking_method_id = '" . (int)$id . "' ");
+			if($id == "all"){
+					$query = $this->db->query("SELECT news_id FROM news_recipes_cooking_method");
+			}else{
+					$query = $this->db->query("SELECT news_id FROM news_recipes_cooking_method WHERE 	cooking_method_id = '" . (int)$id . "' ");
+			}
 			return $query->rows;
 	}
+
 	public function getIngredientNews($id){
-			$query = $this->db->query("SELECT news_id FROM news_recipes_main_ingredients WHERE main_ingredients_id = '" . (int)$id . "' ");
+			if($id == "all"){
+					$query = $this->db->query("SELECT news_id FROM news_recipes_main_ingredients");
+			}else{
+					$query = $this->db->query("SELECT news_id FROM news_recipes_main_ingredients WHERE main_ingredients_id = '" . (int)$id . "' ");
+			}
 			return $query->rows;
 	}
 

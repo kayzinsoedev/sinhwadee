@@ -62,12 +62,11 @@ class ModelCatalogNews extends Model {
 			$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
 
 			if(!empty($news_id) && empty($keyword)){
-				debug("if1");die;
+				// debug($news_id);die;
 				foreach ($news_id as $key => $value) {
 						$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE n.news_id = '" . (int)$value . "'  AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
 
 						if ($query->num_rows) {
-
 							$article[] =array(
 								'news_id'          => $query->row['news_id'],
 								'title'            => $query->row['title'],
@@ -101,15 +100,23 @@ class ModelCatalogNews extends Model {
 								'gal_slider_t'     => $query->row['gal_slider_t'],
 								'download_file'		 => $query->row['download_file'],
 							);
-						} else {
-							return false;
+							// debug($article);die;
 						}
-				}
-			}else{
-				$article[] =array();
-			}
 
-			if(!empty($keyword) && empty($news_id)){
+						// else {
+						// 	return false;
+						// }
+
+				}
+				// debug($article);die;
+				// return $article;
+
+			}
+			// else{
+			// 	$article[] =array();
+			// }
+
+			else if(!empty($keyword) && empty($news_id)){
 				// debug("if2");die;
 				$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND nd.title LIKE '%" . $keyword . "%' OR nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
 
@@ -146,17 +153,20 @@ class ModelCatalogNews extends Model {
 							'gal_slider_t'     => $query->row['gal_slider_t'],
 							'download_file'		 => $query->row['download_file'],
 						);
-				}else{
-						return false;
 				}
+				// else{
+				// 		return false;
+				// }
 
 			}
 
 
-			if(!empty($news_id) && !empty($keyword) ){
+			else if(!empty($news_id) && !empty($keyword) ){
 				// debug($news_id);die;
 				foreach ($news_id as $key => $value) {
-							$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' OR nd.title LIKE '%" . $keyword . "%' AND nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
+							// $query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' OR nd.title LIKE '%" . $keyword . "%' AND nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
+							$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
+
 							if ($query->num_rows) {
 								$article[] =array(
 									'news_id'          => $query->row['news_id'],
@@ -190,13 +200,16 @@ class ModelCatalogNews extends Model {
 									'gal_slider_t'     => $query->row['gal_slider_t'],
 									'download_file'		 => $query->row['download_file'],
 								);
-								// debug($article);die;
-							} else {
-								return false;
+								// debug($article);
 							}
+							// else {
+							// 	return false;
+							// }
 				}
 
-			}else{
+			}
+
+			else{
 				$article[] =array();
 			}
 
@@ -205,7 +218,7 @@ class ModelCatalogNews extends Model {
 				return $article;
 
 		}else{
-
+			// debug("else");die;
 				$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE n.news_id = '" . (int)$news_id . "'  AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
 				// debug($query->row);die;
 				if ($query->num_rows) {
@@ -250,7 +263,7 @@ class ModelCatalogNews extends Model {
 	}
 
 	public function getNews($data = array(),$news_ids=null,$keyword=null) {
-		// debug($data);die;
+		// debug($news_ids);die;
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
 		$group_restriction_join = $this->config->get('ncategory_bnews_restrictgroup') ? " LEFT JOIN " . DB_PREFIX . "sb_news_to_group n2g ON (n.news_id = n2g.news_id) " : '';
@@ -364,7 +377,7 @@ class ModelCatalogNews extends Model {
 
 
 		if(isset($news_ids) || isset($keyword)){
-			// debug($keyword);die;
+			// debug($news_ids);die;
 				$articles_data = $this->getNewsStory($news_ids,$keyword);
 		}else{
 				// debug("else");die;

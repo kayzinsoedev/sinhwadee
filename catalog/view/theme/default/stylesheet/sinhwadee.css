@@ -330,21 +330,27 @@ body.product-product #related_blog .slick-nav.right{
     flex: 0 0 40%;
     margin-right: 15px;
 }
-.recipes-list-title{
+.recipes-list-title h3{
   font-family: 'Celeste';
   color: #121212;
-  font-size: calc(5px + (35 - 22) * (100vw - 320px) / (1920 - 320)) !important;
+  font-size: calc(10px + (35 - 22) * (100vw - 320px) / (1920 - 320)) !important;
   font-weight: bold;
   text-transform: uppercase;;
 }
 .recipes-list{
     /* font-family: 'Celeste'; */
     color: #121212;
-    font-size: calc(5px + (35 - 22) * (100vw - 320px) / (1920 - 320)) !important;
+    font-size: calc(3px + (35 - 22) * (100vw - 320px) / (1920 - 320)) !important;
     font-weight: bold;
     font-family: 'Helvetica';
 }
 
+.filter-recipes-list{
+  margin-top: 10px;
+}
+.filter-recipes-title {
+    margin-bottom: 10px;
+}
 .list-group-item .year-wrap .caret:before {
     content: "\f067";
     font: normal normal normal 14px/1 FontAwesome;
@@ -389,6 +395,17 @@ body.product-product #related_blog .slick-nav.right{
 #articles-column-left .list-group-item a{
     color: #000000;
 }
+
+
+.filter-recipes-list h3:after{
+    content: " ";
+    display: block;
+    height: 1px;
+    background: #eae7e7;
+    left: 100%;
+    top: calc(50% - 2px);
+}
+
 /* by kay */
 
 .container-fluid {

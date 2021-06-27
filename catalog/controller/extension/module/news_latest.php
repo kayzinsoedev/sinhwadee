@@ -92,6 +92,7 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 			if ($news_total > $setting['news_limit']) $data['text_headlines'] = $this->language->get('text_search_more');
 		} elseif ($setting['ncategory_id'] == 'all' || !isset($catexists)) {
 			$sdata = array(
+					'filter_ncategory_id' => '59',  /*recipes blog*/
 					'start'           => 0,
 					'limit'           => $setting['news_limit']
 			);
@@ -115,6 +116,8 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 		} else {
 				$elements = array("name","image","da","du","author","category","desc","button","com","custom1","custom2","custom3","custom4");
 		}
+
+		// debug($results);die;
 
 		if(!empty($results)){
 		foreach ($results as $result) {
@@ -183,7 +186,8 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 				} else {
 					$category = '';
 				}
-				$href = $this->url->link('news/article', 'news_id=' . $result['news_id']);
+				// $href = $this->url->link('news/article', 'news_id=' . $result['news_id']);
+				$href = $this->url->link('news/article&ncat=59', 'news_id=' . $result['news_id']);
 
 				$data['article'][] = array(
 					'article_id'  => $result['news_id'],
@@ -213,7 +217,9 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 		if(isset($this->request->get['ncat'])){
 				$data['cat_id']=$this->request->get['ncat'];
 		}
-	
+
+
+		// debug($data['article']);die;
 
 		return $this->load->view('extension/module/news_latest', $data);
 

@@ -1,7 +1,7 @@
 <?php
 class ControllerNewsRecipesList extends Controller {
     public function index($article,$post,$page) {
-      debug($article);die;
+      debug("ss");die;
         if(isset($post['receipt_sauce'])
           || isset($post['receipt_cooking_method'])
           || isset($post['receipt_main_ingredient'])
@@ -40,8 +40,8 @@ class ControllerNewsRecipesList extends Controller {
 
             $data['$filter_recipes_pagination'] = sprintf($this->language->get('text_pagination'), ($total_recipes) ? (($page - 1) * $recipes_limit) + 1 : 0, ((($page - 1) * $recipes_limit) > ($total_recipes - $recipes_limit)) ? $total_recipes : ((($page - 1) * $recipes_limit) + $recipes_limit), $total_recipes, ceil($total_recipes / $recipes_limit));
             // debug($data);die;
-
-            return $this->load->view('default/template/news/filter_recipes_list.tpl', $data);
+            return "please";
+            // return $this->load->view('default/template/news/filter_recipes_list.tpl', $data);
         }
 
     }

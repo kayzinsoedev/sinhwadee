@@ -1,22 +1,22 @@
-<?php  
+<?php
 class ControllerExtensionModuleNewsArchive extends Controller {
 	public function index() {
 
 		$this->language->load('extension/module/news_archive');
-		
+
     	$data['heading_title'] = $this->language->get('heading_title');
     	$data['text_categories'] = $this->language->get('text_categories');
     	$data['text_year'] = $this->language->get('text_year');
     	$data['button_filter'] = $this->language->get('button_filter');
-		
+
 		$months = $this->config->get('news_archive_months');
-		
+
 		$data['archives'] = array();
-		
+
 		$lid = $this->config->get('config_language_id');
-		
+
 		$m_name = array();
-		
+
 		$m_name[1] = (isset($months['jan'][$lid]) && $months['jan'][$lid]) ? $months['jan'][$lid] : 'January';
 		$m_name[2] = (isset($months['feb'][$lid]) && $months['feb'][$lid]) ? $months['feb'][$lid] : 'February';
 		$m_name[3] = (isset($months['march'][$lid]) && $months['march'][$lid]) ? $months['march'][$lid] : 'March';
@@ -29,11 +29,11 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 		$m_name[10] = (isset($months['oct'][$lid]) && $months['oct'][$lid]) ? $months['oct'][$lid] : 'October';
 		$m_name[11] = (isset($months['nov'][$lid]) && $months['nov'][$lid]) ? $months['nov'][$lid] : 'November';
 		$m_name[12] = (isset($months['dec'][$lid]) && $months['dec'][$lid]) ? $months['dec'][$lid] : 'December';
-		
+
 		$this->load->model('catalog/news');
-		
+
 		$years = $this->model_catalog_news->getArchive();
-		
+
 		foreach ($years as $year) {
 			$data_month = array();
 			$total = 0;
@@ -45,7 +45,7 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 					'name' => $m_name[$mo],
 					'href' => $this->url->link('news/ncategory', 'archive=' . $year['year'] . '-' . $mo),
 					'num' => $mo,
-				);	
+				);
 			}
 			$data['archives'][] = array(
 				'year' => $year['year'],
@@ -54,9 +54,14 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 			);
 		}
 
+
+		$parent_id = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : 0 ;
+		// debug($parent_id);die;
 		//debug($this->model_catalog_news->getNewsCategories());
-		$data['categories'] = array(); 
-		$ctgrs = $this->model_catalog_news->getNewsCategories(array('parent_id' => 0));
+		$data['categories'] = array();
+		// $ctgrs = $this->model_catalog_news->getNewsCategories(array('parent_id' => 0));
+		$ctgrs = $this->model_catalog_news->getNewsCategories(array('parent_id' => $parent_id));
+
 		foreach($ctgrs as $c) {
 			$data['categories'][] = array(
 				'url' => $this->url->link('news/ncategory', 'ncat='.$c['ncategory_id']),
@@ -64,12 +69,13 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 				'ncategory_id' => $c['ncategory_id'],
 			);
 		}
-		
+
 		$data['ncategory_id'] = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : '';
 		$data['archive_query'] = isset($this->request->get['archive']) ? $this->request->get['archive'] : '';
 		$data['achive_yr'] = isset($this->request->get['archive']) ? explode('-', $this->request->get['archive'])[0] : '';
 
+		// debug($data['categories']);die;
 		return $this->load->view('extension/module/news_archive', $data);
-		
+
   	}
 }
