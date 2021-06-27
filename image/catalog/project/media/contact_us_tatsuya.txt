@@ -1,0 +1,41 @@
+
+Message Us
+
+We always look forward to hearing our customers' feedback. Reach out to us by completing the contact form.
+
+[contact-form-7 id="5" title="Contact Form"]
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="mg-b15">
+      [text* your-name placeholder "Name"]
+    </div>
+  </div>
+   <div class="pd-md-l0 col-md-6">
+    <div class="mg-b15">
+      [text* your-contact placeholder "Contact No"]
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="mg-b15">
+      [email* your-email placeholder "Email"]
+    </div>
+  </div>
+   <div class="pd-md-l0 col-md-6">
+    <div class="mg-b15">
+      [text* your-subject placeholder "Subject"]
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="mg-b15">
+      [textarea* your-message placeholder "Message"]
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="text-center">
+      [recaptcha][submit class:btn "Submit"]
+    </div>
+  </div>
+</div>

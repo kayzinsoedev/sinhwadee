@@ -1,0 +1,11 @@
+<p>[text_new_enquiry]</p>
+<p>
+    [text_subject]<br/>
+    [text_name]<br/>
+    [text_mail]<br/>
+    [text_contact]<br/>
+    [text_position]<br/>
+</p>
+<p>[text_address]</p>
+<p>[text_cvfile]</p>
+<p>&nbsp;</p>
