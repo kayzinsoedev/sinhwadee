@@ -444,7 +444,10 @@ body.product-product #related_blog .slick-nav.right{
     top: calc(50% - 2px);
 }
 
-
+body.common-home .featured .slick-no-slide{
+    margin-left: 0 !important;
+    margin-right: 0!important;
+}
 
 .container-fluid {
     padding: 0 5vw;

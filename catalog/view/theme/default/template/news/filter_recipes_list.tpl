@@ -49,5 +49,7 @@
 						</div>
 
 
-		<div class="text-center pd-b60"><?php echo $filter_recipes_pagination; ?></div>
+
+		<!-- <div class="text-center pd-b60"><?php echo $pagination; ?></div> -->
 <?php } ?>
+<div class="text-center pd-b60"><?=$filter_recipes_pagination; ?></div>
