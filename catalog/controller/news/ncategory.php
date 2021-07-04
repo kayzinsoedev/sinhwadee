@@ -16,11 +16,12 @@ class ControllerNewsNcategory extends Controller {
       		'separator' => false
    		);
 
-	    $data['breadcrumbs'][] = array(
-   	    	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('news/ncategory')
-        );
+	    // $data['breadcrumbs'][] = array(
+   	  //   	'text'      => $this->language->get('heading_title'),
+			// 		'href'      => $this->url->link('news/ncategory')
+      //   );
 
+				// debug($data['breadcrumbs']);die;
 		$url = '';
 
 		if (isset($this->request->get['page'])) {
@@ -48,6 +49,7 @@ class ControllerNewsNcategory extends Controller {
         			);
 				}
 			}
+
 			$ncategory_id = array_pop($parts);
 			$this->document->addLink($this->url->link('news/ncategory', 'ncat=' . $ncategory_id), 'canonical');
 		} else {
@@ -80,6 +82,7 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 		}
+
 
 		$ncategory_info = $this->model_catalog_ncategory->getncategory($ncategory_id);
 
@@ -122,7 +125,7 @@ class ControllerNewsNcategory extends Controller {
 		if ($archive) {
 	       	$data['breadcrumbs'][] = array(
    	    		'text'      => $this->language->get('heading_title_archive') . $month_name . ' ' . $year,
-				'href'      => $this->url->link('news/ncategory', 'archive=' . $year . '-' . $month)
+						'href'      => $this->url->link('news/ncategory', 'archive=' . $year . '-' . $month)
         	);
 			$data['heading_title'] = $this->language->get('heading_title_archive') . $month_name . ' ' . $year;
 			$this->document->setTitle($this->language->get('heading_title_archive') . $month_name . ' ' . $year);
@@ -344,6 +347,9 @@ class ControllerNewsNcategory extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
+
+
+
 
 			if (version_compare(VERSION, '2.2.0.0') >= 0) {
 				$this->response->setOutput($this->load->view('error/not_found', $data));
@@ -706,7 +712,7 @@ class ControllerNewsNcategory extends Controller {
 				$data['cat_id']=$this->request->get['ncat'];
 		}
 
-		// debug($data['pagination']);die;
+
 		if (version_compare(VERSION, '2.2.0.0') >= 0) {
 			return $this->load->view('news/ncategory', $data);
 		} else {
