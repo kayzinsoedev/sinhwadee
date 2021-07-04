@@ -16,7 +16,7 @@
 															<?php foreach($recipes_article['sauces'] as $sauce){ ?>
 																	<?php foreach($recipes_sauces as $recipes_sauce){ ?>
 																				<?php if($recipes_sauce['id']==$sauce['sauce_id']){ ?>
-																								<span class="recipes-list"><?=$key.". ";?></span><?=$recipes_sauce['title'].",";?>
+																								<span class="recipes-list"></span><?=$recipes_sauce['title'].",";?>
 																				<?php } ?>
 																	<?php } ?>
 															<?php } ?>
@@ -27,7 +27,7 @@
 															<?php foreach($recipes_article['ingredients'] as $ingredient){ ?>
 																	<?php foreach($recipes_main_ingredients as $recipes_main_ingredient){ ?>
 																				<?php if($recipes_main_ingredient['id']==$ingredient['main_ingredients_id']){ ?>
-																								<span class="recipes-list"><?=$key.". ";?></span><?=$recipes_main_ingredient['title'].",";?>
+																								<span class="recipes-list"></span><?=$recipes_main_ingredient['title'].",";?>
 																				<?php } ?>
 																	<?php } ?>
 															<?php } ?>
@@ -38,7 +38,7 @@
 															<?php foreach($recipes_article['cooking_method'] as $cooking_method){ ?>
 																	<?php foreach($recipes_cooking_methods as $recipes_cooking_method){ ?>
 																				<?php if($recipes_cooking_method['id']== $cooking_method['cooking_method_id']){ ?>
-																								<span class="recipes-list"><?=$key.". ";?></span><?=$recipes_cooking_method['title'].",";?>
+																								<span class="recipes-list"></span><?=$recipes_cooking_method['title'].",";?>
 																				<?php } ?>
 																	<?php } ?>
 															<?php } ?>
