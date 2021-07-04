@@ -194,12 +194,13 @@ class ControllerNewsNcategory extends Controller {
                 'name'        => $value['title'],
                 'sauces'      => $sauce_ids,
                 'ingredients' => $ingredients_ids,
-                'cooking_method' => $cooking_methods_ids
+                'cooking_method' => $cooking_methods_ids,
+								'link' 				=> $this->url->link('news/article', 'ncat=' . $ncategory_id . '&news_id=' . $value['news_id'])
 
               );
            }
 
-					 // debug($data['filter_recipes_list']);die;
+
 
 					 if (isset($this->request->get['page'])) {
 			 			$page = (int)$this->request->get['page'];
@@ -288,7 +289,7 @@ class ControllerNewsNcategory extends Controller {
 			$data['recipes_main_ingredients'] = $Modulehelper->get_field ($oc, $recipes_main_ingredient_modulename, $language_id, 'recipes_main_ingredient');
 
 
-			// debug($data['recipes_articles']);die;
+
 
 
 			if (!$this->config->get('ncategory_bnews_tplpick')) {

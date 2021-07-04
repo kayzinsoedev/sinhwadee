@@ -10,7 +10,7 @@
 									<?php foreach ($filter_recipes_list as $key=> $recipes_article) { ?>
 											<div class="row">
 												 <?php $key++; ?>
-														<div class="col-md-3 recipes-list"><span><?=$key.". ";?></span><?=$recipes_article['name'];?></div>
+														<a href="<?=$recipes_article['link'];?>"><div class="col-md-3 recipes-list"><span><?=$key.". ";?></span><?=$recipes_article['name'];?></div></a>
 														<div class="col-md-3 recipes-list">
 															<!-- Sauces -->
 															<?php foreach($recipes_article['sauces'] as $sauce){ ?>

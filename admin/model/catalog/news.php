@@ -111,6 +111,7 @@ class ModelCatalogNews extends Model {
 
 		/*update related product*/
 		// debug($data['product_related']);
+		// debug(count($data['product_related']));die;
 		if (count($data['product_related']) > 0) {
 			$this->db->query("DELETE FROM " . DB_PREFIX . "related_blog_product WHERE news_id = '" . (int)$news_id . "' ");
 			foreach ($data['product_related'] as $product_id) {
