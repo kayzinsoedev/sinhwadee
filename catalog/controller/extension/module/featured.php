@@ -84,6 +84,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 
 	public function related_products_list($news_id){
+		// debug($news_id);die;
 			$blog_products = $this->model_catalog_product->getProductRelatedBlog($news_id);
 			$this->load->model('catalog/product');
 			if(!empty($blog_products)){

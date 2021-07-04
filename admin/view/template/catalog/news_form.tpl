@@ -156,7 +156,7 @@
                             <?php
                                      $selected = ($selected_recipes_sauce['sauce_id'] == $recipes_sauce['id']) ? 'selected' : ''; ?>
                                      <option value="<?=$recipes_sauce['id'];?>" <?=$selected;?> ><?=$recipes_sauce['title'];?></option>
-                          
+
                    <?php  } ?>
                 </select>
               </div>

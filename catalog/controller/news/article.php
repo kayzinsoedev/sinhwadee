@@ -664,7 +664,7 @@ class ControllerNewsArticle extends Controller {
 
 		$data['related_products_slider'] = $this->load->controller('extension/module/featured/related_products', $data_mimick_module);
 
-
+		// debug($data['related_products']);die;
 		if (version_compare(VERSION, '2.2.0.0') >= 0) {
 			return $this->load->view('news/article', $data);
 		} else {

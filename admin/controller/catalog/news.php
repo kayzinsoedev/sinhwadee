@@ -918,22 +918,23 @@ class ControllerCatalogNews extends Controller {
 		/*related product */
 		if (isset($this->request->post['product_related'])) {
 			// debug("if");
-			$products = $this->request->post['product_related'];
+			$blog_products = $this->request->post['product_related'];
 		} elseif (isset($this->request->get['news_id'])) {
 			// debug("elseif");
-			$products = $this->model_catalog_product->getProductRelatedForBlog($this->request->get['news_id']);
+			$blog_products = $this->model_catalog_product->getProductRelatedForBlog($this->request->get['news_id']);
 		} else {
 			// debug("else");
-			$products = array();
+			$blog_products = array();
 		}
 
-
+		// debug($blog_products);die;
 
 		$data['product_relateds'] = array();
-		if (!empty($this->request->post['product_related'])) {
-				foreach ($products as $product_id) {
+		// if (!empty($this->request->post['product_related'])) {
+
+				foreach ($blog_products as $product_id) {
 					$related_info = $this->model_catalog_product->getProduct($product_id);
-								// debug($related_info);
+								// debug($related_info);die;
 					if ($related_info) {
 						$data['product_relateds'][] = array(
 							'product_id' => $related_info['product_id'],
@@ -941,7 +942,8 @@ class ControllerCatalogNews extends Controller {
 						);
 					}
 				}
-		}
+		// }
+
 
 		/*related product */
 
