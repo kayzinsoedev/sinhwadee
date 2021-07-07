@@ -32,6 +32,11 @@
   display: block !important;
 } */
 
+.dropdown-menu.mega-menu .container:not(.cat-menu .dropdown-menu.mega-menu .container)
+{
+    width: auto !important;
+}
+
 .custom-mega-menu{
   padding-top: 10px;
 }
@@ -129,7 +134,9 @@ ul.no-dropdown li a {
   width: 50%;
 }
 
-.custom-category-box {
+.cat-menu .dropdown-menu.mega-menu .container .custom-category-box
+/* .custom-category-box  */
+{
     width: 33.3%;
     padding: 10px;
 }
