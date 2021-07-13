@@ -540,7 +540,7 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 
-			// debug($results);die;
+			debug($results);die;
 			foreach ($results as $key=> $result) {
 				if(!empty($result)){
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
@@ -713,6 +713,8 @@ class ControllerNewsNcategory extends Controller {
 				$data['cat_id']=$this->request->get['ncat'];
 		}
 
+
+		// debug($data['article']);die;
 
 		if (version_compare(VERSION, '2.2.0.0') >= 0) {
 			return $this->load->view('news/ncategory', $data);

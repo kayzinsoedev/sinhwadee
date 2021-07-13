@@ -134,6 +134,10 @@ ul.no-dropdown li a {
   width: 50%;
 }
 
+.custom-mega-menu a{
+  font-size: calc(10px + (14 - 12) * (100vw - 320px) / (1920 - 320))!important;
+}
+
 .cat-menu .dropdown-menu.mega-menu .container .custom-category-box
 /* .custom-category-box  */
 {
