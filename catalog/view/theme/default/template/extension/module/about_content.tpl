@@ -31,13 +31,18 @@
                             </div><br>
                         </div>
                         <div class="col-sm-5 rightimage">
-                            <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                            <?php if(!empty($slogan['top_image'])){ ?>
+                                  <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                            <?php } ?>
+
                         </div>
                     </div>
                 <?php } elseif($slogan['alignment'] == '1') { ?>
                     <div id="about-sub-title<?=$key;?>" class="flex about-container">
                         <div class="col-sm-5">
-                            <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                            <?php if(!empty($slogan['top_image'])){ ?>
+                                  <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                            <?php } ?>
                         </div>
                         <div class="section2-desc desc-right col-sm-7">
                             <div class="desc-container desc-read-more-section2">
