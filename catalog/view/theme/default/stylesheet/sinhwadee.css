@@ -968,6 +968,7 @@ footer .footer-contact-info h5 {
 body.product-product .to-overlay
 {
     background-color: rgba(239, 239, 239, 0.8)!important;
+    height: 100%;
 }
 .hover-overlay .to-overlay .fa-2em:before {
     color: #505050!important;
@@ -1165,6 +1166,21 @@ body.product-product .article-name a:hover
     padding: 12px;
 }
 
+
+.service-img {
+    width: 30%;
+}
+
+.desc-right.service-content{
+  width: 70%;
+  margin-left: 20px;
+}
+
+.desc-left.service-content{
+    width: 70%;
+    margin-right: 20px;
+}
+
 @media (max-width: 1600px) {
     .news-ncategory iframe {
         min-height: 405px!important;
@@ -1336,7 +1352,11 @@ body.product-product .article-name a:hover
     }
     .about_content .desc-right .desc-container,
     .services-section .desc-right .desc-container,
-    .oem-section .desc-right .desc-container {
+    .services-section .desc-left .desc-container,
+    .oem-section .desc-right .desc-container,
+    .oem-section .desc-left .desc-container
+
+    {
         padding-left: 0;
         margin-top: 1.5em;
     }
@@ -1386,6 +1406,26 @@ body.product-product .article-name a:hover
         max-width: 180px;
         margin: 0 auto;
     }
+
+
+    .service-img {
+        width: 100%;
+    }
+    .desc-right.service-content
+    {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .reverse-container{
+      flex-direction: column-reverse !important;
+    }
+
+    .desc-left.service-content{
+        width: 100%;
+        margin-right: 0;
+    }
+
 }
 @media (max-width: 420px) {
     .filter-section{

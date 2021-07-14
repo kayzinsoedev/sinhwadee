@@ -34,7 +34,6 @@
                             <?php if(!empty($slogan['top_image'])){ ?>
                                   <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                             <?php } ?>
-
                         </div>
                     </div>
                 <?php } elseif($slogan['alignment'] == '1') { ?>

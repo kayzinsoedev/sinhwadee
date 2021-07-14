@@ -540,7 +540,7 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 
-			debug($results);die;
+			// debug($results);die;
 			foreach ($results as $key=> $result) {
 				if(!empty($result)){
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';

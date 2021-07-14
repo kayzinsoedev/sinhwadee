@@ -21,6 +21,7 @@
 				<?php } ?>
 
 					<?php if ($articles['video']) { ?>
+						<!-- <?php debug("if");?> -->
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');"></div>
 						<div class="cover-bg video-media center-bg pd-b80p hidden">
 									<img src="<?php echo $articles['thumb']; ?>" class="img-responsive"/ data-pop="<?=$articles['video']; ?>" >
@@ -29,8 +30,10 @@
 						<img class="article-image img-responsive" src="" title="<?php echo $articles['name']; ?>" alt="<?php echo $articles['name']; ?>" />
 						<?php */ ?>
 					<?php } else { ?>
+						<!-- <?php debug("else");?> -->
 						<?php if ($articles['thumb']) { ?>
 						<?php if($cat_id == "59" || $cat_id == "61"){ ?>
+							<!-- <?php debug("if");?> -->
 								<a href="<?php echo $articles['href']; ?>">
 										<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
 										<div class="cover-bg center-bg pd-b80p hide">
@@ -41,10 +44,12 @@
 										<?php */ ?>
 							</a>
 						<?php } else if($cat_id == "66"){ ?>
+							<!-- <?php debug("else if");?> -->
 								<a href="image/catalog/project/media/<?=$articles['download_file'];?>" download>
 										<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
 								</a>
 						<?php }else{ ?>
+							<!-- <?php debug("else");?> -->
 							<div>
 										<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
 										<div class="cover-bg center-bg pd-b80p hide">
