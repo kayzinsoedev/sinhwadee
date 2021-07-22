@@ -135,7 +135,8 @@ ul.no-dropdown li a {
 }
 
 .custom-mega-menu a{
-  font-size: calc(10px + (14 - 12) * (100vw - 320px) / (1920 - 320))!important;
+  font-size: calc(11px + (14 - 12) * (100vw - 320px) / (1920 - 320))!important;
+  font-style: italic;
 }
 
 .cat-menu .dropdown-menu.mega-menu .container .custom-category-box
