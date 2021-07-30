@@ -112,10 +112,12 @@ class ModelCatalogNews extends Model {
 		/*update related product*/
 		// debug($data['product_related']);
 		// debug(count($data['product_related']));die;
-		if (count($data['product_related']) > 0) {
-			$this->db->query("DELETE FROM " . DB_PREFIX . "related_blog_product WHERE news_id = '" . (int)$news_id . "' ");
-			foreach ($data['product_related'] as $product_id) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "related_blog_product SET product_id = '" . (int)$product_id . "', news_id = '" . (int)$news_id . "'");
+		if ($data['product_related'] !="") {
+			if (count($data['product_related']) > 0) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "related_blog_product WHERE news_id = '" . (int)$news_id . "' ");
+				foreach ($data['product_related'] as $product_id) {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "related_blog_product SET product_id = '" . (int)$product_id . "', news_id = '" . (int)$news_id . "'");
+				}
 			}
 		}
 		/*update related product*/
