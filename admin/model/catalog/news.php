@@ -166,7 +166,11 @@ class ModelCatalogNews extends Model {
 		}
 		$this->db->query("DELETE FROM " . DB_PREFIX . "sb_news_description WHERE news_id = '" . (int)$news_id . "'");
 		foreach (@$data['news_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "sb_news_description SET news_id = '" . (int)$news_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_desc = '" . $this->db->escape($value['meta_desc']) . "', meta_key = '" . $this->db->escape($value['meta_key']) . "', ctitle = '" . $this->db->escape($value['ctitle']) . "', ntags = '" . $this->db->escape($value['ntags']) . "', description2 = '" . $this->db->escape($value['description2']) . "', cfield1 = '" . $this->db->escape($value['cfield1']) . "', cfield2 = '" . $this->db->escape($value['cfield2']) . "', cfield3 = '" . $this->db->escape($value['cfield3']) . "', cfield4 = '" . $this->db->escape($value['cfield4']) . "'");
+			$cfield1 = isset($value['cfield1']) ? $value['cfield1'] : null;
+			$cfield2 = isset($value['cfield2']) ? $value['cfield2'] : null;
+			$cfield3 = isset($value['cfield3']) ? $value['cfield3'] : null;
+			$cfield4 = isset($value['cfield4']) ? $value['cfield4'] : null;
+			$this->db->query("INSERT INTO " . DB_PREFIX . "sb_news_description SET news_id = '" . (int)$news_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_desc = '" . $this->db->escape($value['meta_desc']) . "', meta_key = '" . $this->db->escape($value['meta_key']) . "', ctitle = '" . $this->db->escape($value['ctitle']) . "', ntags = '" . $this->db->escape($value['ntags']) . "', description2 = '" . $this->db->escape($value['description2']) . "', cfield1 = '" . $cfield1 . "', cfield2 = '" . $cfield2 . "', cfield3 = '" . $cfield3 . "', cfield4 = '" . $cfield4 . "'");
 		}
 		$this->db->query("DELETE FROM " . DB_PREFIX . "sb_news_to_store WHERE news_id = '" . (int)$news_id . "'");
 

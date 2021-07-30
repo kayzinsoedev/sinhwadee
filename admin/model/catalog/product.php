@@ -348,7 +348,7 @@ class ModelCatalogProduct extends Model {
 
 
 		/* Related Blog*/
-		if (isset($data['blog_related'])) {
+		if ($data['blog_related']!="") {
 			$this->db->query("DELETE FROM " . DB_PREFIX . "related_blog_product WHERE product_id = '" . (int)$product_id . "' ");
 			foreach ($data['blog_related'] as $related_id) {
 				// debug($related_id);die;
