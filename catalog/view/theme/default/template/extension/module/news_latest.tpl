@@ -15,7 +15,11 @@
               <img class="article-image" src="<?= $articles['thumb'] ?>"/>
             <?php } ?>
           </div>
-          <div class="info">
+          <?php if( (!empty($articles['thumb'])) || (!empty($articles['video'])) ){ ?>
+                <div class="info">
+          <?php }else{ ?>
+                <div class="no-img-info">
+          <?php } ?>
             <?php if ($articles['name']) { ?>
               <div class="name"><a href="<?php echo $articles['href']; ?>"><?php echo $articles['name']; ?></a></div>
             <?php } ?>

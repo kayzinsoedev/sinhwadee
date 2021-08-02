@@ -32,6 +32,13 @@
   display: block !important;
 } */
 
+
+body.news-ncategory #column-left{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+}
+
 .dropdown-menu.mega-menu .container:not(.cat-menu .dropdown-menu.mega-menu .container)
 {
     width: auto !important;
