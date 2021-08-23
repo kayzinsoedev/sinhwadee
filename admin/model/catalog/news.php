@@ -1,7 +1,7 @@
 <?php
 class ModelCatalogNews extends Model {
 	public function addNews($data, $ifcopy = 0, $file) {
-		// debug($file);die;
+
 		$this->db->query("INSERT INTO " . DB_PREFIX . "sb_news SET status = '" . (int)$data['status'] . "', acom = '" . (int)$data['acom'] . "', nauthor_id = '" . (int)$data['nauthor_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', gal_thumb_w = '" . (int)$data['gal_thumb_w'] . "', gal_thumb_h = '" . (int)$data['gal_thumb_h'] . "', gal_popup_w = '" . (int)$data['gal_popup_w'] . "', gal_popup_h = '" . (int)$data['gal_popup_h'] . "', gal_slider_h = '" . (int)$data['gal_slider_h'] . "', gal_slider_w = '" . (int)$data['gal_slider_w'] . "', gal_slider_t = '" . (int)$data['gal_slider_t'] . "', date_pub = '" . $this->db->escape($data['date_pub']) . "', date_added = '" . $this->db->escape($data['date_added']) . "', date_updated = '" . $this->db->escape($data['date_updated']) . "'");
 		$news_id = $this->db->getLastId();
 

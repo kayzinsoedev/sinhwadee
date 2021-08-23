@@ -39,9 +39,10 @@ class ControllerCatalogNews extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('catalog/news');
+
 		// debug($this->request->server['REQUEST_METHOD']);die;
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validateForm())) {
-			// debug($this->request->files);die;
+
 			$this->model_catalog_news->addNews($this->request->post,1,$this->request->files);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -930,7 +931,7 @@ class ControllerCatalogNews extends Controller {
 		// debug($blog_products);die;
 
 		$data['product_relateds'] = array();
-		// if (!empty($this->request->post['product_related'])) {
+		if (!empty($this->request->post['product_related'])) {
 
 				foreach ($blog_products as $product_id) {
 					$related_info = $this->model_catalog_product->getProduct($product_id);
@@ -942,7 +943,7 @@ class ControllerCatalogNews extends Controller {
 						);
 					}
 				}
-		// }
+		}
 
 
 		/*related product */
@@ -988,17 +989,20 @@ class ControllerCatalogNews extends Controller {
 	}
 
 	private function validateForm() {
+
 		if (!$this->user->hasPermission('modify', 'catalog/news')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
-		foreach ($this->request->post['news_description'] as $language_id => $value) {
-			if ((strlen($value['title']) < 3) || (strlen($value['title']) >100)) {
-				$this->error['title'][$language_id] = $this->language->get('error_title');
-			}
-			if (strlen($value['description']) < 3) {
-				$this->error['description'][$language_id] = $this->language->get('error_description');
-			}
-		}
+		// foreach ($this->request->post['news_description'] as $language_id => $value) {
+		// 	if ((strlen($value['title']) < 3) || (strlen($value['title']) >100)) {
+		//
+		// 		$this->error['title'][$language_id] = $this->language->get('error_title');
+		// 	}
+		// 	if (strlen($value['description']) < 3) {
+		// 		debug("else");die;
+		// 		$this->error['description'][$language_id] = $this->language->get('error_description');
+		// 	}
+		// }
         if (utf8_strlen($this->request->post['keyword']) > 0) {
 			$this->load->model('catalog/url_alias');
 
