@@ -55,7 +55,7 @@ class ModelCatalogNews extends Model {
 
 	$this->db->query("INSERT INTO " . DB_PREFIX . "sb_news_description SET news_id = '" . (int)$news_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_desc = '" . $this->db->escape($value['meta_desc']) . "', meta_key = '" . $this->db->escape($value['meta_key']) . "', ctitle = '" . $this->db->escape($value['ctitle']) . "', ntags = '" . $this->db->escape($value['ntags']) . "', description2 = '" . $this->db->escape($value['description2']) . "', cfield1 = '" . $cfield1 . "', cfield2 = '" . $cfield2 . "', cfield3 = '" . $cfield3 . "', cfield4 = '" . $cfield4 . "'");
 		}
-		
+
 
 		if (isset($data['news_store'])) {
 			foreach ($data['news_store'] as $store_id) {
