@@ -135,7 +135,7 @@ class ControllerNewsArticle extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			// debug($this->request->get['route']);
+			$data['cat_id']='';
 			if(isset($this->request->get['ncat'])){
 					$data['cat_id']=$this->request->get['ncat'];
 			}

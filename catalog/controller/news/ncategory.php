@@ -261,6 +261,7 @@ class ControllerNewsNcategory extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
+			$data['cat_id']='';
 			if(isset($this->request->get['ncat'])){
 					$data['cat_id']=$this->request->get['ncat'];
 			}
@@ -709,14 +710,17 @@ class ControllerNewsNcategory extends Controller {
 
 			$data['pag_results'] = sprintf($this->language->get('text_pagination'), ($news_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($news_total - $limit)) ? $news_total : ((($page - 1) * $limit) + $limit), $news_total, ceil($news_total / $limit));
 
+
+		$data['cat_id'] = '';
 		if(isset($this->request->get['ncat'])){
 				$data['cat_id']=$this->request->get['ncat'];
 		}
 
 
-		// debug($data['article']);die;
+
 
 		if (version_compare(VERSION, '2.2.0.0') >= 0) {
+
 			return $this->load->view('news/ncategory', $data);
 		} else {
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/ncategory.tpl')) {

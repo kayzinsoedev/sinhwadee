@@ -10,6 +10,7 @@
   <br><br><br>
   <h2 class="hidden"><?php echo $heading_title; ?></h2>
   <!-- <?php debug($route);?> -->
+
   <?php if($cat_id == "59"){ ?>
       <?php if(isset($route)){ ?>
       <?php if($route != "news/article" ){ ?>
@@ -90,6 +91,7 @@
         <?php } ?>
 
   <?php } ?>
+
 
 
   <br>

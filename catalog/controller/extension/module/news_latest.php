@@ -213,7 +213,7 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 
 		}
 
-
+		$data['cat_id']='';
 		if(isset($this->request->get['ncat'])){
 				$data['cat_id']=$this->request->get['ncat'];
 		}
