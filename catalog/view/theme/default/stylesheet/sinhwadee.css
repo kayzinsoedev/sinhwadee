@@ -33,6 +33,10 @@
 } */
 
 
+.product-image-additional-container {
+  display: none !important;
+}
+
 body.news-ncategory #column-left{
     display: flex;
     flex-wrap: wrap;
