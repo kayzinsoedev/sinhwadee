@@ -33,7 +33,8 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 		$this->load->model('catalog/news');
 
 		$years = $this->model_catalog_news->getArchive();
-
+		$ncat_id = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : "" ;
+		// debug($ncat_id);die;
 		foreach ($years as $year) {
 			$data_month = array();
 			$total = 0;
@@ -43,7 +44,7 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 				$data_month[] = array(
 					//'name' => $m_name[$mo] . ' '. $year['year'],
 					'name' => $m_name[$mo],
-					'href' => $this->url->link('news/ncategory', 'archive=' . $year['year'] . '-' . $mo),
+					'href' => $this->url->link('news/ncategory&ncat='.$ncat_id, 'archive=' . $year['year'] . '-' . $mo),
 					'num' => $mo,
 				);
 			}
@@ -74,7 +75,7 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 		$data['archive_query'] = isset($this->request->get['archive']) ? $this->request->get['archive'] : '';
 		$data['achive_yr'] = isset($this->request->get['archive']) ? explode('-', $this->request->get['archive'])[0] : '';
 
-		// debug($data['categories']);die;
+		// debug($data['archives']);die;
 		return $this->load->view('extension/module/news_archive', $data);
 
   	}

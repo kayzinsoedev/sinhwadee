@@ -87,6 +87,7 @@ class ControllerNewsNcategory extends Controller {
 		$ncategory_info = $this->model_catalog_ncategory->getncategory($ncategory_id);
 
 		//new archive
+
 		if (isset($this->request->get['archive'])) {
 			$archive = (string)$this->request->get['archive'];
 		} else {
@@ -95,9 +96,13 @@ class ControllerNewsNcategory extends Controller {
 
 		if ($ncategory_info) {
 			$settings = $ncategory_info;
-		} elseif ($author_info) {
+		}
+		// elseif ($author_info) {
+		if ($author_info) {
 			$settings = array('author' => $author_info, 'author_info' => $authordesc);
-		} elseif ($archive) {
+		}
+		// elseif ($archive !="") {
+		if ($archive !="") {
 			$date = explode('-', $archive);
 			$year = isset($date[0]) ? (int)$date[0] : 2015;
 			$month = (isset($date[1]) && $date[1] > 0 && $date[1] < 13) ? (int)$date[1] : 0;
@@ -117,7 +122,7 @@ class ControllerNewsNcategory extends Controller {
 			$m_name[10] = (isset($months['oct'][$lid]) && $months['oct'][$lid]) ? $months['oct'][$lid] : 'October';
 			$m_name[11] = (isset($months['nov'][$lid]) && $months['nov'][$lid]) ? $months['nov'][$lid] : 'November';
 			$m_name[12] = (isset($months['dec'][$lid]) && $months['dec'][$lid]) ? $months['dec'][$lid] : 'December';
-			$month_name = $m_name[$month];
+			$month_name = isset($m_name[$month]) ? $m_name[$month] : '';
 			$settings = array('year' => $year, 'month' => $month, 'month_name' => $month_name);
 		} else {
 			$settings = array();
@@ -425,15 +430,15 @@ class ControllerNewsNcategory extends Controller {
 				$data['is_category'] = true;
 				// $limit = $ncategory_info['column'];
 				$limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
-				$display_image = $ncategory_info['top'];
+				$display_image = isset($ncategory_info['top']) ? $ncategory_info['top'] : '';
 
-				if ($ncategory_info['image']) {
+				if (isset($ncategory_info['image'])) {
 					$data['thumb'] = $this->model_tool_image->resize($ncategory_info['image'], 100, 100);
 				} else {
 					$data['thumb'] = '';
 				}
-				$data['heading_title'] = $ncategory_info['name'];
-				$data['description'] = html_entity_decode($ncategory_info['description'], ENT_QUOTES, 'UTF-8');
+				$data['heading_title'] = isset($ncategory_info['name']) ? $ncategory_info['name'] : '';
+				$data['description'] = html_entity_decode(isset($ncategory_info['description']) ? $ncategory_info['description'] : '', ENT_QUOTES, 'UTF-8');
 
 				$data['ncategories'] = array();
 
@@ -489,7 +494,7 @@ class ControllerNewsNcategory extends Controller {
 					'start'           => ($page - 1) * $limit,
 					'limit'           => $limit
 				);
-				$data['display_style'] = $ncategory_info['top'];
+				$data['display_style'] = isset($ncategory_info['top']) ? $ncategory_info['top'] : '';
 			} elseif ($author_id) {
 				// debug("if2");die;
 				$sdata = array(
