@@ -34,7 +34,7 @@
 
 
 .product-image-additional-container {
-  display: none !important;
+  /* display: none !important; */
 }
 
 body.news-ncategory #column-left{
