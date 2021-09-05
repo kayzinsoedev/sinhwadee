@@ -45,6 +45,7 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 					//'name' => $m_name[$mo] . ' '. $year['year'],
 					'name' => $m_name[$mo],
 					'href' => $this->url->link('news/ncategory&ncat='.$ncat_id, 'archive=' . $year['year'] . '-' . $mo),
+					// 'href' => $this->url->link('news/ncategory', 'archive=' . $year['year'] . '-' . $mo),
 					'num' => $mo,
 				);
 			}
@@ -75,7 +76,7 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 		$data['archive_query'] = isset($this->request->get['archive']) ? $this->request->get['archive'] : '';
 		$data['achive_yr'] = isset($this->request->get['archive']) ? explode('-', $this->request->get['archive'])[0] : '';
 
-		// debug($data['archives']);die;
+		// debug($data['categories']);die;
 		return $this->load->view('extension/module/news_archive', $data);
 
   	}

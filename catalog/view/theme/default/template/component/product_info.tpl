@@ -101,13 +101,13 @@
 			</div>
 		</div>
 
-		<!-- <div class="product-image-additional-container related">
+		<div class="product-image-additional-container related">
 			<div class="product-image-additional-<?=$product_id;?>">
 				<?php foreach($additional_images as $image){ ?>
 				<img src="<?= $image['thumb']; ?>" alt="<?= $name; ?>" title="<?= $name; ?>" class="pointer img-responsive additional-img" />
 				<?php } ?>
 			</div>
-		</div> -->
+		</div>
 
 		<div class="product-name">
 			<a href="<?= $href; ?>"><?= $name; ?></a>

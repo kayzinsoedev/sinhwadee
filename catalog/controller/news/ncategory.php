@@ -103,6 +103,7 @@ class ControllerNewsNcategory extends Controller {
 		}
 		// elseif ($archive !="") {
 		if ($archive !="") {
+			// debug("if");die;
 			$date = explode('-', $archive);
 			$year = isset($date[0]) ? (int)$date[0] : 2015;
 			$month = (isset($date[1]) && $date[1] > 0 && $date[1] < 13) ? (int)$date[1] : 0;
@@ -127,6 +128,7 @@ class ControllerNewsNcategory extends Controller {
 		} else {
 			$settings = array();
 		}
+		// debug($month_name);die;
 		if ($archive) {
 	       	$data['breadcrumbs'][] = array(
    	    		'text'      => $this->language->get('heading_title_archive') . $month_name . ' ' . $year,
@@ -421,7 +423,8 @@ class ControllerNewsNcategory extends Controller {
 
 		$limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
 
-		if (isset($this->request->get['ncat'])) {
+
+		if (isset($this->request->get['ncat']) && empty($this->request->get['archive'])) {
 			$parts = explode('_', (string)$this->request->get['ncat']);
 			$ncategory_id = array_pop($parts);
 			$ncategory_info = $settings;
@@ -488,7 +491,6 @@ class ControllerNewsNcategory extends Controller {
 			$data['article'] = array();
 
 			if ($ncategory_info) {
-				// debug("if1");die;
 				$sdata = array(
 					'filter_ncategory_id' => $ncategory_id,
 					'start'           => ($page - 1) * $limit,
@@ -496,14 +498,12 @@ class ControllerNewsNcategory extends Controller {
 				);
 				$data['display_style'] = isset($ncategory_info['top']) ? $ncategory_info['top'] : '';
 			} elseif ($author_id) {
-				// debug("if2");die;
 				$sdata = array(
 					'filter_author_id' => $author_id,
 					'start'           => ($page - 1) * $limit,
 					'limit'           => $limit
 				);
 			} elseif ($year) {
-				// debug("if3");die;
 				$sdata = array(
 					'filter_year' 	  => $year,
 					'filter_month'	  => $month,
@@ -511,12 +511,12 @@ class ControllerNewsNcategory extends Controller {
 					'limit'           => $limit
 				);
 			} else {
-				// debug("if4");die;
 				$sdata = array(
 					'start'           => ($page - 1) * $limit,
 					'limit'           => $limit
 				);
 			}
+
 
 			if(isset($this->request->get['filter_name'])){
 				$sdata['filter_name'] = $this->lowerString($this->request->get['filter_name']);
@@ -533,16 +533,12 @@ class ControllerNewsNcategory extends Controller {
 
 			$news_total = $this->model_catalog_news->getTotalNews($sdata);
 
-			// debug($news_total);die;
+
 			if(isset($news_ids) || $keyword){
-				// debug($keyword);die;
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 					$data['recipes_result'] = $results;
-					// return $data['recipes_result'];
 			}else{
-				// debug("else");die;
 				$results = $this->model_catalog_news->getNews($sdata);
-				// debug($results);die;
 			}
 
 
@@ -725,7 +721,7 @@ class ControllerNewsNcategory extends Controller {
 
 
 		if (version_compare(VERSION, '2.2.0.0') >= 0) {
-
+			// debug($data['article']);die;
 			return $this->load->view('news/ncategory', $data);
 		} else {
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/ncategory.tpl')) {
