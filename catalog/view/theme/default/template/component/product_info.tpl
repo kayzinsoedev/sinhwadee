@@ -300,7 +300,7 @@
 			setTimeout(function () {
 				product_slick<?=$product_id;?>();
 				AOS.init();
-			},550);
+			},150);
 		});
 
 		function product_slick<?=$product_id;?>(){
