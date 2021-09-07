@@ -35,26 +35,57 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 		$years = $this->model_catalog_news->getArchive();
 		$ncat_id = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : "" ;
 		// debug($ncat_id);die;
-		foreach ($years as $year) {
-			$data_month = array();
-			$total = 0;
-			$months = unserialize($year['months']);
-			foreach ($months as $mo => $articles) {
-				$total += $articles;
-				$data_month[] = array(
-					//'name' => $m_name[$mo] . ' '. $year['year'],
-					'name' => $m_name[$mo],
-					'href' => $this->url->link('news/ncategory&ncat='.$ncat_id, 'archive=' . $year['year'] . '-' . $mo),
-					// 'href' => $this->url->link('news/ncategory', 'archive=' . $year['year'] . '-' . $mo),
-					'num' => $mo,
-				);
-			}
-			$data['archives'][] = array(
-				'year' => $year['year'],
-				'month' => $data_month,
-				'yr_href' => $this->url->link('news/ncategory', 'archive=' . $year['year']),
-			);
+
+		$this->load->model('catalog/news');
+
+		$years = $this->model_catalog_news->getArchive();
+
+		if (isset($this->request->get['ncat'])) {
+			$ncat = (string)$this->request->get['ncat'];
+		} else {
+			$ncat = false;
 		}
+
+		foreach ($years as $year) {
+	$data_month = array();
+	$total = 0;
+	$months = unserialize($year['months']);
+	foreach ($months as $mo => $articles) {
+		$total += $articles;
+		$data_month[] = array(
+			//'name' => $m_name[$mo] . ' '. $year['year'],
+			'name' => $m_name[$mo],
+			'href' => $this->url->link('news/ncategory', 'archive=' . $year['year'] . '-' . $mo) . "&ncat=".$ncat,
+			'num' => $mo,
+		);
+	}
+	$data['archives'][] = array(
+		'year' => $year['year'],
+		'month' => $data_month,
+		'yr_href' => $this->url->link('news/ncategory', 'archive=' . $year['year']). "&ncat=".$ncat,
+	);
+}
+
+		// foreach ($years as $year) {
+		// 	$data_month = array();
+		// 	$total = 0;
+		// 	$months = unserialize($year['months']);
+		// 	foreach ($months as $mo => $articles) {
+		// 		$total += $articles;
+		// 		$data_month[] = array(
+		// 			//'name' => $m_name[$mo] . ' '. $year['year'],
+		// 			'name' => $m_name[$mo],
+		// 			'href' => $this->url->link('news/ncategory&ncat='.$ncat_id, 'archive=' . $year['year'] . '-' . $mo),
+		// 			// 'href' => $this->url->link('news/ncategory', 'archive=' . $year['year'] . '-' . $mo),
+		// 			'num' => $mo,
+		// 		);
+		// 	}
+		// 	$data['archives'][] = array(
+		// 		'year' => $year['year'],
+		// 		'month' => $data_month,
+		// 		'yr_href' => $this->url->link('news/ncategory', 'archive=' . $year['year']),
+		// 	);
+		// }
 
 
 		$parent_id = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : 0 ;

@@ -68,10 +68,15 @@
 	<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 	<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
+
+	<!-- add slick css -->
+	<link rel="stylesheet" type="text/css" href="catalog/view/javascript/slick/slick.min.css">
+	<link rel="stylesheet" type="text/css" href="catalog/view/javascript/slick/slick.theme.css">
+
 	<link href="catalog/view/javascript/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
 	<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
-	
+
 	<link href="catalog/view/theme/default/stylesheet/product.css" rel="stylesheet">
 
 	<!-- <link href="catalog/view/javascript/smartmenus/sm-core-css.min.css" rel="stylesheet"> --> <!--Added in sidr_bare_sm_core_css_sass_icon.css -->
@@ -100,6 +105,12 @@
 	<script src="catalog/view/javascript/jquery-multi-level-accordion-menu/js/modernizr.js" type="text/javascript"></script>
 	<!-- <script src="catalog/view/javascript/jquery-multi-level-accordion-menu/js/main.js" type="text/javascript"></script> --> <!--Added in Alpha.js -->
 	<script src="catalog/view/javascript/smartmenus/jquery.smartmenus.min.js" type="text/javascript"></script>
+
+
+	<!-- add slick js -->
+	<script src="catalog/view/javascript/slick/slick.min.js" type="text/javascript"></script>
+
+
 
 	<script src="catalog/view/javascript/bluebird.min.js"></script> <!--FOR IE-->
 	<link href="catalog/view/javascript/sweetalert2.min.css" rel="stylesheet">

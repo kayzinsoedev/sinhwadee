@@ -495,7 +495,7 @@ class ControllerNewsNcategory extends Controller {
 
 			$data['article'] = array();
 
-			//debug($ncategory_info);
+			// debug($ncategory_info);die;
 
 			if ($ncategory_info) {
 				$sdata = array(
@@ -513,6 +513,7 @@ class ControllerNewsNcategory extends Controller {
 			} elseif ($year) {
 				$sdata = array(
 					'filter_year' 	  => $year,
+					'filter_ncategory_id' => (isset($_GET['ncat']))?$_GET['ncat']:0,
 					'filter_month'	  => $month,
 					'start'           => ($page - 1) * $limit,
 					'limit'           => $limit
@@ -541,7 +542,6 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 			$news_total = $this->model_catalog_news->getTotalNews($sdata);
-
 
 			if(isset($news_ids) || $keyword){
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
