@@ -33,8 +33,8 @@
 } */
 
 
-.product-image-additional-container {
-  /* display: none !important; */
+body.product-search .product-image-additional-container {
+  display: none !important;
 }
 
 body.news-ncategory #column-left{
