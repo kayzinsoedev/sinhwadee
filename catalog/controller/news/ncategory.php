@@ -374,7 +374,7 @@ class ControllerNewsNcategory extends Controller {
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
 
 		// debug($news_ids);die;
-		$data['action'] = $this->url->link('news/ncategory&ncat=59', '', true);
+		// $data['action'] = $this->url->link('news/ncategory&ncat=59', '', true);
 
 		if(isset($this->request->get['route'])) {
 			if(strpos(strtolower($this->request->get['route']), 'getpagecontent')) {
@@ -421,6 +421,8 @@ class ControllerNewsNcategory extends Controller {
 			$page = 1;
 		}
 
+		$settings['ncategory_id'] = 'all';
+
 		$limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
 
 
@@ -428,7 +430,10 @@ class ControllerNewsNcategory extends Controller {
 			$parts = explode('_', (string)$this->request->get['ncat']);
 			$ncategory_id = array_pop($parts);
 			$ncategory_info = $settings;
-			// debug($ncategory_info);die;
+
+			$settings['ncategory_id'] = $ncategory_id;
+
+			 //debug($ncategory_id);die;
 		if ($ncategory_info) {
 				$data['is_category'] = true;
 				// $limit = $ncategory_info['column'];
@@ -490,6 +495,8 @@ class ControllerNewsNcategory extends Controller {
 
 			$data['article'] = array();
 
+			//debug($ncategory_info);
+
 			if ($ncategory_info) {
 				$sdata = array(
 					'filter_ncategory_id' => $ncategory_id,
@@ -517,6 +524,8 @@ class ControllerNewsNcategory extends Controller {
 				);
 			}
 
+			//debug($sdata);
+
 
 			if(isset($this->request->get['filter_name'])){
 				$sdata['filter_name'] = $this->lowerString($this->request->get['filter_name']);
@@ -537,8 +546,10 @@ class ControllerNewsNcategory extends Controller {
 			if(isset($news_ids) || $keyword){
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 					$data['recipes_result'] = $results;
+					//debug($results);die;
 			}else{
 				$results = $this->model_catalog_news->getNews($sdata);
+				//debug($sdata);
 			}
 
 
@@ -716,6 +727,8 @@ class ControllerNewsNcategory extends Controller {
 		if(isset($this->request->get['ncat'])){
 				$data['cat_id']=$this->request->get['ncat'];
 		}
+
+		//debug($data['cat_id']);
 
 
 
@@ -909,6 +922,8 @@ class ControllerNewsNcategory extends Controller {
 
 					$results = $this->model_catalog_news->getNews($sdata);
 				}
+
+					//debug($results);
 
 
 				// debug($results);die;
