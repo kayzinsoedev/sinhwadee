@@ -17,9 +17,10 @@ class ControllerExtensionModuleRelatedBlog extends Controller {
 
 		if(!empty($blog_products)){
 				foreach ($blog_products as $news_id) {
+
 					$related_blog = $this->model_catalog_news->getRelatedNews($news_id);
 					$main_category = $this->model_catalog_news->getRelatedMainCategory($news_id);
-					// debug($news_id);
+					// debug($main_category);
 					if(isset($main_category)){
 								$main_category_id = $main_category[0]['ncategory_id'];
 								if ($related_blog) {

@@ -12,7 +12,7 @@ class ControllerNewsNcategory extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
+					'href'      => $this->url->link('common/home'),
       		'separator' => false
    		);
 
@@ -543,6 +543,7 @@ class ControllerNewsNcategory extends Controller {
 
 			$news_total = $this->model_catalog_news->getTotalNews($sdata);
 
+
 			if(isset($news_ids) || $keyword){
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 					$data['recipes_result'] = $results;
@@ -551,6 +552,8 @@ class ControllerNewsNcategory extends Controller {
 				$results = $this->model_catalog_news->getNews($sdata);
 				//debug($sdata);
 			}
+
+			// debug($data['recipes_result']);
 
 
 			// debug($results);die;
