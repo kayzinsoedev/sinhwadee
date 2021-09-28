@@ -1040,7 +1040,8 @@ class ControllerNewsNcategory extends Controller {
 				}
 
 
-				// debug($data['article']);die;
+
+				
 
 
 				$this->load->library('modulehelper');

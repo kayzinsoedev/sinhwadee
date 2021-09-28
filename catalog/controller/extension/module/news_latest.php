@@ -119,75 +119,206 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 
 		// debug($results);die;
 
-		if(!empty($results)){
-		foreach ($results as $result) {
-				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
-				$da = (in_array("da", $elements)) ? date($date_format, strtotime($result['date_added'])) : '';
-				$du = (in_array("du", $elements) && $result['date_updated'] && $result['date_updated'] != $result['date_added']) ? date($date_format, strtotime($result['date_updated'])) : '';
+		// if(!empty($results)){
+		// foreach ($results as $result) {
+		// 		$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
+		// 		$da = (in_array("da", $elements)) ? date($date_format, strtotime($result['date_added'])) : '';
+		// 		$du = (in_array("du", $elements) && $result['date_updated'] && $result['date_updated'] != $result['date_added']) ? date($date_format, strtotime($result['date_updated'])) : '';
+		// 		$button = (in_array("button", $elements)) ? true : false;
+		// 		$custom1 = (in_array("custom1", $elements) && $result['cfield1']) ? html_entity_decode($result['cfield1'], ENT_QUOTES, 'UTF-8') : '';
+		// 		$custom2 = (in_array("custom2", $elements) && $result['cfield2']) ? html_entity_decode($result['cfield2'], ENT_QUOTES, 'UTF-8') : '';
+		// 		$custom3 = (in_array("custom3", $elements) && $result['cfield3']) ? html_entity_decode($result['cfield3'], ENT_QUOTES, 'UTF-8') : '';
+		// 		$custom4 = (in_array("custom4", $elements) && $result['cfield4']) ? html_entity_decode($result['cfield4'], ENT_QUOTES, 'UTF-8') : '';
+		// 		if (in_array("image", $elements) && ($result['image'] || $result['image2'])) {
+		// 			if ($result['image2']) {
+		// 				$image = 'image/'.$result['image2'];
+		// 			} else {
+		// 				$image = $this->model_tool_image->resize($result['image'], $bbwidth, $bbheight);
+		// 			}
+		// 		} else {
+		// 			$image = false;
+		// 		}
+		// 		if (in_array("author", $elements) && $result['author']) {
+		// 			$author = $result['author'];
+		// 			$author_id = $result['nauthor_id'];
+		// 			$author_link = $this->url->link('news/ncategory', 'author=' . $result['nauthor_id']);
+		// 		} else {
+		// 			$author = '';
+		// 			$author_id = '';
+		// 			$author_link = '';
+		// 		}
+		// 		if (in_array("desc", $elements) && ($result['description'] || $result['description2'])) {
+		// 			if($result['description2'] && (strlen(html_entity_decode($result['description2'], ENT_QUOTES, 'UTF-8')) > 20)) {
+		// 					$desc = html_entity_decode($result['description2'], ENT_QUOTES, 'UTF-8');
+		// 			} else {
+		// 					// $desc_limit = $this->config->get('ncategory_bnews_desc_length') ? $this->config->get('ncategory_bnews_desc_length') : 600;
+		// 					$desc_limit = 80;
+		// 					$desc = utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $desc_limit) . '..';
+		// 			}
+		// 		} else {
+		// 			$desc = '';
+		// 		}
+		// 		if (in_array("com", $elements) && $result['acom']) {
+		// 			$com = $this->model_catalog_ncomments->getTotalNcommentsByNewsId($result['news_id']);
+		// 			if (!$com) {
+		// 				$com = " 0 ";
+		// 			}
+		// 		} else {
+		// 			$com = '';
+		// 		}
+		// 		if (in_array("category", $elements)) {
+		// 			$category = "";
+		// 			$cats = $this->model_catalog_news->getNcategoriesbyNewsId($result['news_id']);
+		// 			if ($cats) {
+		// 				$comma = 0;
+		// 				foreach($cats as $catid) {
+		// 					$catinfo = $this->model_catalog_ncategory->getncategory($catid['ncategory_id']);
+		// 					if ($catinfo) {
+		// 						if ($comma) {
+		// 							$category .= ', <a href="'.$this->url->link('news/ncategory', 'ncat=' . $catinfo['ncategory_id']).'">'.$catinfo['name'].'</a>';
+		// 						} else {
+		// 							$category .= '<a href="'.$this->url->link('news/ncategory', 'ncat=' . $catinfo['ncategory_id']).'">'.$catinfo['name'].'</a>';
+		// 						}
+		// 						$comma++;
+		// 					}
+		// 				}
+		// 			}
+		// 		} else {
+		// 			$category = '';
+		// 		}
+		// 		// $href = $this->url->link('news/article', 'news_id=' . $result['news_id']);
+		// 		$href = $this->url->link('news/article&ncat=59', 'news_id=' . $result['news_id']);
+		//
+		// 		$data['article'][] = array(
+		// 			'article_id'  => $result['news_id'],
+		// 			'name'        => $name,
+		// 			'thumb'       => $image,
+		// 			'video'       => $result['video'],
+		// 			'date_added'  => $da,
+		// 			'du'          => $du,
+		// 			'author'      => $author,
+		// 			'author_id'   => $author_id,
+		// 			'author_link' => $author_link,
+		// 			'description' => $desc,
+		// 			'button'      => $button,
+		// 			'custom1'     => $custom1,
+		// 			'custom2'     => $custom2,
+		// 			'custom3'     => $custom3,
+		// 			'custom4'     => $custom4,
+		// 			'category'    => $category,
+		// 			'href'        => $href,
+		// 			'total_comments' => $com
+		// 		);
+		// }
+		//
+		// }
+
+		$data['cat_id']='';
+		if(isset($this->request->get['ncat'])){
+				$data['cat_id']=$this->request->get['ncat'];
+		}
+
+
+
+		/*featured recipest*/
+			$this->load->language('extension/module/latest_news_4_mh');
+
+			$this->load->model('catalog/news');
+			$this->load->model('catalog/ncategory');
+
+			$language_id = $this->config->get('config_language_id');
+			$modulename  = 'featured_recipes';
+
+			$data['modulename'] = $modulename;
+
+			$data['article'] = array();
+
+			$title = $this->modulehelper->get_field ( $this, $modulename, $language_id, 'title' );
+			$data['heading_title'] = $title ? $title : '';
+			$data['button_read_more'] = $this->language->get('button_read_more');
+			$data['button_view_more'] = $this->language->get('button_view_more');
+			$data['view_more_link'] = $this->url->link('news/ncategory', '', true);
+
+			$date_format = $this->config->get('ncategory_bnews_date_format') ? $this->config->get('ncategory_bnews_date_format') : 'd.m.Y';
+			$bbwidth = ($this->config->get('ncategory_bnews_image_width')) ? $this->config->get('ncategory_bnews_image_width') : 80;
+			$bbheight = ($this->config->get('ncategory_bnews_image_height')) ? $this->config->get('ncategory_bnews_image_height') : 80;
+
+
+			$news = $this->modulehelper->get_field ( $this, $modulename, $language_id, 'news_list' );
+
+			foreach ($news as $n) {
+				$result = $this->model_catalog_news->getNewsStory($n['news']);
+				// debug($result);
 				$button = (in_array("button", $elements)) ? true : false;
+
 				$custom1 = (in_array("custom1", $elements) && $result['cfield1']) ? html_entity_decode($result['cfield1'], ENT_QUOTES, 'UTF-8') : '';
 				$custom2 = (in_array("custom2", $elements) && $result['cfield2']) ? html_entity_decode($result['cfield2'], ENT_QUOTES, 'UTF-8') : '';
 				$custom3 = (in_array("custom3", $elements) && $result['cfield3']) ? html_entity_decode($result['cfield3'], ENT_QUOTES, 'UTF-8') : '';
 				$custom4 = (in_array("custom4", $elements) && $result['cfield4']) ? html_entity_decode($result['cfield4'], ENT_QUOTES, 'UTF-8') : '';
-				if (in_array("image", $elements) && ($result['image'] || $result['image2'])) {
+
+
+				$name = $result['title'];
+
+				$da = date($date_format, strtotime($result['date_added']));
+
+				if ($result['image'] || $result['image2']) {
 					if ($result['image2']) {
 						$image = 'image/'.$result['image2'];
 					} else {
-						$image = $this->model_tool_image->resize($result['image'], $bbwidth, $bbheight);
+						//$image = $this->model_tool_image->resize($result['image'], $bbwidth, $bbheight);
+						$image ='image/'.$result['image'];
 					}
 				} else {
 					$image = false;
 				}
-				if (in_array("author", $elements) && $result['author']) {
-					$author = $result['author'];
-					$author_id = $result['nauthor_id'];
-					$author_link = $this->url->link('news/ncategory', 'author=' . $result['nauthor_id']);
-				} else {
-					$author = '';
-					$author_id = '';
-					$author_link = '';
-				}
-				if (in_array("desc", $elements) && ($result['description'] || $result['description2'])) {
+
+				if ($result['description'] || $result['description2']) {
+					//	$desc_limit = $this->config->get('ncategory_bnews_desc_length') ? $this->config->get('ncategory_bnews_desc_length') : 600;
+					$desc_limit = 150;
+
 					if($result['description2'] && (strlen(html_entity_decode($result['description2'], ENT_QUOTES, 'UTF-8')) > 20)) {
-							$desc = html_entity_decode($result['description2'], ENT_QUOTES, 'UTF-8');
+						$desc = utf8_substr(strip_tags(html_entity_decode($result['description2'], ENT_QUOTES, 'UTF-8')), 0, $desc_limit) . '..';
 					} else {
-							// $desc_limit = $this->config->get('ncategory_bnews_desc_length') ? $this->config->get('ncategory_bnews_desc_length') : 600;
-							$desc_limit = 80;
-							$desc = utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $desc_limit) . '..';
+						$desc = utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $desc_limit) . '..';
 					}
 				} else {
 					$desc = '';
 				}
-				if (in_array("com", $elements) && $result['acom']) {
-					$com = $this->model_catalog_ncomments->getTotalNcommentsByNewsId($result['news_id']);
-					if (!$com) {
-						$com = " 0 ";
-					}
-				} else {
-					$com = '';
-				}
-				if (in_array("category", $elements)) {
-					$category = "";
-					$cats = $this->model_catalog_news->getNcategoriesbyNewsId($result['news_id']);
-					if ($cats) {
-						$comma = 0;
-						foreach($cats as $catid) {
-							$catinfo = $this->model_catalog_ncategory->getncategory($catid['ncategory_id']);
-							if ($catinfo) {
-								if ($comma) {
-									$category .= ', <a href="'.$this->url->link('news/ncategory', 'ncat=' . $catinfo['ncategory_id']).'">'.$catinfo['name'].'</a>';
-								} else {
-									$category .= '<a href="'.$this->url->link('news/ncategory', 'ncat=' . $catinfo['ncategory_id']).'">'.$catinfo['name'].'</a>';
-								}
-								$comma++;
+
+				$category = "";
+				$cats = $this->model_catalog_news->getNcategoriesbyNewsId($result['news_id']);
+				if ($cats) {
+					$comma = 0;
+					foreach($cats as $catid) {
+						$catinfo = $this->model_catalog_ncategory->getncategory($catid['ncategory_id']);
+						if ($catinfo) {
+
+							$bkground_class = '';
+
+							if ($comma) {
+								$category .= ', <a class="block w100 h100 pd-5 pd-l15 pd-r15 '.$bkground_class.'" href="'.$this->url->link('news/ncategory', 'ncat=' . $catinfo['ncategory_id']).'">'.$catinfo['name'].'</a>';
+							} else {
+								$category .= '<a class="block w100 h100 pd-5 pd-l15 pd-r15 '.$bkground_class.'" href="'.$this->url->link('news/ncategory', 'ncat=' . $catinfo['ncategory_id']).'">'.$catinfo['name'].'</a>';
 							}
+							$comma++;
 						}
 					}
-				} else {
-					$category = '';
 				}
-				// $href = $this->url->link('news/article', 'news_id=' . $result['news_id']);
-				$href = $this->url->link('news/article&ncat=59', 'news_id=' . $result['news_id']);
+
+				$href  = $this->url->link('news/article','news_id=' . $result['news_id']);
+
+				$ntags = array();
+				if($result['ntags']) {
+					$tags = explode(',', $result['ntags']);
+					foreach($tags as $each) {
+						$tag_href = $this->url->link('news/ncategory', 'tags='.trim($each));
+
+						$ntags[] = array(
+							'name' => trim($each),
+							'href' => $tag_href,
+						);
+					}
+				}
 
 				$data['article'][] = array(
 					'article_id'  => $result['news_id'],
@@ -195,10 +326,10 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 					'thumb'       => $image,
 					'video'       => $result['video'],
 					'date_added'  => $da,
-					'du'          => $du,
-					'author'      => $author,
-					'author_id'   => $author_id,
-					'author_link' => $author_link,
+					// 'du'          => $du,
+					'author'      => $result['author'],
+					// 'author_id'   => $author_id,
+					'author_link' => $this->url->link('news/ncategory', 'author=' . $result['nauthor_id']),
 					'description' => $desc,
 					'button'      => $button,
 					'custom1'     => $custom1,
@@ -207,16 +338,11 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 					'custom4'     => $custom4,
 					'category'    => $category,
 					'href'        => $href,
-					'total_comments' => $com
+					// 'total_comments' => $com
 				);
-		}
+			}
 
-		}
 
-		$data['cat_id']='';
-		if(isset($this->request->get['ncat'])){
-				$data['cat_id']=$this->request->get['ncat'];
-		}
 
 
 		// debug($data['article']);die;
