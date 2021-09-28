@@ -373,6 +373,7 @@ class ControllerNewsNcategory extends Controller {
   	}
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
 
+
 		// debug($news_ids);die;
 		// $data['action'] = $this->url->link('news/ncategory&ncat=59', '', true);
 
@@ -545,10 +546,12 @@ class ControllerNewsNcategory extends Controller {
 
 
 			if(isset($news_ids) || $keyword){
+				// debug("if");die;
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 					$data['recipes_result'] = $results;
 					//debug($results);die;
 			}else{
+				// debug("else");die;
 				$results = $this->model_catalog_news->getNews($sdata);
 				//debug($sdata);
 			}
@@ -1041,7 +1044,7 @@ class ControllerNewsNcategory extends Controller {
 
 
 
-				
+
 
 
 				$this->load->library('modulehelper');

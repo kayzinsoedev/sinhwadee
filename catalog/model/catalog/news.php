@@ -51,6 +51,7 @@ class ModelCatalogNews extends Model {
 
 
 	public function getNewsStory($news_id,$keyword=NULL) {
+		// debug($keyword);die;
 
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
@@ -162,9 +163,10 @@ class ModelCatalogNews extends Model {
 
 
 			else if(!empty($news_id) && !empty($keyword) ){
-				// debug("else if");
+				// debug($this->config->get('config_store_id'));die;
 				foreach ($news_id as $key => $value) {
-							$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' OR nd.title LIKE '%" . $keyword . "%' AND nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
+					// debug($value);die;
+							$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' OR nd.title LIKE '%" . $keyword . "%' AND nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction );
 							// $query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
 
 							if ($query->num_rows) {
@@ -263,7 +265,7 @@ class ModelCatalogNews extends Model {
 	}
 
 	public function getNews($data = array(),$news_ids=null,$keyword=null) {
-		// debug($news_ids);die;
+		// debug("k");die;
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
 		$group_restriction_join = $this->config->get('ncategory_bnews_restrictgroup') ? " LEFT JOIN " . DB_PREFIX . "sb_news_to_group n2g ON (n.news_id = n2g.news_id) " : '';
@@ -377,10 +379,10 @@ class ModelCatalogNews extends Model {
 
 
 		if(isset($news_ids) || isset($keyword)){
-			// debug($news_ids);die;
+			// debug("a");die;
 				$articles_data = $this->getNewsStory($news_ids,$keyword);
 		}else{
-				// debug("else");die;
+				// debug("b");die;
 				foreach ($query->rows as $result) {
 					 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],$keyword=NULL);
 				}

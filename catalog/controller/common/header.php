@@ -521,7 +521,14 @@
                                 if($level == 1){
                                     if($sub_menu) {
                                             $menus .= '<div class="custom-category-box">';
-                                            $menus .= '<h3 onclick="window.location.href=\''.$href.'\'" style="cursor:pointer">' . $name . '</h3><div><img src=image/'.$image.' class="img-responsive menu-img"></div>'.$sub_menu;
+
+																						if(!empty($image)){
+																								$menus .= '<h3 onclick="window.location.href=\''.$href.'\'" style="cursor:pointer">' . $name . '</h3><div><img src=image/'.$image.' class="img-responsive menu-img"></div>'.$sub_menu;
+																						}else{
+																								$menus .= '<h3 onclick="window.location.href=\''.$href.'\'" style="cursor:pointer">' . $name . '</h3>'.$sub_menu;
+																						}
+
+                                            // $menus .= '<h3 onclick="window.location.href=\''.$href.'\'" style="cursor:pointer">' . $name . '</h3><div><img src=image/'.$image.' class="img-responsive menu-img"></div>'.$sub_menu;
                                     }
                                     else{
                                             $menus .= '<div class="custom-category-box">';
