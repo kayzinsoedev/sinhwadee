@@ -187,7 +187,10 @@ class ControllerNewsNcategory extends Controller {
 					}
 
 					// debug($news_ids);die;
+					/* update by 28/09/2021*/
+
 					$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
+
 					$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
 
 
@@ -548,7 +551,23 @@ class ControllerNewsNcategory extends Controller {
 			if(isset($news_ids) || $keyword){
 				// debug("if");die;
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
-					$data['recipes_result'] = $results;
+					// $results_temp = $this->model_catalog_news->getNews();
+
+					// foreach($results_temp as $result)
+					// {
+					// 	//debug($result);
+					//
+					// 	$pos = strpos($result['title'], $keyword);
+					//
+					// 	if($pos != NULL)
+					// 	{
+					// 		$results[] = $result;
+					// 	}
+					//
+					// 	//debug($result['title']);
+					// 	//debug($pos);
+					// }
+					// $data['recipes_result'] = $results;
 					//debug($results);die;
 			}else{
 				// debug("else");die;
