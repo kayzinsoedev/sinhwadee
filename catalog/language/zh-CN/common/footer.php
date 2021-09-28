@@ -16,8 +16,8 @@ $_['text_wishlist']     = '收藏清单';
 $_['text_newsletter']   = '订阅咨询';
 $_['text_powered']      = '<a href="http://www.opencart.cn"></a>  %s © %s ';
 
-
-$_['text_sales_enq']    = '如需銷售諮詢，請聯繫';
-$_['text_brand_enq']    = '如需品牌諮詢，請聯繫';
-$_['text_purchase_enq']    = '如需採購諮詢，請聯繫';
-$_['text_career_enq']    = '如需就業諮詢，請聯繫';
+$_['text_email']        = '如需其他业务咨询，请联系';
+$_['text_sales_enq']    = '如需销售咨询，请联系';
+$_['text_brand_enq']    = '如需品牌咨询，请联系';
+$_['text_purchase_enq']    = '如需采购咨询，请联系';
+$_['text_career_enq']    = '如需就业咨询，请联系';

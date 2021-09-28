@@ -15,7 +15,8 @@ class ControllerExtensionModuleFeaturedRecipes extends Controller {
 
         foreach ($results as $result) {
             $choices[] = array(
-                'label' =>  $result['title'],
+                'label' =>  str_replace("''","",$result['title']),
+                // 'label' =>  $result['title'],
                 'value' => $result['news_id'],
             );
         }
