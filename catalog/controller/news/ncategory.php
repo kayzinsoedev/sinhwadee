@@ -378,7 +378,7 @@ class ControllerNewsNcategory extends Controller {
 
 					$start = ($fiter_page - 1) * $recipes_limit;
 						// debug($start);
-        	$data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $start, $recipes_limit);
+        	// $data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $start, $recipes_limit);
 
 
 
@@ -1034,7 +1034,7 @@ class ControllerNewsNcategory extends Controller {
 					$data['is_category'] = true;
 					// $limit = $ncategory_info['column'];
 					$limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
-					$limit = 4;
+					$limit = 10;
 					// $display_image = $ncategory_info['top'];
 
 
@@ -1136,11 +1136,11 @@ class ControllerNewsNcategory extends Controller {
 
 				// debug($sdata);
 
-
+		// debug($sdata);
 				if(isset($news_ids) || $keyword){
 						$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 
-						// debug($results);
+
 						$data['recipes_result'] = $results;
 						$data['recipes_filter'] = "true";
 						return $data;exit;
