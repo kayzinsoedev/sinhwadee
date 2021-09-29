@@ -360,8 +360,14 @@ class ModelCatalogNews extends Model {
 
 
 		if (isset($keyword)) {
-			$sql .= " AND LOWER(title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%'";
+			$sql .= " AND (LOWER(title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%'";
 		}
+
+
+		if (isset($keyword)) {
+			$sql .= " OR LOWER(description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
+		}
+
 
 
 
@@ -449,7 +455,7 @@ class ModelCatalogNews extends Model {
 
 		return $news_related_data;
 	}
-	public function getTotalNews($data = array()) {
+	public function getTotalNews($data = array(),$keyword=null) {
 
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
@@ -511,6 +517,17 @@ class ModelCatalogNews extends Model {
 
 			$sql .= ")";
 		}
+
+		if (isset($keyword)) {
+			$sql .= " AND (LOWER(title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%'";
+		}
+
+
+		if (isset($keyword)) {
+			$sql .= " OR LOWER(description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
+		}
+
+
 
 		if (!empty($data['filter_author_id'])) {
 			$sql .= " AND n.nauthor_id = '" . (int)$data['filter_author_id'] . "'";

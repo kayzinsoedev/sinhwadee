@@ -7,7 +7,8 @@
 												<div class="col-md-3 recipes-list-title"><h3>Ingredients</h3></div>
 												<div class="col-md-3 recipes-list-title"><h3>Method</h3></div>
 									</div>
-									<?php foreach ($filter_recipes_list as $key=> $recipes_article) { ?>
+									<?php //debug($filter_recipes_list);
+									foreach ($filter_recipes_list as $key=> $recipes_article) { ?>
 											<div class="row">
 												 <?php $key++; ?>
 														<a href="<?=$recipes_article['link'];?>"><div class="col-md-3 recipes-list"><span><?=$key.". ";?></span><?=$recipes_article['name'];?></div></a>
