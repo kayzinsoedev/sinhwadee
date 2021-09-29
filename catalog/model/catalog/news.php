@@ -596,7 +596,7 @@ class ModelCatalogNews extends Model {
 	}
  	public function getNewsCategories($data = array()) {
 		$sql = "SELECT ncd.* FROM " . DB_PREFIX . "sb_news_to_ncategory ntn LEFT JOIN " . DB_PREFIX . "sb_ncategory nc ON (ntn.ncategory_id = nc.ncategory_id) LEFT JOIN " . DB_PREFIX . "sb_ncategory_description ncd ON (ntn.ncategory_id = ncd.ncategory_id) LEFT JOIN " . DB_PREFIX . "sb_news n ON (ntn.news_id = n.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON ntn.news_id = nd.news_id LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (ntn.news_id = n2s.news_id)";
-		$sql .= " WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_added < NOW()";
+		$sql .= " WHERE ncd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_added < NOW()";
 
 		if(!empty($data['parent_id'])) {
 			$sql .= " AND nc.parent_id = '".(int)$data['parent_id']."'";
