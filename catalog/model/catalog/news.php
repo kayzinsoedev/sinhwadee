@@ -602,6 +602,7 @@ class ModelCatalogNews extends Model {
 			$sql .= " AND nc.parent_id = '".(int)$data['parent_id']."'";
 		}
 		$sql .= " GROUP BY ntn.ncategory_id";
+		$sql .= " ORDER BY nc.sort_order ASC";
 
 		$query = $this->db->query($sql);
 
