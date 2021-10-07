@@ -37,11 +37,6 @@
 		      <?php } ?>
 		    </div>
 
-				<!-- <img
-					src="<?= $thumb; ?>"
-					alt="<?= $name; ?>"
-					title="<?= $name; ?>"
-					class="img-responsive img1" /> -->
 				<?php if($thumb2 && $hover_image_change) { ?>
 					<div id="product-image-main-id-<?=$product_id;?>" class="product-image-main-<?=$product_id;?>">
 			      <?php foreach($images as $image){ ?>

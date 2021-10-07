@@ -89,7 +89,7 @@
 						<div class="article-name bold pd-b15"><a href="<?php echo $articles['href']; ?>"><?php echo $articles['name']; ?></a></div>
 					<?php } ?>
 					<?php if ($articles['date_added']) { ?>
-						<div class="pd-b15">
+						<div class="pd-b15 hidden">
 							<img src="image/catalog/project/general/calendar.png" alt="calendar"/>
 							<span class="img-calendar"><?php echo $articles['date_added']; ?></span>
 						</div>

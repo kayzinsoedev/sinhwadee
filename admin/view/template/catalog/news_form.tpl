@@ -147,15 +147,20 @@
           </div>
         </div>
 
-
+        <!-- <?php debug($selected_recipes_sauces); ?> -->
         <div class="form-group">
               <label class="col-sm-2 control-label" for="input-status">Recipes Sauce</label>
               <div class="col-sm-10">
                 <select name="receipt_sauces[]" multiple id="receipt-sauces" class="form-control">
                     <?php foreach($recipes_sauces as $key=> $recipes_sauce){ ?>
-                            <?php
-                                     $selected = ($selected_recipes_sauce['sauce_id'] == $recipes_sauce['id']) ? 'selected' : ''; ?>
-                                     <option value="<?=$recipes_sauce['id'];?>" <?=$selected;?> ><?=$recipes_sauce['title'];?></option>
+                      <?php
+                          if(in_array(  $recipes_sauce['id'] , $sauce_array)  ){ ?>
+                                <option value="<?=$recipes_sauce['id'];?>" selected><?=$recipes_sauce['title'];?></option>
+                          <?php }else{ ?>
+                              <option value="<?=$recipes_sauce['id'];?>"><?=$recipes_sauce['title'];?></option>
+                          <?php } ?>
+
+
 
                    <?php  } ?>
                 </select>
@@ -167,8 +172,13 @@
               <div class="col-sm-10">
                 <select name="receipt_cooking_method[]" multiple id="receipt-cooking-method" class="form-control">
                   <?php foreach($recipes_cooking_methods as $key=> $recipes_cooking_method){ ?>
-                      <?php  $selected = ($selected_recipes_cooking_method[$key]['cooking_method_id'] == $recipes_cooking_method['id']) ? 'selected' : ''; ?>
-                      <option value="<?=$recipes_cooking_method['id'];?>" <?=$selected;?>><?=$recipes_cooking_method['title'];?></option>
+                    <?php
+                        if(in_array( $recipes_cooking_method['id'] , $method_array)  ){ ?>
+                              <option value="<?=$recipes_cooking_method['id'];?>" selected><?=$recipes_cooking_method['title'];?></option>
+                        <?php }else{ ?>
+                            <option value="<?=$recipes_cooking_method['id'];?>"><?=$recipes_cooking_method['title'];?></option>
+                        <?php } ?>
+
                  <?php  } ?>
                 </select>
               </div>
@@ -179,8 +189,14 @@
               <div class="col-sm-10">
                 <select name="receipt_main_ingredient[]" multiple id="receipt-main-ingredient" class="form-control">
                   <?php foreach($recipes_main_ingredients as $key=> $recipes_main_ingredient){ ?>
-                      <?php  $selected = ($selected_recipes_ingredients[$key]['main_ingredients_id'] == $recipes_main_ingredient['id']) ? 'selected' : ''; ?>
-                      <option value="<?=$recipes_main_ingredient['id'];?>" <?=$selected;?> ><?=$recipes_main_ingredient['title'];?></option>
+
+                      <?php
+                      if(in_array( $recipes_main_ingredient['id'] , $ingredient_array)  ){ ?>
+                            <option value="<?=$recipes_main_ingredient['id'];?>" selected><?=$recipes_main_ingredient['title'];?></option>
+                      <?php }else{ ?>
+                          <option value="<?=$recipes_main_ingredient['id'];?>"><?=$recipes_main_ingredient['title'];?></option>
+                      <?php } ?>
+
                  <?php  } ?>
                 </select>
               </div>

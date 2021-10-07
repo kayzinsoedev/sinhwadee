@@ -531,6 +531,7 @@ class ModelCatalogNews extends Model {
 
 	public function getRecipesCookingMethod($news_id){
 			$query = $this->db->query("SELECT cooking_method_id FROM news_recipes_cooking_method WHERE news_id = '" . (int)$news_id . "' ");
+			// debug($query);die;
 			return $query->rows;
 	}
 

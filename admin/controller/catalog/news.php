@@ -977,13 +977,28 @@ class ControllerCatalogNews extends Controller {
 		// debug($data['receipt_main_ingredient']);
 
 
+
 		if(isset($this->request->get['news_id'])){
+			// debug($this->request->get['news_id']);die;
 				$data['selected_recipes_sauces'] = $this->model_catalog_news->getRecipesSauces($this->request->get['news_id']);
+				foreach ($data['selected_recipes_sauces'] as $key => $sauce) {
+						$data['sauce_array'][] = $sauce['sauce_id'];
+				}
+
 				$data['selected_recipes_cooking_method'] = $this->model_catalog_news->getRecipesCookingMethod($this->request->get['news_id']);
+				foreach ($data['selected_recipes_cooking_method'] as $key => $method) {
+						$data['method_array'][] = $method['cooking_method_id'];
+				}
+
 				$data['selected_recipes_ingredients'] = $this->model_catalog_news->getRecipesIngredients($this->request->get['news_id']);
+				foreach ($data['selected_recipes_ingredients'] as $key => $ingredient) {
+						$data['ingredient_array'][] = $ingredient['main_ingredients_id'];
+				}
+
+				// debug($data['ingredient_array']);
 		}
 
-		// debug($data['selected_recipes_sauces']);die;
+		// debug($data['selected_recipes_cooking_method']);
 
 		$this->response->setOutput($this->load->view('catalog/news_form.tpl', $data));
 	}

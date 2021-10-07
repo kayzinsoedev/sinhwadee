@@ -11,6 +11,13 @@ class ControllerNewsArticle extends Controller {
 		$this->document->addScript('catalog/view/theme/default/blog-mp/jquery.magnific-popup.min.js');
 		$this->document->addStyle('catalog/view/theme/default/blog-mp/magnific-popup.css');
 
+
+		$this->document->addStyle('catalog/view/javascript/slick/slick.min.css');
+		$this->document->addStyle('catalog/view/javascript/slick/slick-theme.css');
+		$this->document->addScript('catalog/view/javascript/slick/slick-custom.min.js');
+
+
+
 		if ($this->config->get('config_google_captcha_status')) {
 			$this->document->addScript('https://www.google.com/recaptcha/api.js');
 		}
