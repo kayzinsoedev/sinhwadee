@@ -371,7 +371,7 @@ class ModelCatalogNews extends Model {
 
 
 
-
+		// debug($this->config->get('ncategory_bnews_order'));die;
 		if (!$this->config->get('ncategory_bnews_order')) {
 			$sql .= " ORDER BY n.date_added DESC ";
 			} else {
@@ -620,6 +620,12 @@ class ModelCatalogNews extends Model {
 	public function getRelatedMainCategory($news_id){
 		$query = $this->db->query("SELECT ncategory_id FROM " . DB_PREFIX . "sb_news_to_ncategory WHERE news_id= '" . $news_id . "' ");
 		return $query->rows;
+	}
+
+
+	public function getParentCategoryId($cat_id){
+			$query = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "sb_ncategory WHERE ncategory_id= '" . $cat_id . "' ");
+			return $query->rows;
 	}
 
 

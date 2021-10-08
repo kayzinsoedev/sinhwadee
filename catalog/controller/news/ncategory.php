@@ -722,7 +722,7 @@ class ControllerNewsNcategory extends Controller {
 				//debug($sdata);
 			}
 
-			// debug($data['recipes_result']);
+			// debug($sdata);die;
 
 
 			// debug($results);die;

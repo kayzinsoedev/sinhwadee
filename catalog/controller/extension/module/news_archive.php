@@ -88,12 +88,21 @@ class ControllerExtensionModuleNewsArchive extends Controller {
 		// }
 
 
-		$parent_id = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : 0 ;
-;
+		// $parent_id = isset($this->request->get['ncat']) ? $this->request->get['ncat'] : 0 ;
+
+		$parent_id = $this->model_catalog_news->getParentCategoryId($this->request->get['ncat']);
+		if($parent_id[0]['parent_id'] !=0){
+			$parent_id = $parent_id[0]['parent_id'];
+		}else{
+			$parent_id = $this->request->get['ncat'];
+		}
+
+		// debug($parent_id);
 		$data['categories'] = array();
-		// debug($this->config->get('config_language_id'));
+
 		$ctgrs = $this->model_catalog_news->getNewsCategories(array('parent_id' => $parent_id));
-		// debug($ctgrs);
+		// $ctgrs = $this->model_catalog_news->getNewsCategories(0);
+
 		foreach($ctgrs as $c) {
 			$data['categories'][] = array(
 				'url' => $this->url->link('news/ncategory', 'ncat='.$c['ncategory_id']),
