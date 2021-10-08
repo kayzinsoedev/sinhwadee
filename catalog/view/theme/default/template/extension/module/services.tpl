@@ -36,7 +36,7 @@
                   </div>
                   <!-- <div class="service-img rightimage col-sm-5"> -->
                   <div class="col-sm-5 rightimage">
-                      <img src="image/<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                      <img src="<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                   </div>
               </div>
           <?php } elseif($service['alignment'] == '1') { ?>
@@ -44,7 +44,7 @@
               <div id="about-sub-title<?=$key;?>" class="flex about-container">
                   <!-- <div class="service-img col-sm-5"> -->
                   <div class="col-sm-5">
-                      <img src="image/<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                      <img src="<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                   </div>
                   <!-- <div class="desc-right w-100 service-content"> -->
                   <div class="section2-desc desc-right col-sm-7">

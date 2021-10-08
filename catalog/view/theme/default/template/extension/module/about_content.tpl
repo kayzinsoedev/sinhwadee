@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-sm-5 rightimage">
                             <?php if(!empty($slogan['top_image'])){ ?>
-                                  <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                                  <img src="<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                             <?php } ?>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div id="about-sub-title<?=$key;?>" class="flex about-container">
                         <div class="col-sm-5">
                             <?php if(!empty($slogan['top_image'])){ ?>
-                                  <img src="image/<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
+                                  <img src="<?= $slogan['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                             <?php } ?>
                         </div>
                         <div class="section2-desc desc-right col-sm-7">
