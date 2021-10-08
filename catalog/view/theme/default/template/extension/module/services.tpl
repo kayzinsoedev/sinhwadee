@@ -47,7 +47,7 @@
                       <img src="<?= $service['top_image']; ?>" class="img-responsive" alt="aboutus_image"/>
                   </div>
                   <!-- <div class="desc-right w-100 service-content"> -->
-                  <div class="section2-desc desc-right col-sm-7">
+                  <div class="section2-desc col-sm-7">
                       <div class="infor-desc desc-container desc-read-more-section1">
                           <h3><?= $service['title']; ?></h3>
                           <div class="desc-container">

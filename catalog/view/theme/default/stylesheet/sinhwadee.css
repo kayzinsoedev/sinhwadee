@@ -1205,8 +1205,9 @@ body.product-product .article-name a:hover
 
 
 .service-img {
-    /* width: 30%; */
+    width: 30%;
 }
+
 
 .desc-right.service-content{
   width: 70%;

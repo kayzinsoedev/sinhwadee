@@ -12,8 +12,8 @@
 		<?php } ?>
 		</div>
 	</div>
-	<h3><?= $text_year ?></h3>
-	<div class="list-group pd-b15">
+	<h3 hidden><?= $text_year ?></h3>
+	<div class="list-group pd-b15 hidden">
 		<?php $index = 0; ?>
 				<?php foreach ($archives as $archive) { ?>
 			<?php $index++ ?>
