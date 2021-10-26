@@ -1,11 +1,11 @@
-<div>
-    <h2><?= $sec_title; ?> </h2>
-    <div class="clientele-logo vertical-align container-fluid">
+
+<h2><?= $sec_title; ?> </h2>
+<div class="clientele-logo vertical-align container-fluid">
         <div class="part-container">
             <div class="home-users-slide-container slideshow">
                 <div id="clientele" class="relative owl-carousel"  style="opacity: 1; width: 100%;">
                     <?php foreach ($client_logo as $client_logos) { ?>
-                    <div class="clientele-users-slide">
+                    <div class="clientele-users-slide" data-toggle="modal" data-target="#Clientele-<?=$client_logos['id'];?>">
                         <img src="image/<?= $client_logos['logo']; ?>" class="img-responsive" alt="client_logo"/>
                     </div>
                     <?php } ?>
@@ -13,6 +13,34 @@
             </div>
         </div>
 </div>
+
+
+<?php foreach($client_logo as $client_logos) {?>
+<div class="modal fade custom-service" id="Clientele-<?=$client_logos['id'];?>" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-body">
+							<!-- <div class=" modal-close-button close" data-dismiss="modal">
+                <img src="image/catalog/jling/general/close_btn.png" alt="close" class="">
+              </div> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+
+							<div id="" class="clientele-popup main pd-b20">
+                      <?= html($client_logos['description']); ?>
+							</div>
+							<!-- </div> -->
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+<?php } ?>
+
+
 
 <script type="text/javascript">
     $('#clientele').owlCarousel({
@@ -55,7 +83,7 @@
           },
 
         nav: true,
-        navText: ['<div class="pointer absolute position-top-left h100 slider-nav slider-nav-left hover-show"><div class="absolute position-center-center navs"><img src="image/catalog/project/general/prev-active.png" alt="previous" /></div></div>', 
+        navText: ['<div class="pointer absolute position-top-left h100 slider-nav slider-nav-left hover-show"><div class="absolute position-center-center navs"><img src="image/catalog/project/general/prev-active.png" alt="previous" /></div></div>',
                 '<div class="pointer absolute position-top-right h100 slider-nav slider-nav-right hover-show"><div class="absolute position-center-center navs"><img src="image/catalog/project/general/next-active.png" alt="next"/></div></div>'],
         dots: false,
         dotsClass: 'slider-dots slider-custom-dots absolute float-sm-right list-inline text-center',

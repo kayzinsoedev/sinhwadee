@@ -20,8 +20,12 @@ class ControllerExtensionModuleOurClientele extends Controller {
             $data['client_logo'] = $client_logo;
         }
 
+				$data['status'] = $this->config->get('our_clientele_status');
+				// debug($data['client_logo']);die;
 		return $this->load->view('extension/module/our_clientele', $data);
     }
+
+
     function sortLogos($object1, $object2){
         if (is_numeric($object1['sort']) && is_numeric($object2['sort'])) {
           return $object1['sort'] - $object2['sort'];

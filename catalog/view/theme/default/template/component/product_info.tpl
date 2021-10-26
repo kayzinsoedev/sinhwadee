@@ -27,31 +27,37 @@
 				href="<?= $href; ?>"
 				title="<?= $name; ?>"
 				class="product-image image-container relative" >
+				<img
+					src="<?= $thumb; ?>"
+					alt="<?= $name; ?>"
+					title="<?= $name; ?>"
+					class="img-responsive img1" />
 
-				<div id="product-image-main-id-<?=$product_id;?>" class="product-image-main-<?=$product_id;?>">
+
+				<!-- <div id="product-image-main-id-<?=$product_id;?>" class="product-image-main-<?=$product_id;?>">
 		      <?php foreach($images as $image){ ?>
 		          <img src="<?= $image['thumb']; ?>" alt="<?= $name; ?>" title="<?= $name; ?>"
 		            class="main_images pointer" href="<?= $image['popup']; ?>" title="<?= $heading_title; ?>"
 		            data-zoom-image="<?= $image['zoom']; ?>"
 		          />
 		      <?php } ?>
-		    </div>
+		    </div> -->
 
 				<?php if($thumb2 && $hover_image_change) { ?>
-					<div id="product-image-main-id-<?=$product_id;?>" class="product-image-main-<?=$product_id;?>">
+					<!-- <div id="product-image-main-id-<?=$product_id;?>" class="product-image-main-<?=$product_id;?>">
 			      <?php foreach($images as $image){ ?>
 			          <img src="<?= $image['thumb']; ?>" alt="<?= $name; ?>" title="<?= $name; ?>"
 			            class="main_images pointer" href="<?= $image['popup']; ?>" title="<?= $heading_title; ?>"
 			            data-zoom-image="<?= $image['zoom']; ?>"
 			          />
 			      <?php } ?>
-			    </div>
+			    </div> -->
 
-					<!-- <img
+					<img
 						src="<?= $thumb2; ?>"
 						alt="<?= $name; ?>"
 						title="<?= $name; ?>"
-						class="img-responsive img2" style="display: none"/> -->
+						class="img-responsive img2" style="display: none"/>
 				<?php } ?>
 				<?php /*if($more_options){ ?>
 				<div class="more-options-text absolute position-bottom-center">
@@ -96,7 +102,7 @@
 			</div>
 		</div>
 
-		<div class="product-image-additional-container related">
+		<div class="product-image-additional-container related hidden">
 			<div class="product-image-additional-<?=$product_id;?>">
 				<?php foreach($additional_images as $image){ ?>
 				<img src="<?= $image['thumb']; ?>" alt="<?= $name; ?>" title="<?= $name; ?>" class="pointer img-responsive additional-img" />
@@ -303,29 +309,29 @@
 				$('#product-image-main-id-<?=$product_id;?>').parent().removeAttr('style');
 			});
 
-			$("#product-image-main-id-<?=$product_id;?>").slick({
-					dots: false,
-					infinite: false,
-					speed: 300,
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					arrows: true,
-					prevArrow: "<div class='pointer slick-nav left prev'></div>",
-					nextArrow: "<div class='pointer slick-nav right next'></div>",
-				});
+			// $("#product-image-main-id-<?=$product_id;?>").slick({
+			// 		dots: false,
+			// 		infinite: false,
+			// 		speed: 300,
+			// 		slidesToShow: 1,
+			// 		slidesToScroll: 1,
+			// 		arrows: true,
+			// 		prevArrow: "<div class='pointer slick-nav left prev'></div>",
+			// 		nextArrow: "<div class='pointer slick-nav right next'></div>",
+			// 	});
 
 
-				$('.product-image-additional-<?=$product_id;?>').slick({
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					asNavFor: '.product-image-main-<?=$product_id;?>',
-					dots: false,
-					centerMode: false,
-					focusOnSelect: true,
-					infinite: false,
-					prevArrow: "<div class='pointer slick-nav left prev'></div>",
-					nextArrow: "<div class='pointer slick-nav right next'></div>",
-				});
+				// $('.product-image-additional-<?=$product_id;?>').slick({
+				// 	slidesToShow: 3,
+				// 	slidesToScroll: 1,
+				// 	asNavFor: '.product-image-main-<?=$product_id;?>',
+				// 	dots: false,
+				// 	centerMode: false,
+				// 	focusOnSelect: true,
+				// 	infinite: false,
+				// 	prevArrow: "<div class='pointer slick-nav left prev'></div>",
+				// 	nextArrow: "<div class='pointer slick-nav right next'></div>",
+				// });
 
 		}
 
