@@ -277,7 +277,7 @@ body.product-category .slick-slide .additional-img{
 
 
 .sidebar-about-main-cat {
-    font-size: 15px;
+    font-size: calc(10px + (30 - 18) * (100vw - 320px) / (1920 - 320));
     text-transform: uppercase;
     color: #121212;
     font-weight: bold;
@@ -779,7 +779,7 @@ footer .footer-contact-info h5 {
     margin-bottom: 2em;
 }
 .aboutsub_title {
-    font-size: calc(12px + (30 - 18) * (100vw - 320px) / (1920 - 320));
+    font-size: calc(18px + (30 - 18) * (100vw - 320px) / (1920 - 320));
 }
 .iid-4 .infoHide, .iid-7 .infoHide,
 .iid-8 .infoHide, .iid-10 .infoHide,
@@ -989,9 +989,13 @@ footer .footer-contact-info h5 {
 }
 .content-gal .desc-container .split:nth-child(2) {
     font-family: 'Celeste';
-    font-size: 20px;
+    font-size: 22px;
     text-transform: uppercase;
 }
+.content-gal .desc-container .split:nth-child(3) {
+    font-size: 16px;
+}
+
 .article-button a {
     text-transform: uppercase;
     color: #b32329;

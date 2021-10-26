@@ -28,7 +28,8 @@
                   <!-- <div class="section2-desc desc-left service-content"> -->
                   <div class="section2-desc desc-left col-sm-7">
                       <div class="infor-desc desc-container desc-read-more-section1">
-                          <h3><?= $service['title']; ?></h3>
+                          <!-- <h3><?= $service['title']; ?></h3> -->
+                          <p class="aboutsub_title"><?= $service['title']; ?></p>
                           <div class="desc-container">
                               <span class="abt-desc"><?php echo html($service['description']); ?></span>
                           </div><br>
@@ -49,7 +50,7 @@
                   <!-- <div class="desc-right w-100 service-content"> -->
                   <div class="section2-desc col-sm-7">
                       <div class="infor-desc desc-container desc-read-more-section1">
-                          <h3><?= $service['title']; ?></h3>
+                          <p class="aboutsub_title"><?= $service['title']; ?></p>
                           <div class="desc-container">
                               <span class="abt-desc"><?php echo html($service['description']); ?></span>
                           </div><br>

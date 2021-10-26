@@ -11,15 +11,12 @@ class ControllerExtensionModuleServices extends Controller {
 				$main_categories = $Modulehelper->get_field ( $oc, $modulename, $language_id, 'main_categories');
 
 
-
-
         $data['services'] = array();
         if(!empty($services)) {
 
 						foreach ($services as $key => $value) {
 							// debug($value['top_image']);
 							$this->load->model('tool/image');
-
 									$data['services'][] = array(
 											'id' => $value['id'],
 											'main_categories' => $value['main_categories'],

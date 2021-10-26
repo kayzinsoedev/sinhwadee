@@ -1,11 +1,15 @@
 <?= $header; ?>
-<div class="shop-page-banner">
-  <div id="product_inner_banner_slick">
-    <?php foreach($product_inner_banners as $product_inner_banner){ ?>
-          <img src="image/<?=$product_inner_banner['image'];?>" alt="shop-page-banner">
-    <?php  } ?>
-  </div>
-</div>
+
+<?php if($status == '1'){ ?>
+    <div class="shop-page-banner">
+      <div id="product_inner_banner_slick">
+        <?php foreach($product_inner_banners as $product_inner_banner){ ?>
+              <img src="image/<?=$product_inner_banner['image'];?>" alt="shop-page-banner">
+        <?php  } ?>
+      </div>
+    </div>
+<?php } ?>
+
 
 
 

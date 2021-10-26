@@ -1,4 +1,3 @@
-
 <div id="product">
 <?php if(!$not_avail) { ?>
 
@@ -31,8 +30,8 @@
           <label>
             <input type="radio" name="option[<?= $option['product_option_id']; ?>]" value="<?= $option_value['product_option_value_id']; ?>" />
             <?php if ($option_value['image']) { ?>
-            <img src="<?= $option_value['image']; ?>" alt="<?= $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" class="img-thumbnail" /> 
-            <?php } ?>                    
+            <img src="<?= $option_value['image']; ?>" alt="<?= $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" class="img-thumbnail" />
+            <?php } ?>
             <?= $option_value['name']; ?>
             <?php if ($option_value['price']) { ?>
             (<?= $option_value['price_prefix']; ?><?= $option_value['price']; ?>)
@@ -52,7 +51,7 @@
           <label>
             <input type="checkbox" name="option[<?= $option['product_option_id']; ?>][]" value="<?= $option_value['product_option_value_id']; ?>" />
             <?php if ($option_value['image']) { ?>
-            <img src="<?= $option_value['image']; ?>" alt="<?= $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" class="img-thumbnail" /> 
+            <img src="<?= $option_value['image']; ?>" alt="<?= $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" class="img-thumbnail" />
             <?php } ?>
             <?= $option_value['name']; ?>
             <?php if ($option_value['price']) { ?>
@@ -137,9 +136,9 @@
         <?php if(!$not_avail && !$enquiry) { ?>
         <div class="input-group">
           <label class="input-group-addon"><?= $entry_qty; ?></label>
-          <span class="input-group-btn"> 
+          <span class="input-group-btn">
             <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="qty-<?= $product_id; ?>" onclick="descrement($(this).parent().parent())")>
-              <span class="glyphicon glyphicon-minus"></span> 
+              <span class="glyphicon glyphicon-minus"></span>
             </button>
           </span>
           <input type="text" name="quantity" class="form-control input-number integer text-center" id="input-quantity" value="<?= $minimum; ?>" >
@@ -150,10 +149,10 @@
           </span>
         </div>
         <?php } ?>
-  
+
       <input type="hidden" name="product_id" value="<?= $product_id; ?>" />
       <br />
-  
+
       <?php if(!$enquiry){ ?>
         <?php if(!$not_avail) { ?>
         <button type="button" id="button-cart" data-loading-text="<?= $text_loading; ?>" class="btn btn-primary"><?= $button_cart; ?></button>
@@ -161,11 +160,11 @@
       <?php }else{ ?>
         <button type="button" id="button-enquiry" data-loading-text="<?= $text_loading; ?>" class="btn btn-primary"><?= $button_enquiry; ?></button>
       <?php } ?>
-      
+
       <?php if($download){ ?>
         <a href="<?= $download; ?>" target="_blank" class="btn btn-primary" ><?= $button_download; ?></a>
       <?php } ?>
-  
+
     </div>
     <?php if ($minimum > 1) { ?>
     <div class="alert alert-info"><i class="fa fa-info-circle"></i> <?= $text_minimum; ?></div>
@@ -173,17 +172,17 @@
   </div>
 
 
-  
+
 <script type="text/javascript"><!--
     $('.date').datetimepicker({
         pickTime: false
     });
-    
+
     $('.datetime').datetimepicker({
         pickDate: true,
         pickTime: true
     });
-    
+
     $('.time').datetimepicker({
         pickDate: false
     });
@@ -211,24 +210,24 @@
       }
     });
     // Fix for datetimepicker positon issue
-    
+
     $('button[id^=\'button-upload\']').on('click', function() {
         var node = this;
-    
+
         $('#form-upload').remove();
-    
+
         $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
-    
+
         $('#form-upload input[name=\'file\']').trigger('click');
-    
+
         if (typeof timer != 'undefined') {
             clearInterval(timer);
         }
-    
+
         timer = setInterval(function() {
             if ($('#form-upload input[name=\'file\']').val() != '') {
                 clearInterval(timer);
-    
+
                 $.ajax({
                     url: 'index.php?route=tool/upload',
                     type: 'post',
@@ -245,14 +244,14 @@
                     },
                     success: function(json) {
                         $('.text-danger').remove();
-    
+
                         if (json['error']) {
                             $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
                         }
-    
+
                         if (json['success']) {
                             alert(json['success']);
-    
+
                             $(node).parent().find('input').val(json['code']);
                         }
                     },
@@ -263,8 +262,8 @@
             }
         }, 500);
     });
-  
-  // << OPTIONS IMAGE 
+
+  // << OPTIONS IMAGE
     function isEmpty(obj) {
         for(var key in obj) {
             if(obj.hasOwnProperty(key))
@@ -281,7 +280,6 @@
             //data: {'prodid': prodid, 'poid': poid, 'povid': povid},
             data: $('#product input[type=radio], #product select').serialize() + '&prodid=' + prodid + '&poid=' + poid + '&povid=' + povid,
             success: function(json) {
-                //console.log(json);
                 if(!isEmpty(json['images']) && !isEmpty(json['additional_images'])) {
                   destroySlick();
                   for(var i = 0; i < json['images'].length; i++) {
@@ -296,6 +294,7 @@
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
+              // console.log("error");
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
@@ -325,11 +324,10 @@
         });
     }
     $(document).on('change', '#product input[type=radio], #product select', function() {
+
         if($(this).val()) {
-            //console.log($(this).parent().parent().parent().attr('id'));
-            if($(this).parent().parent().parent().attr('id') !== undefined){
-            var poid = $(this).parent().parent().parent().attr('id').replace('input-option', '');
-            
+            if($(this).parent().parent().parent().parent().attr('id') !== undefined){
+            var poid = $(this).parent().parent().parent().parent().attr('id').replace('input-option', '');
             } else {
               var poid = $(this).attr('id').replace('input-option', '');
             }
@@ -340,7 +338,7 @@
           getprodimages(<?= $product_id ?>, '<?= $prod_image ?>');
         }
     });
-    // >> OPTIONS IMAGE 
+    // >> OPTIONS IMAGE
 
 
 
@@ -349,21 +347,21 @@
 
 
   <?php if(isset($update_price_status) && $update_price_status) { ?>
-					
+
 	<script type="text/javascript">
     changeProdPrice();
 		$("#product input[type='checkbox']").click(function() {
 			changeProdPrice();
 		});
-		
+
 		$("#product input[type='radio']").click(function() {
 			changeProdPrice();
 		});
-		
+
 		$("#product select").change(function() {
 			changeProdPrice();
 		});
-		
+
 		$("#input-quantity").blur(function() {
 			changeProdPrice();
 		});
@@ -371,7 +369,7 @@
     $("#input-quantity").parent(".input-group").find(".btn-number").click(function() {
 			changeProdPrice();
 		});
-		
+
 		function changeProdPrice() {
 			$.ajax({
 				url: 'index.php?route=product/product/updatePrice&product_id=<?php echo $product_id; ?>',
@@ -379,14 +377,14 @@
 				dataType: 'json',
 				data: $('#product input[name=\'quantity\'], #product select, #product input[type=\'checkbox\']:checked, #product input[type=\'radio\']:checked'),
 				beforeSend: function() {
-					
+
 				},
 				complete: function() {
-					
+
 				},
 				success: function(json) {
 					$('.alert-success, .alert-danger').remove();
-					
+
 					if(json['new_price_found']) {
 						$('.new-prices').html(json['total_price']);
 						$('.product-tax').html(json['tax_price']);
@@ -397,51 +395,51 @@
 				}
 			});
 
-      // << CHECK OPTION STOCK 
+      // << CHECK OPTION STOCK
       <?php if(!$product_has_ro)	{ ?>
-      $.ajax({	
-				url: 'index.php?route=product/product/checkOptionStock&product_id=<?php echo $product_id; ?>',	
-				type: 'post',	
-				dataType: 'json',	
-				data: $('#product input[name=\'quantity\'], #product select, #product input[type=\'checkbox\']:checked, #product input[type=\'radio\']:checked'),	
-				beforeSend: function() {	
-						
-				},	
-				complete: function() {	
-						
-				},	
-				success: function(json) {	
-          $('#waiting_list input[name="no_stock_pov_ids"]').val('');	
-          $('#waiting_list input[name="pov_ids"]').val('');	
-          if(json['no_stock_option_array'].length > 0){	
-              $('#waiting_list input[name="no_stock_pov_ids"]').val(json['no_stock_option_array']);	
-          }	
-          if(json['selected_option_array'].length > 0){	
-              $('#waiting_list input[name="pov_ids"]').val(json['selected_option_array']);	
-          }	
-					$('.alert-success, .alert-danger').remove();	
-					$('#waiting_list input[name="product_no_stock"]').val(false);	
-					if(json['has_stock']) {	
-              //has stock	
-              $('#waiting_list').hide();	
-              $('#button-cart').show();	
-					} else {	
-              //no stock	
-              $('#waiting_list').show();	
-              $('#button-cart').hide();	
-					}	
-          if(json['main_product_nostock']){	
-              $('#waiting_list input[name="product_no_stock"]').val(true);	
-          }	
-				}	
-			});	
+      $.ajax({
+				url: 'index.php?route=product/product/checkOptionStock&product_id=<?php echo $product_id; ?>',
+				type: 'post',
+				dataType: 'json',
+				data: $('#product input[name=\'quantity\'], #product select, #product input[type=\'checkbox\']:checked, #product input[type=\'radio\']:checked'),
+				beforeSend: function() {
+
+				},
+				complete: function() {
+
+				},
+				success: function(json) {
+          $('#waiting_list input[name="no_stock_pov_ids"]').val('');
+          $('#waiting_list input[name="pov_ids"]').val('');
+          if(json['no_stock_option_array'].length > 0){
+              $('#waiting_list input[name="no_stock_pov_ids"]').val(json['no_stock_option_array']);
+          }
+          if(json['selected_option_array'].length > 0){
+              $('#waiting_list input[name="pov_ids"]').val(json['selected_option_array']);
+          }
+					$('.alert-success, .alert-danger').remove();
+					$('#waiting_list input[name="product_no_stock"]').val(false);
+					if(json['has_stock']) {
+              //has stock
+              $('#waiting_list').hide();
+              $('#button-cart').show();
+					} else {
+              //no stock
+              $('#waiting_list').show();
+              $('#button-cart').hide();
+					}
+          if(json['main_product_nostock']){
+              $('#waiting_list input[name="product_no_stock"]').val(true);
+          }
+				}
+			});
       <?php } else { ?>
         setTimeout(function(){
           $('#waiting_list').hide();
-          },300);	
+          },300);
       <?php }  ?>
       // >> CHECK OPTION STOCK
 		}
 	</script>
-		
+
 <?php } ?>

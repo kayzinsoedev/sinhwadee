@@ -756,6 +756,8 @@ class ControllerProductProduct extends Controller {
 			$modulename  = 'product_inner_banner';
 
 			$data['product_inner_banners'] = $Modulehelper->get_field ( $oc, $modulename, $language_id, 'product_inner_banners');
+			$data['status'] = $this->config->get('product_inner_banner_status');
+			// debug($data['status']);die;
 			$this->document->addStyle('catalog/view/javascript/slick/slick.min.css');
 			$this->document->addScript('catalog/view/javascript/slick/slick-custom.min.js');
 			/* call product inner banner module */
@@ -770,7 +772,7 @@ class ControllerProductProduct extends Controller {
 
 
 			$data['related_blogs_slider'] = $this->load->controller('extension/module/related_blog',$this->request->get['product_id']);
-			
+
 
 			$this->response->setOutput($this->load->view('product/product/product', $data));
 		} else {
@@ -1335,6 +1337,8 @@ class ControllerProductProduct extends Controller {
 				}
 			}
 		}
+
+		$json['prodid'] = $this->request->get['povid'];
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

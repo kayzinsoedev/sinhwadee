@@ -23,7 +23,7 @@
                     <div id="about-sub-title<?=$key;?>" class="flex about-container reverse-container">
                         <div class="section2-desc desc-left service-content">
                             <div class="infor-desc desc-container desc-read-more-section1">
-                                <h3><?= $service['sub_title']; ?></h3>
+                                <p class="aboutsub_title"><?= $service['sub_title']; ?></p>
                                 <div class="desc-container">
                                     <span class="abt-desc"><?php echo html($service['description']); ?></span>
                                 </div><br>
@@ -40,7 +40,8 @@
                         </div>
                         <div class="desc-right w-100 service-content">
                             <div class="infor-desc desc-container w-100">
-                                <h3><?= $service['sub_title']; ?></h3>
+                                <!-- <h3><?= $service['sub_title']; ?></h3> -->
+                                <p class="aboutsub_title"><?= $service['sub_title']; ?></p>
                                 <div class="desc-container">
                                     <span class="abt-desc"><?php echo html($service['description']); ?></span>
                                 </div><br>
