@@ -8,14 +8,15 @@ class ControllerExtensionModuleContentGallery extends Controller {
         $modulename  = 'contentgallery';
 
         $contents = $Modulehelper->get_field ( $oc, $modulename, $language_id, 'contents');
-        
+
         $data['contents'] = array();
         if(!empty($contents)) {
             //usort($contents, array($this,"sortSlogans"));
             $data['contents'] = $contents;
         }
-        
+
+
 		return $this->load->view('extension/module/contentgallery', $data);
     }
-    
+
 }
