@@ -802,7 +802,8 @@ footer .footer-contact-info h5 {
 .iid-4 .infoHide, .iid-7 .infoHide,
 .iid-8 .infoHide, .iid-10 .infoHide,
 .iid-11 .infoHide, .iid-12 .infoHide,
-.iid-9 .infoHide,.iid-16 .infoHide {
+.iid-9 .infoHide, .iid-16 .infoHide,
+.iid-14 .infoHide {
     display: none;
 }
 .iid-7 .breadcrumb, .iid-8 .breadcrumb, .iid-9 .breadcrumb,

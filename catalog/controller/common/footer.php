@@ -116,6 +116,17 @@ class ControllerCommonFooter extends Controller {
 		$footerImages = $this->afterFooterImg();
 
 		$data = array_merge($data, $footerImages);
+
+		$this->load->library('modulehelper');
+		$Modulehelper = Modulehelper::get_instance($this->registry);
+		$oc = $this;
+		$language_id = $this->config->get('config_language_id');
+		$modulename  = 'footer_email';
+
+		$data['footer_email'] = $Modulehelper->get_field ( $oc, $modulename, $language_id, 'footer_email');
+
+		// debug($footer_email);
+
 		return $this->load->view('common/footer', $data);
 	}
 

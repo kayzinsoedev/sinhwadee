@@ -28,8 +28,8 @@
 					<?php if($fax){ ?>
 						<?= $text_fax; ?>: <a href="fax:<?= $fax; ?>" ><?= $fax; ?></a><br/>
 					<?php } ?>
-					<?= $text_email; ?>: <a href="mailto:<?= $email; ?>" ><?= $email; ?></a><br/>
-					<?php if($config_sales_email){ ?>
+					<!-- <?= $text_email; ?>: <a href="mailto:<?= $email; ?>" ><?= $email; ?></a><br/> -->
+					<!-- <?php if($config_sales_email){ ?>
 						<?= $text_sales_enq; ?>: <a href="mailto:<?= $config_sales_email; ?>" ><?= $config_sales_email; ?></a><br/>
 					<?php } ?>
 					<?php if($config_brand_email){ ?>
@@ -40,7 +40,10 @@
 					<?php } ?>
 					<?php if($config_career_email){ ?>
 						<?= $text_career_enq; ?>: <a href="mailto:<?= $config_career_email; ?>" ><?= $config_career_email; ?></a><br/>
-					<?php } ?>
+					<?php } ?> -->
+
+					<?=html($footer_email);?>
+
 
 					<?php if($social_icons){ ?>
 					<div class="footer-social-icons">
