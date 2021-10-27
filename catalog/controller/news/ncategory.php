@@ -380,8 +380,7 @@ class ControllerNewsNcategory extends Controller {
 
 		 			if ($ncategory_id) {
 						// debug("1");
-						// debug("Page".$page);
-		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page='.$page.'&filter-page='.$fiter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter-page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 		 			} elseif($author_pid) {
 						// debug("2");
 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter-page='.$fiter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);

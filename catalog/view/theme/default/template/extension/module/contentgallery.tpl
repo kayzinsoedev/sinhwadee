@@ -14,13 +14,13 @@
                             </div>
                             <!-- <div class="rightimage"  style="background-image:url(image/<?= $content['small_image1']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                    <img src="image/<?=$content['small_image1']; ?>">
+                                    <img src="<?=$content['small_image1']; ?>">
                             </div>
                         </div>
                         <div class="flex" style="background:<?=$content['small_bg'];?>">
                             <!-- <div class="rightimage"  style="background-image:url(image/<?= $content['small_image2']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                  <img src="image/<?=$content['small_image2']; ?>">
+                                  <img src="<?=$content['small_image2']; ?>">
                             </div>
                             <div class="small-desc desc-left relative w-50">
                                 <div class="desc-container">
@@ -35,7 +35,7 @@
                         <div class="flex" style="background:<?=$content['small_bg'];?>">
                             <!-- <div class="rightimage"  style="background-image:url(image/<?= $content['small_image1']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                  <img src="image/<?=$content['small_image1']; ?>">
+                                  <img src="<?=$content['small_image1']; ?>">
                             </div>
                             <div class="small-desc desc-left relative w-50">
                                 <div class="desc-container">
@@ -53,7 +53,7 @@
                             </div>
                             <!-- <div class="rightimage"  style="background-image:url(image/<?= $content['small_image2']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                    <img src="image/<?=$content['small_image2']; ?>">
+                                    <img src="<?=$content['small_image2']; ?>">
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         </div><br>
                     </div>
                     <!-- <div class="right-BigImage" style="background-image:url(image/<?= $content['top_image']; ?>);"> -->
-                    <div class="right-BigImage gal-img"><img src="image/<?=$content['top_image']; ?>">
+                    <div class="right-BigImage gal-img"><img src="<?=$content['top_image']; ?>">
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             <div class="flex about-container">
                 <div class="bigSecContainer w-100 flex" style="background:<?=$content['big_bg'];?>">
                     <!-- <div class="left-BigImage" style="background-image:url(image/<?= $content['top_image']; ?>);"> -->
-                    <div class="left-BigImage gal-img"><img src="image/<?=$content['top_image']; ?>">
+                    <div class="left-BigImage gal-img"><img src="<?=$content['top_image']; ?>">
                     </div>
                     <div class="left-BigImage-desc text-center relative">
                         <div class="desc-container">
@@ -96,13 +96,13 @@
                             </div>
                             <!-- <div class="rightimage" style="background-image:url(image/<?= $content['small_image1']; ?>);"></div> -->
                             <div class="rightimage gal-img">
-                                    <img src="image/<?=$content['small_image1']; ?>">
+                                    <img src="<?=$content['small_image1']; ?>">
                             </div>
                         </div>
                         <div class="flex" style="background:<?=$content['small_bg'];?>">
                             <!-- <div class="rightimage" style="background-image:url(image/<?= $content['small_image2']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                <img src="image/<?=$content['small_image2']; ?>">
+                                <img src="<?=$content['small_image2']; ?>">
                             </div>
                             <div class="small-desc desc-left relative w-50">
                                 <div class="desc-container">
@@ -117,7 +117,7 @@
                         <div class="flex" style="background:<?=$content['small_bg'];?>">
                             <!-- <div class="rightimage" style="background-image:url(image/<?= $content['small_image1']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                    <img src="image/<?=$content['small_image2']; ?>">
+                                    <img src="<?=$content['small_image2']; ?>">
                             </div>
                             <div class="small-desc desc-left relative w-50">
                                 <div class="desc-container">
@@ -135,7 +135,7 @@
                             </div>
                             <!-- <div class="rightimage" style="background-image:url(image/<?= $content['small_image2']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                    <img src="image/<?=$content['small_image2']; ?>">
+                                    <img src="<?=$content['small_image2']; ?>">
                             </div>
                         </div>
                     </div>

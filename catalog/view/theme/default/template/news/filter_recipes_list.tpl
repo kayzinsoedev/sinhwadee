@@ -50,8 +50,6 @@
 						</div>
 
 
-
-		<!-- <div class="text-center pd-b60"><?php echo $pagination; ?></div> -->
 <?php } ?>
 <?php if(isset($filter_recipes_pagination)){ ?>
 		<div class="text-center pd-b60"><?=$filter_recipes_pagination; ?></div>
