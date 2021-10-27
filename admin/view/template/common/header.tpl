@@ -49,6 +49,11 @@
 		<script src="view/javascript/jscolor.js" type="text/javascript"></script>
 		<script src="view/javascript/common.js" type="text/javascript"></script>
 
+		<!-- select 2 js -->
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<!-- select 2 js -->
+
 
 		<?php foreach ($scripts as $script => $delay) { ?>
 			<script type="text/javascript" src="<?php echo $script; ?>" <?= $delay?'defer="defer"':''; ?> ></script>

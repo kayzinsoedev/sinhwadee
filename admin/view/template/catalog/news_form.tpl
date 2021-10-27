@@ -151,7 +151,7 @@
         <div class="form-group">
               <label class="col-sm-2 control-label" for="input-status">Recipes Sauce</label>
               <div class="col-sm-10">
-                <select name="receipt_sauces[]" multiple id="receipt-sauces" class="form-control">
+                <select name="receipt_sauces[]" id="receipt-sauces" class="sauce-select select form-control" multiple="multiple">
                     <?php foreach($recipes_sauces as $key=> $recipes_sauce){ ?>
                       <?php
                           if(in_array(  $recipes_sauce['id'] , $sauce_array)  ){ ?>
@@ -159,9 +159,6 @@
                           <?php }else{ ?>
                               <option value="<?=$recipes_sauce['id'];?>"><?=$recipes_sauce['title'];?></option>
                           <?php } ?>
-
-
-
                    <?php  } ?>
                 </select>
               </div>
@@ -170,7 +167,7 @@
         <div class="form-group">
               <label class="col-sm-2 control-label" for ="input-status">Recipes Cooking Method</label>
               <div class="col-sm-10">
-                <select name="receipt_cooking_method[]" multiple id="receipt-cooking-method" class="form-control">
+                <select name="receipt_cooking_method[]" multiple id="receipt-cooking-method" class="cooking-select form-control">
                   <?php foreach($recipes_cooking_methods as $key=> $recipes_cooking_method){ ?>
                     <?php
                         if(in_array( $recipes_cooking_method['id'] , $method_array)  ){ ?>
@@ -187,7 +184,7 @@
         <div class="form-group">
               <label class="col-sm-2 control-label" for="input-status">Recipes Main Ingredient</label>
               <div class="col-sm-10">
-                <select name="receipt_main_ingredient[]" multiple id="receipt-main-ingredient" class="form-control">
+                <select name="receipt_main_ingredient[]" multiple id="receipt-main-ingredient" class="ingre-select form-control">
                   <?php foreach($recipes_main_ingredients as $key=> $recipes_main_ingredient){ ?>
 
                       <?php
@@ -875,7 +872,15 @@ function addVideo() {
 	video_row++;
 }
 //--></script>
-<script type="text/javascript"><!--
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $('.sauce-select').select2();
+    $('.cooking-select').select2();
+    $('.ingre-select').select2();
+  });
+
+<!--
 	<?php foreach ($languages as $language) { ?>
 		var superh3stat<?php echo $language['language_id']; ?> = $('#hidesdesc<?php echo $language['language_id']; ?>').hasClass('active');
         $('#hidesdesc<?php echo $language['language_id']; ?>').bind('click', function() {

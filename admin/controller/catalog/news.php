@@ -998,7 +998,7 @@ class ControllerCatalogNews extends Controller {
 				// debug($data['ingredient_array']);
 		}
 
-		// debug($data['selected_recipes_cooking_method']);
+		// debug($data['selected_recipes_cooking_method']);die;
 
 		$this->response->setOutput($this->load->view('catalog/news_form.tpl', $data));
 	}

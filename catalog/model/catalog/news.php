@@ -267,7 +267,6 @@ class ModelCatalogNews extends Model {
 	}
 
 	public function getNews($data = array(),$news_ids=null,$keyword=null) {
-		// debug($news_ids);
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
 		$group_restriction_join = $this->config->get('ncategory_bnews_restrictgroup') ? " LEFT JOIN " . DB_PREFIX . "sb_news_to_group n2g ON (n.news_id = n2g.news_id) " : '';
@@ -278,7 +277,10 @@ class ModelCatalogNews extends Model {
 			}
 		$sql .= " WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()" . $group_restriction;
 
+
+
 		if (!empty($data['filter_ncategory_id'])) {
+
 				if (!empty($data['filter_sub_ncategory'])) {
 					$implode_data = array();
 
@@ -394,27 +396,22 @@ class ModelCatalogNews extends Model {
 
 		$query = $this->db->query($sql);
 
-
 		if(isset($news_ids) || isset($keyword)){
-			// debug("a");die;
 				//$articles_data = $this->getNewsStory($news_ids,$keyword);
-				foreach ($query->rows as $result) {
-
-					if (in_array($result['news_id'], $news_ids)) {
-
-							$articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],$keyword=NULL);
-					}
-
-
+				// foreach ($query->rows as $result) {
+				foreach ($news_ids as $key=> $result) {
+					// if (in_array($result['news_id'], $news_ids)) {
+							$articles_data[$result] = $this->getNewsStory($result,$keyword=NULL);
+					// }
 				}
-				// debug($articles_data);
-				// debug($sql);
+
 		}else{
-				// debug("b");die;
 				foreach ($query->rows as $result) {
 					 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],$keyword=NULL);
 				}
 		}
+		// die;
+		// debug($articles_data);die;
 
 		return $articles_data;
 	}
@@ -526,6 +523,11 @@ class ModelCatalogNews extends Model {
 		if (isset($keyword)) {
 			$sql .= " OR LOWER(description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
 		}
+
+
+		// if (isset($news_ids)){
+		// 		$sql .= " AND n.news_id = '" . (int)$news_ids . "'";
+		// }
 
 
 
