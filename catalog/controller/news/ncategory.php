@@ -29,7 +29,7 @@ class ControllerNewsNcategory extends Controller {
 		}
 
 		if (isset($this->request->get['fiter-page'])) {
-			$url .= '&fiter_page=' . (int)$this->request->get['fiter-page'];
+			$url .= '&filter_page=' . (int)$this->request->get['fiter-page'];
 		}
 
 
@@ -331,15 +331,15 @@ class ControllerNewsNcategory extends Controller {
 			 			$page = 1;
 			 		}
 
-					if (isset($this->request->get['filter-page'])) {
-					 $fiter_page = (int)$this->request->get['filter-page'];
+					if (isset($this->request->get['filter_page'])) {
+					 $filter_page = (int)$this->request->get['filter_page'];
 				 } else {
-					 $fiter_page = 1;
+					 $filter_page = 1;
 				 }
 
 				 $recipes_limit = 5;
 
-				 $filter_start = ($fiter_page - 1) * $recipes_limit;
+				 $filter_start = ($filter_page - 1) * $recipes_limit;
 
 				 $data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
 				 // debug($data['filter_recipes_list']);die;
@@ -373,29 +373,27 @@ class ControllerNewsNcategory extends Controller {
 								$news_total = $this->model_catalog_news->getTotalNews($sdata,$keyword);
 					}
 
-					$filter_recipes_pagination = new Pagination();
+					$filter_recipes_pagination = new RecipePagination();
 		 			$filter_recipes_pagination->total = $news_total;
-		 			$filter_recipes_pagination->page = $fiter_page;
+		 			$filter_recipes_pagination->filter_page = $filter_page;
+		 			$filter_recipes_pagination->type = "filter";
+		 			$filter_recipes_pagination->page = $page;
 		 			$filter_recipes_pagination->limit = $recipes_limit;
 
 		 			if ($ncategory_id) {
-						// debug("1");
-		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter-page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
-		 			} elseif($author_pid) {
-						// debug("2");
-		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter-page='.$fiter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+				} elseif($author_pid) {
+		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 		 			} elseif($year) {
-						// debug("3");
-		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter-page='.$fiter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 		 			} else {
-						// debug("4");
-		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', $url . '&filter-page='.$fiter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 		 			}
 
 
 					// debug($data['filter_recipes_list']);die;
 
-					// $filter_start = ($fiter_page - 1) * $recipes_limit;
+					// $filter_start = ($$filter_page - 1) * $recipes_limit;
 					//
         	// $data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
 					// debug($data['filter_recipes_list']);die;
@@ -589,8 +587,8 @@ class ControllerNewsNcategory extends Controller {
 
 
 		$filter_page;
-		if (isset($this->request->get['filter-page'])) {
-			$filter_page = (int)$this->request->get['filter-page'];
+		if (isset($this->request->get['filter_page'])) {
+			$filter_page = (int)$this->request->get['filter_page'];
 		}
 		else {
 			$filter_page = 1;
@@ -872,7 +870,7 @@ class ControllerNewsNcategory extends Controller {
 
 			}
 
-			$limit = 10;
+			$limit = 5;
 			$start = ($page - 1) * $limit;
       $data['article'] = array_slice($data['article'], $start, $limit);
 
@@ -954,23 +952,23 @@ class ControllerNewsNcategory extends Controller {
 			}
 			/*get recipes options */
 
-
 			$url = '';
-			$pagination = new Pagination();
+			$pagination = new RecipePagination();
 			$pagination->total = $news_total;
+			$pagination->type = "";
+			$pagination->filter_page = $filter_page;
 			$pagination->page = $page;
+
 			$pagination->limit = $limit;
 
-			// debug($url);die;
-
 			if ($ncategory_id) {
-				$pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page=' . $filter_page . '&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id );
+				$pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id );
 			} elseif($author_pid) {
-				$pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter_page=' . $filter_page . '&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+				$pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 			} elseif($year) {
-				$pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter_page='. $filter_page .'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+				$pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter_page='.$filter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 			} else {
-				$pagination->url = $this->url->link('news/ncategory', $url . '&page={page}&filter_page='. $filter_page . '&keyword='.$keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+				$pagination->url = $this->url->link('news/ncategory', $url . '&page={page}&filter_page='.$filter_page.'&keyword='.$keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
 			}
 
 
@@ -1335,12 +1333,10 @@ class ControllerNewsNcategory extends Controller {
 				/*get recipes options */
 
 			$url = '';
-				$pagination = new Pagination();
+				$pagination = new RecipePagination();
 				$pagination->total = $news_total;
 				$pagination->page = $page;
 				$pagination->limit = $limit;
-
-
 
 				if ($ncategory_id) {
 					$pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}');
