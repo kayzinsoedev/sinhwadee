@@ -337,7 +337,7 @@ class ControllerNewsNcategory extends Controller {
 					 $filter_page = 1;
 				 }
 
-				 $recipes_limit = 5;
+				 $recipes_limit = 10;
 
 				 $filter_start = ($filter_page - 1) * $recipes_limit;
 
@@ -870,7 +870,7 @@ class ControllerNewsNcategory extends Controller {
 
 			}
 
-			$limit = 5;
+			$limit = 10;
 			$start = ($page - 1) * $limit;
       $data['article'] = array_slice($data['article'], $start, $limit);
 
@@ -1358,7 +1358,6 @@ class ControllerNewsNcategory extends Controller {
 
 
 		 }
-
 
 
 
