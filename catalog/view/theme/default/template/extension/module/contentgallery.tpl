@@ -31,6 +31,7 @@
                         </div>
                     </div>
                 <?php } else { ?>
+
                     <div class="smallSecContainer w-83">
                         <div class="flex" style="background:<?=$content['small_bg'];?>">
                             <!-- <div class="rightimage"  style="background-image:url(image/<?= $content['small_image1']; ?>);"> -->
@@ -117,7 +118,7 @@
                         <div class="flex" style="background:<?=$content['small_bg'];?>">
                             <!-- <div class="rightimage" style="background-image:url(image/<?= $content['small_image1']; ?>);"> -->
                             <div class="rightimage gal-img">
-                                    <img src="<?=$content['small_image2']; ?>">
+                                    <img src="<?=$content['small_image1']; ?>">
                             </div>
                             <div class="small-desc desc-left relative w-50">
                                 <div class="desc-container">

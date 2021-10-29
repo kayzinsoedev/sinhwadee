@@ -1,3 +1,3 @@
 <?php
 // Heading
-$_['heading_title']    = 'Service Clientele';
+$_['heading_title']    = 'Service Carousel';
