@@ -91,8 +91,9 @@ class ControllerCatalogNews extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('catalog/news');
-		// debug($this->request->post);die;
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validateForm()) && $this->validateAuthor()) {
+
 			$this->model_catalog_news->editNews($this->request->get['news_id'], $this->request->post, $this->request->files);
 			// $this->model_catalog_news->editRelatedProduct($this->request->get['news_id'], $this->request->post);
 

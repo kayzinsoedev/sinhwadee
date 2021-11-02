@@ -285,6 +285,13 @@ class ModelCatalogNews extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "sb_news_related WHERE news_id = '" . (int)$news_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "sb_news_gallery WHERE news_id = '" . (int)$news_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "sb_news_video WHERE news_id = '" . (int)$news_id . "'");
+
+		/*delete from recipes*/
+		$this->db->query("DELETE FROM  news_recipes_sauces WHERE news_id = '" . (int)$news_id . "'");
+		$this->db->query("DELETE FROM  news_recipes_cooking_method WHERE news_id = '" . (int)$news_id . "'");
+		$this->db->query("DELETE FROM  news_recipes_main_ingredients WHERE news_id = '" . (int)$news_id . "'");
+		/*delete from recipes*/
+
 		$this->cache->delete('news');
 	}
 	public function getNewsStory($news_id) {
