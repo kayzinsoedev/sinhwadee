@@ -68,7 +68,9 @@ class ModelCatalogncategory extends Model {
 			}else{
 					$query = $this->db->query("SELECT news_id FROM news_recipes_sauces WHERE sauce_id = '" . (int)$id . "' ");
 			}
+
 			return $query->rows;
+
 	}
 	public function getCookingMethodNews($id){
 			if($id == "all"){
@@ -87,6 +89,99 @@ class ModelCatalogncategory extends Model {
 			}
 			return $query->rows;
 	}
+
+
+	public function getRecipesBySearch($sau_id,$cooking_id,$ingre_id){
+
+			if($ingre_id !="all"){
+					$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+					FROM news_recipes_main_ingredients
+					WHERE main_ingredients_id = '".$ingre_id."'
+					GROUP BY main_ingredients_id"
+					);
+					$news_id = $query->row;
+
+					if(!empty($news_id)){
+						if($cooking_id !="all"){
+								$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+										FROM news_recipes_cooking_method
+										WHERE cooking_method_id = '".$cooking_id."' AND news_id IN (" . $news_id['news_id']. ") GROUP BY cooking_method_id" );
+
+											$news_id2 = $query->row;
+											if(!empty($news_id2)){
+													if($sau_id !="all"){
+															$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+																	FROM news_recipes_sauces
+																	WHERE sauce_id = '".$sau_id."' AND news_id IN (" . $news_id2['news_id'].") GROUP BY sauce_id");
+																		$news_id3 = $query->row;
+													}else{
+																	$news_id3 = $news_id2;
+													}
+											}
+
+
+						}else{
+								if($sau_id !="all"){
+										$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+												FROM news_recipes_sauces
+												WHERE sauce_id = '".$sau_id."' AND news_id IN (" . $news_id['news_id'].") GROUP BY sauce_id");
+													$news_id3 = $query->row;
+								}else{
+												$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+												FROM news_recipes_main_ingredients
+												WHERE main_ingredients_id = '".$ingre_id."'
+												GROUP BY main_ingredients_id"
+												);
+												$news_id3 = $query->row;
+								}
+						}
+
+					}
+
+			}else{
+
+				if($cooking_id !="all"){
+						$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+								FROM news_recipes_cooking_method
+								WHERE cooking_method_id = '".$cooking_id."' ");
+									$news_id2 = $query->row;
+
+									if(!empty($news_id2)){
+											if($sau_id !="all"){
+													$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+															FROM news_recipes_sauces
+															WHERE sauce_id = '".$sau_id."' AND news_id IN (" . $news_id2['news_id'].") GROUP BY sauce_id");
+
+																$news_id3 = $query->row;
+											}else{
+													$news_id3 =  $news_id2;
+											}
+									}
+
+				}else{
+
+					if($sau_id !="all"){
+							$query = $this->db->query("SELECT GROUP_CONCAT(news_id) as news_id
+									FROM news_recipes_sauces
+									WHERE sauce_id = '".$sau_id."' ");
+
+										$news_id3 = $query->row;
+					}else{
+
+						$query = $this->db->query("SELECT news_id FROM " . DB_PREFIX . "sb_news");
+						$news_id3 = $query->rows;
+						// debug($news_id3);
+
+					}
+
+				}
+			}
+
+			return $news_id3;
+
+	}
+
+
 
 	public function getSauceNewsById($news_id){
 		$query = $this->db->query("SELECT sauce_id FROM news_recipes_sauces WHERE news_id = '" . (int)$news_id . "' ");

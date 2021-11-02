@@ -324,7 +324,6 @@
         });
     }
     $(document).on('change', '#product input[type=radio], #product select', function() {
-
         if($(this).val()) {
             if($(this).parent().parent().parent().parent().attr('id') !== undefined){
             var poid = $(this).parent().parent().parent().parent().attr('id').replace('input-option', '');
@@ -332,7 +331,7 @@
               var poid = $(this).attr('id').replace('input-option', '');
             }
             var povid = $(this).val();
-            getoptionimages(<?= $product_id ?>, poid, povid);
+             (<?= $product_id ?>, poid, povid);
         }
         else {
           getprodimages(<?= $product_id ?>, '<?= $prod_image ?>');

@@ -273,7 +273,6 @@ class ControllerNewsNcategory extends Controller {
 							$sauce_news_ids= $this->model_catalog_ncategory->getSauceNews($sau_id);
 					}
 
-
 					$cooking_method_news_ids = array();
 					if($cooking_id !="all"){
 							$cooking_method_news_ids= $this->model_catalog_ncategory->getCookingMethodNews($cooking_id);
@@ -284,28 +283,51 @@ class ControllerNewsNcategory extends Controller {
 								$main_ingredient_news_ids= $this->model_catalog_ncategory->getIngredientNews($ingre_id);
 					}
 
+					// $s_id = array();
+					// foreach ($sauce_news_ids as $s_news_id) {
+					// 	$s_id[] = $s_news_id['news_id'];
+					// }
+					//
+					// $c_id = array();
+					// foreach ($cooking_method_news_ids as $cooking_news_id) {
+					// 	$c_id[] = $cooking_news_id['news_id'];
+					// }
+					//
+					// $m_id = array();
+					// foreach ($main_ingredient_news_ids as $main_news_id) {
+					// 	$m_id[] = $main_news_id['news_id'];
+					// }
 
-					$merge_news_ids = (array_merge($sauce_news_ids,$cooking_method_news_ids,$main_ingredient_news_ids));
 
-
-					if(!empty($merge_news_ids)){
-							foreach($merge_news_ids as $value){
-									$news_ids[]= $value['news_id'];
-									$news_ids=array_unique($news_ids);
+					$news_ids_array = $this->model_catalog_ncategory->getRecipesBySearch($sau_id,$cooking_id,$ingre_id);
+					$news_ids = array();
+					if(count($news_ids_array) > 0){
+							if(isset($news_ids_array['news_id'])){
+									$news_ids = explode(",",$news_ids_array['news_id']);
+							}else{
+									if(!empty($news_ids_array)){
+											foreach($news_ids_array as $value){
+													$news_ids[]= $value['news_id'];
+													$news_ids=array_unique($news_ids);
+											}
+									}else{
+												$news_ids = null;
+									}
 							}
-					}else{
-								$news_ids = null;
+
 					}
 
+					// debug($news_ids);die;
 
 					$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
 					$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
 
 
+
+					$data['filter_recipes_list'] = array();
 					if(!empty($news_ids)){
 							foreach($data['recipes_articles']['recipes_result'] as $key=> $value){
-								// debug($value);
 		              $sauce_ids= $this->model_catalog_ncategory->getSauceNewsById($value['news_id']);
 		              $ingredients_ids= $this->model_catalog_ncategory->getIngredientsNewsById($value['news_id']);
 		              $cooking_methods_ids= $this->model_catalog_ncategory->getCookingNewsById($value['news_id']);
@@ -1299,6 +1321,9 @@ class ControllerNewsNcategory extends Controller {
 				}
 
 				}
+
+
+				// debug($data['article']);die;
 
 
 				$this->load->library('modulehelper');
