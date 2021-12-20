@@ -840,7 +840,7 @@ class ControllerNewsNcategory extends Controller {
 					'article_id'  => $result['news_id'],
 					'name'        => $name,
 					'thumb'       => $image,
-					'video'       => '<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$result["video"];?>" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+					'video'       => '<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$result["video"];?>?autoplay=1" frameborder="0" allowfullscreen></iframe>',
 					// 'static_video' => '<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"  width="560" height="315" frameborder="0" allowfullscreen></iframe>',
 					'date_added'  => $da,
 					'du'          => $du,
@@ -1291,7 +1291,7 @@ class ControllerNewsNcategory extends Controller {
 				}
 
 
-				// debug($data['article']);die;
+
 
 
 				$this->load->library('modulehelper');

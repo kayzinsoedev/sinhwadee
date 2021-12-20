@@ -324,7 +324,7 @@ class ControllerExtensionModuleNewsLatest extends Controller {
 					'article_id'  => $result['news_id'],
 					'name'        => $name,
 					'thumb'       => $image,
-					'video'       => $result['video'],
+					'video'       => '<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$result["video"];?>" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
 					'date_added'  => $da,
 					// 'du'          => $du,
 					'author'      => $result['author'],
