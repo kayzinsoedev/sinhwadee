@@ -553,11 +553,8 @@ class ControllerNewsNcategory extends Controller {
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
 
         $this->load->model('tool/image');
- 	 	$data['logo'] = $this->model_tool_image->resize($this->config->get('config_logo'), '50', '150');
+ 	 			$data['logo'] = $this->model_tool_image->resize($this->config->get('config_no_image'), '450', '450');
 
-
-		// debug($news_ids);die;
-		// $data['action'] = $this->url->link('news/ncategory&ncat=59', '', true);
 
 		if(isset($this->request->get['route'])) {
 			if(strpos(strtolower($this->request->get['route']), 'getpagecontent')) {
