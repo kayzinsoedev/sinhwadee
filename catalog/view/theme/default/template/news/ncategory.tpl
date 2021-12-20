@@ -24,7 +24,7 @@
 						<?php if(!empty($articles['thumb'])){ ?>
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');"></div>
 						<?php }else{ ?>
-								<div class="cover-bg center-bg pd-b80p" style="background-image:url('image/<?= $logo; ?>');"></div>
+								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?= $logo; ?>');"></div>
 						<?php  } ?>
 
 						<div class="cover-bg video-media center-bg pd-b80p hidden">
@@ -49,12 +49,10 @@
 										<?php */ ?>
 							</a>
 						<?php } else if($cat_id == "66"){ ?>
-							<!-- <?php debug("else if");?> -->
 								<a href="image/catalog/project/media/<?=$articles['download_file'];?>" download>
 										<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
 								</a>
 						<?php }else{ ?>
-							<!-- <?php debug("else");?> -->
 							<div>
 										<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
 										<div class="cover-bg center-bg pd-b80p hide">
@@ -151,10 +149,8 @@
 <script>
     $(function() {
 		$('.archive-img').on('click', function() {
-					console.log('<?=$articles['video'];?>');
 					if('<?=$articles['video'];?>' !=""){
 								$('.embeddmediaVideo').html('<?=$articles['video'];?>');
-								// $('.embeddmediaVideo').html('<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$articles['video'];?>" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 								$('#videomodal').modal('show');
 					}else{
 								$('.imagepreview').attr('src', $(this).find('img').attr('data-pop'));

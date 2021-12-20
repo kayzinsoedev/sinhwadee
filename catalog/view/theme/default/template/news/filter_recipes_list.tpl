@@ -1,13 +1,13 @@
 
 <?php if(isset($filter_recipes_list)){ ?>
-						<div class="col-md-12 filter-recipes-list">
+						<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="display:none;">
 									<div class="row filter-recipes-title">
 												<div class="col-md-3 recipes-list-title"><h3>Recipes</h3></div>
 												<div class="col-md-3 recipes-list-title"><h3>Sauce</h3></div>
 												<div class="col-md-3 recipes-list-title"><h3>Ingredients</h3></div>
 												<div class="col-md-3 recipes-list-title"><h3>Method</h3></div>
 									</div>
-									<?php //debug($filter_recipes_list);
+									<?php
 									foreach ($filter_recipes_list as $key=> $recipes_article) { ?>
 											<div class="row">
 												 <?php $key++; ?>
@@ -54,3 +54,16 @@
 <?php if(isset($filter_recipes_pagination)){ ?>
 		<div class="text-center pd-b60"><?=$filter_recipes_pagination; ?></div>
 <?php } ?>
+
+
+
+<script>
+$(document).ready(function() {
+		var $ncat = '<?php echo $ncat; ?>';
+			if($ncat == "59"){
+					document.getElementById("filter-rec-list").style.display = 'block';
+			}
+
+});
+
+</script>

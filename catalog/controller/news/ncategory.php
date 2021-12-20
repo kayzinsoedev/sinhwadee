@@ -343,10 +343,6 @@ class ControllerNewsNcategory extends Controller {
 		           }
 					 }
 
-
-					 // debug($data['filter_recipes_list']);die;
-
-
 					if (isset($this->request->get['page'])) {
 			 			$page = (int)$this->request->get['page'];
 			 		} else {
@@ -365,7 +361,7 @@ class ControllerNewsNcategory extends Controller {
 
 				 $data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
 				 // debug($data['filter_recipes_list']);die;
-
+				 $data['ncat'] = $this->request->get['ncat'];
 
 					$parts = explode('_', (string)$this->request->get['ncat']);
 					$ncategory_id = array_pop($parts);
@@ -880,8 +876,6 @@ class ControllerNewsNcategory extends Controller {
 			$start = ($page - 1) * $limit;
       $data['article'] = array_slice($data['article'], $start, $limit);
 
-			// debug($data['article']);die;
-
 
 			$this->load->library('modulehelper');
 			$Modulehelper = Modulehelper::get_instance($this->registry);
@@ -899,9 +893,6 @@ class ControllerNewsNcategory extends Controller {
 			/*Receipt Filter By Ingredient*/
 			$recipes_main_ingredient_modulename  = 'recipes_main_ingredient';
 			$data['recipes_main_ingredients'] = $Modulehelper->get_field ($oc, $recipes_main_ingredient_modulename, $language_id, 'recipes_main_ingredient');
-			// debug($data['recipes_main_ingredients']);
-			// debug($data['receipt_main_ingredients']);
-
 
 			/*sauce*/
 			if(isset($this->request->post['recipes_sauce'])){
@@ -949,12 +940,8 @@ class ControllerNewsNcategory extends Controller {
 				|| isset($this->request->get['main'])
 				|| isset($keyword)
 			){
-				// debug("here");die;
+
 				$data['receipt_filter'] = "true";
-
-				// $data['filter_recipes_list'] = $this->filter_recipes_list($data['article'],$this->request->post,$page);
-
-
 			}
 			/*get recipes options */
 
@@ -993,7 +980,7 @@ class ControllerNewsNcategory extends Controller {
 		//debug($data['cat_id']);
 
 
-		// debug($data['pagination']);die;
+
 
 		if (version_compare(VERSION, '2.2.0.0') >= 0) {
 			return $this->load->view('news/ncategory', $data);
