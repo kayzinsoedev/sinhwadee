@@ -57,174 +57,10 @@ class ModelCatalogNews extends Model {
 
 		$group_restriction_join = $this->config->get('ncategory_bnews_restrictgroup') ? " LEFT JOIN " . DB_PREFIX . "sb_news_to_group n2g ON (n.news_id = n2g.news_id) " : '';
 
-		 // debug($news_id);die;
-		if(is_array($news_id) || isset($keyword)){
-
-			$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
-
-			if(!empty($news_id) && empty($keyword)){
-				// debug("else if 1");
-				foreach ($news_id as $key => $value) {
-						$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE n.news_id = '" . (int)$value . "'  AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
-
-						if ($query->num_rows) {
-							$article[] =array(
-								'news_id'          => $query->row['news_id'],
-								'title'            => $query->row['title'],
-								'ctitle'           => $query->row['ctitle'],
-								'description'      => $query->row['description'],
-								'description2'     => $query->row['description2'],
-								'meta_desc'        => $query->row['meta_desc'],
-								'meta_key'         => $query->row['meta_key'],
-								'video'            => (isset($query->row['video']) ? '<iframe frameborder="0" allowfullscreen src="' . str_replace("watch?v=","embed/",$query->row['video'].'?showinfo=0') . '" height="100%" width="100%" style="min-height:485px"></iframe>' : ''),
-								// 'video'            => (isset($query->row['video']) ? $query->row['video'] : ''),
-								'ntags'            => $query->row['ntags'],
-								'cfield1'          => $query->row['cfield1'],
-								'cfield2'          => $query->row['cfield2'],
-								'cfield3'          => $query->row['cfield3'],
-								'cfield4'          => $query->row['cfield4'],
-								'image'            => $query->row['image'],
-								'image2'           => $query->row['image2'],
-								'nimage'           => $query->row['nimage'],
-								'acom'             => $query->row['acom'],
-								'author'           => $query->row['author'],
-								'nauthor_id'       => $query->row['nauthor_id'],
-								'date_added'       => $query->row['date_added'],
-								'date_updated'     => $query->row['date_updated'],
-								'sort_order'       => $query->row['sort_order'],
-								'gal_thumb_w'      => $query->row['gal_thumb_w'],
-								'gal_thumb_h'      => $query->row['gal_thumb_h'],
-								'gal_popup_w'      => $query->row['gal_popup_w'],
-								'gal_popup_h'      => $query->row['gal_popup_h'],
-								'gal_slider_h'     => $query->row['gal_slider_h'],
-								'gal_slider_w'     => $query->row['gal_slider_w'],
-								'gal_slider_t'     => $query->row['gal_slider_t'],
-								'download_file'		 => $query->row['download_file'],
-							);
-							// debug($article);die;
-						}
-
-						// else {
-						// 	return false;
-						// }
-
-				}
-				// debug($article);die;
-				// return $article;
-
-			}
-			// else{
-			// 	$article[] =array();
-			// }
-
-			else if(!empty($keyword) && empty($news_id)){
-				// debug("else if 2");
-				$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND nd.title LIKE '%" . $keyword . "%' OR nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
-
-				if ($query->num_rows) {
-						$article[] =array(
-							'news_id'          => $query->row['news_id'],
-							'title'            => $query->row['title'],
-							'ctitle'           => $query->row['ctitle'],
-							'description'      => $query->row['description'],
-							'description2'     => $query->row['description2'],
-							'meta_desc'        => $query->row['meta_desc'],
-							'meta_key'         => $query->row['meta_key'],
-							'video'            => (isset($query->row['video']) ? '<iframe frameborder="0" allowfullscreen src="' . str_replace("watch?v=","embed/",$query->row['video'].'?showinfo=0') . '" height="100%" width="100%" style="min-height:485px"></iframe>' : ''),
-							'ntags'            => $query->row['ntags'],
-							'cfield1'          => $query->row['cfield1'],
-							'cfield2'          => $query->row['cfield2'],
-							'cfield3'          => $query->row['cfield3'],
-							'cfield4'          => $query->row['cfield4'],
-							'image'            => $query->row['image'],
-							'image2'           => $query->row['image2'],
-							'nimage'           => $query->row['nimage'],
-							'acom'             => $query->row['acom'],
-							'author'           => $query->row['author'],
-							'nauthor_id'       => $query->row['nauthor_id'],
-							'date_added'       => $query->row['date_added'],
-							'date_updated'     => $query->row['date_updated'],
-							'sort_order'       => $query->row['sort_order'],
-							'gal_thumb_w'      => $query->row['gal_thumb_w'],
-							'gal_thumb_h'      => $query->row['gal_thumb_h'],
-							'gal_popup_w'      => $query->row['gal_popup_w'],
-							'gal_popup_h'      => $query->row['gal_popup_h'],
-							'gal_slider_h'     => $query->row['gal_slider_h'],
-							'gal_slider_w'     => $query->row['gal_slider_w'],
-							'gal_slider_t'     => $query->row['gal_slider_t'],
-							'download_file'		 => $query->row['download_file'],
-						);
-				}
-				// else{
-				// 		return false;
-				// }
-
-			}
-
-
-			else if(!empty($news_id) && !empty($keyword) ){
-				// debug($this->config->get('config_store_id'));die;
-				foreach ($news_id as $key => $value) {
-					// debug($value);die;
-							$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' AND nd.title LIKE '%" . $keyword . "%' OR nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction );
-							// $query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
-
-							//debug("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE  nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id = '" . (int)$value . "' OR nd.title LIKE '%" . $keyword . "%' OR nd.description LIKE '%" . $keyword . "%' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
-
-							if ($query->num_rows) {
-								$article[] =array(
-									'news_id'          => $query->row['news_id'],
-									'title'            => $query->row['title'],
-									'ctitle'           => $query->row['ctitle'],
-									'description'      => $query->row['description'],
-									'description2'     => $query->row['description2'],
-									'meta_desc'        => $query->row['meta_desc'],
-									'meta_key'         => $query->row['meta_key'],
-									'video'            => (isset($query->row['video']) ? '<iframe frameborder="0" allowfullscreen src="' . str_replace("watch?v=","embed/",$query->row['video'].'?showinfo=0') . '" height="100%" width="100%" style="min-height:485px"></iframe>' : ''),
-									'ntags'            => $query->row['ntags'],
-									'cfield1'          => $query->row['cfield1'],
-									'cfield2'          => $query->row['cfield2'],
-									'cfield3'          => $query->row['cfield3'],
-									'cfield4'          => $query->row['cfield4'],
-									'image'            => $query->row['image'],
-									'image2'           => $query->row['image2'],
-									'nimage'           => $query->row['nimage'],
-									'acom'             => $query->row['acom'],
-									'author'           => $query->row['author'],
-									'nauthor_id'       => $query->row['nauthor_id'],
-									'date_added'       => $query->row['date_added'],
-									'date_updated'     => $query->row['date_updated'],
-									'sort_order'       => $query->row['sort_order'],
-									'gal_thumb_w'      => $query->row['gal_thumb_w'],
-									'gal_thumb_h'      => $query->row['gal_thumb_h'],
-									'gal_popup_w'      => $query->row['gal_popup_w'],
-									'gal_popup_h'      => $query->row['gal_popup_h'],
-									'gal_slider_h'     => $query->row['gal_slider_h'],
-									'gal_slider_w'     => $query->row['gal_slider_w'],
-									'gal_slider_t'     => $query->row['gal_slider_t'],
-									'download_file'		 => $query->row['download_file'],
-								);
-								// debug($article);
-							}
-							// else {
-							// 	return false;
-							// }
-				}
-
-			}
-
-			else{
-				$article[] =array();
-			}
-
-
-
-				return $article;
-
-		}else{
-			// debug("else");die;
 				$query = $this->db->query("SELECT DISTINCT *, nau.name as author, n.image as image, nau.image as nimage FROM " . DB_PREFIX . "sb_news n LEFT JOIN " . DB_PREFIX . "sb_news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_video nvid ON (n.news_id = nvid.news_id) LEFT JOIN " . DB_PREFIX . "sb_news_to_store n2s ON (n.news_id = n2s.news_id)".$group_restriction_join." LEFT JOIN " . DB_PREFIX . "sb_nauthor nau ON (n.nauthor_id = nau.nauthor_id) WHERE n.news_id = '" . (int)$news_id . "'  AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND n.date_pub < NOW()".$group_restriction);
-				// debug($query->row);die;
+
+				$embed_link = html_entity_decode($query->row["video"], ENT_QUOTES, 'UTF-8');
+
 				if ($query->num_rows) {
 					return array(
 						'news_id'          => $query->row['news_id'],
@@ -234,7 +70,9 @@ class ModelCatalogNews extends Model {
 						'description2'     => $query->row['description2'],
 						'meta_desc'        => $query->row['meta_desc'],
 						'meta_key'         => $query->row['meta_key'],
-						'video'            => (isset($query->row['video']) ? '<iframe frameborder="0" allowfullscreen src="' . str_replace("watch?v=","embed/",$query->row['video'].'?showinfo=0') . '" height="100%" width="100%" style="min-height:485px"></iframe>' : ''),
+						// 'video'            => (isset($query->row['video']) ? '<iframe frameborder="0" allowfullscreen src="http://www.youtube.com/embed/W7qWa52k-nE" height="100%" width="100%" style="min-height:485px"></iframe>' : ''),
+						// 'video'            => (isset($query->row['video']) ? '<iframe frameborder="0" allowfullscreen src="' . str_replace("watch?v=","embed/",'$query->row["video"]'.'?showinfo=0') . '" height="100%" width="100%" style="min-height:485px"></iframe>' : ''),
+						'video'            => (isset($query->row['video'])) ? (html_entity_decode($query->row["video"], ENT_QUOTES, 'UTF-8')) : '',
 						'ntags'            => $query->row['ntags'],
 						'cfield1'          => $query->row['cfield1'],
 						'cfield2'          => $query->row['cfield2'],
@@ -261,12 +99,10 @@ class ModelCatalogNews extends Model {
 				} else {
 					return false;
 				}
-		}
-
 
 	}
 
-	public function getNews($data = array(),$news_ids=null,$keyword=null) {
+	public function getNews($data = array(),$news_ids=array(),$keyword='') {
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
 		$group_restriction_join = $this->config->get('ncategory_bnews_restrictgroup') ? " LEFT JOIN " . DB_PREFIX . "sb_news_to_group n2g ON (n.news_id = n2g.news_id) " : '';
@@ -361,17 +197,13 @@ class ModelCatalogNews extends Model {
 
 
 
-		if (isset($keyword)) {
-			$sql .= " AND (LOWER(title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%'";
+		if($keyword) {
+			$sql .= " AND (LOWER(nd.title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%' OR LOWER(nd.description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
 		}
 
-
-		if (isset($keyword)) {
-			$sql .= " OR LOWER(description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
-		}
-
-
-
+        if(count($news_ids)){
+            $sql .= " AND n.news_id IN (".implode(',',$news_ids).")";
+        }
 
 		// debug($this->config->get('ncategory_bnews_order'));die;
 		if (!$this->config->get('ncategory_bnews_order')) {
@@ -396,22 +228,15 @@ class ModelCatalogNews extends Model {
 
 		$query = $this->db->query($sql);
 
-		if(isset($news_ids) || isset($keyword)){
-				//$articles_data = $this->getNewsStory($news_ids,$keyword);
-				// foreach ($query->rows as $result) {
-				foreach ($news_ids as $key=> $result) {
-					// if (in_array($result['news_id'], $news_ids)) {
-							$articles_data[$result] = $this->getNewsStory($result,$keyword=NULL);
-					// }
-				}
-
-		}else{
-				foreach ($query->rows as $result) {
-					 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],$keyword=NULL);
-				}
-		}
-		// die;
-		// debug($articles_data);die;
+		/*if($news_ids){
+			foreach ($news_ids as $key=> $result) {
+				$articles_data[$result] = $this->getNewsStory($result,$keyword);
+			}
+		}else{*/
+			foreach ($query->rows as $result) {
+				 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],'');
+			}
+ 		//}
 
 		return $articles_data;
 	}

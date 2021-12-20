@@ -317,7 +317,7 @@ class ControllerNewsNcategory extends Controller {
 
 					}
 
-					// debug($news_ids);die;
+					//debug($news_ids);
 
 					$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
@@ -396,7 +396,7 @@ class ControllerNewsNcategory extends Controller {
 					}
 
 					$filter_recipes_pagination = new RecipePagination();
-		 			$filter_recipes_pagination->total = $news_total;
+		 			$filter_recipes_pagination->total = count($data['filter_recipes_list']);
 		 			$filter_recipes_pagination->filter_page = $filter_page;
 		 			$filter_recipes_pagination->type = "filter";
 		 			$filter_recipes_pagination->page = $page;
@@ -555,6 +555,9 @@ class ControllerNewsNcategory extends Controller {
 		}
   	}
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
+
+        $this->load->model('tool/image');
+ 	 	$data['logo'] = $this->model_tool_image->resize($this->config->get('config_logo'), '50', '150');
 
 
 		// debug($news_ids);die;
@@ -751,36 +754,13 @@ class ControllerNewsNcategory extends Controller {
 
 
 			if(isset($news_ids) || $keyword){
-				// debug("if");die;
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
-					// $results_temp = $this->model_catalog_news->getNews();
 
-					// foreach($results_temp as $result)
-					// {
-					// 	//debug($result);
-					//
-					// 	$pos = strpos($result['title'], $keyword);
-					//
-					// 	if($pos != NULL)
-					// 	{
-					// 		$results[] = $result;
-					// 	}
-					//
-					// 	//debug($result['title']);
-					// 	//debug($pos);
-					// }
-					// $data['recipes_result'] = $results;
-					//debug($results);die;
 			}else{
-				// debug("else");die;
 				$results = $this->model_catalog_news->getNews($sdata);
-				//debug($sdata);
 			}
 
-			// debug($sdata);die;
 
-
-			// debug($results);die;
 			foreach ($results as $key=> $result) {
 				if(!empty($result)){
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
@@ -867,7 +847,8 @@ class ControllerNewsNcategory extends Controller {
 					'article_id'  => $result['news_id'],
 					'name'        => $name,
 					'thumb'       => $image,
-					'video'       => $result['video'],
+					'video'       => '<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$result["video"];?>" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+					// 'static_video' => '<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"  width="560" height="315" frameborder="0" allowfullscreen></iframe>',
 					'date_added'  => $da,
 					'du'          => $du,
 					'author'      => $author,
@@ -891,6 +872,9 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 			}
+
+
+			debug($data['article']);die;
 
 			$limit = 10;
 			$start = ($page - 1) * $limit;
@@ -976,7 +960,7 @@ class ControllerNewsNcategory extends Controller {
 
 			$url = '';
 			$pagination = new RecipePagination();
-			$pagination->total = $news_total;
+			$pagination->total = count($results);
 			$pagination->type = "";
 			$pagination->filter_page = $filter_page;
 			$pagination->page = $page;

@@ -20,7 +20,7 @@ class ControllerExtensionModuleDuplicatePage1 extends Controller {
 											'main_categories' => $value['main_categories'],
 											'top_image' => $this->model_tool_image->resize($value['top_image'], 613, 414),
 											'alignment' => $value['alignment'],
-											'title' => $value['title'],
+											'title' => $value['sub_title'],
 											'description' => $value['description'],
 											'module_status' => $value['module_status'],
 									);

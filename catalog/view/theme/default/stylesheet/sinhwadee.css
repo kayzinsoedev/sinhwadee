@@ -100,7 +100,13 @@ html {
   scroll-behavior: smooth;
 }
 
-.about-sidebar {
+body.product-category #filter-groups .panel, #filter-groups .list-group, #filter-groups .list-group-item,
+#articles-column-left
+{
+    background: #FFF9F1;
+}
+
+.about-sidebar{
     flex: 0 0 20%;
     background: #FFF9F1;
     padding: 10px;
@@ -115,7 +121,11 @@ body.information-information.iid-8 .fixed-header
     position: absolute !important;
 }
 
-.sidebar-aboutsub_title{
+.sidebar-aboutsub_title,
+#side-categories .group .item a,
+#side-manufacturer .list-group-item label,
+#side_filter label
+{
     font-size: calc(4px + (30 - 18) * (100vw - 320px) / (1920 - 320));
     color: #000;
     font-family: 'Helvetica';
@@ -133,6 +143,7 @@ body.information-information.iid-8 .fixed-header
 #cart_dropdown_icon{
   display: flex !important;
   align-items: center;
+  width: 100% !important;
 }
 
 .cart-txt,
@@ -290,7 +301,15 @@ body.product-category .slick-slide .additional-img{
     transform: scaleX(1);
 }
 
-.sidebar-about-main-cat {
+
+.news-ncategory #column-left h3{
+  padding: 10px 15px;
+}
+
+.sidebar-about-main-cat,
+body.product-category .list-group-item.item-header,
+.news-ncategory #column-left h3
+{
     font-size: calc(10px + (30 - 18) * (100vw - 320px) / (1920 - 320));
     text-transform: uppercase;
     color: #121212;
@@ -542,6 +561,7 @@ h2 {
 h2:after {
     background: transparent!important;
 }
+
 .breadcrumb li::after {
     content: '\f105\f105'!important;
 }
@@ -576,6 +596,11 @@ h2:after {
 .header-container .header-menu #main-menu a:hover {
     color: #B32329;
 }
+
+.cat-menu .custom-category-box a:hover{
+  line-height: 1.5;
+}
+
 .sm-blue a .sub-arrow {
     border-color: #FFF transparent transparent!important;
 }
@@ -1065,14 +1090,27 @@ body.product-product .colorblack
 #articles-column-left .list-group-item {
     padding-left: 0;
 }
-#articles-column-left .list-group-item a {
-    padding-left: 0;
+
+#articles-column-left .list-group-item{
+  padding: 0;
 }
-.news-ncategory #column-left h3 {
+
+#articles-column-left .list-group-item a {
+    /* padding-left: 0; */
+    font-size: calc(4px + (30 - 18) * (100vw - 320px) / (1920 - 320));
+    color: #000;
+    font-family: 'Helvetica';
+    text-transform: uppercase;
+}
+
+#articles-column-left .list-group{
+  margin-top: 0;
+}
+/* .news-ncategory #column-left h3 {
     color: #000!important;
     text-transform: uppercase;
     font-family: 'Celeste';
-}
+} */
 #column-left .bnews-list .artblock .name a, #column-right .bnews-list .artblock .name a {
     color: #000!important;
     font-family: 'Celeste';

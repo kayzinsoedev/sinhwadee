@@ -210,6 +210,7 @@
 			$this->fill_info_categories($menu);  /*add menu for about us page */
 			$this->fill_service_categories($menu); /*add menu for service page */
 			$this->fill_oem_categories($menu); /*add menu for oem page */
+			$this->fill_brands_categories($menu); /*add menu for brands page */
 
 			$data['menu'] = $this->craftHtml($menu);
 
@@ -500,7 +501,9 @@
 				$tab_option = $link['new_tab']?'target="_blank"':'';
 				$href = $link['href'];
 				$name = $link['name'];
-				$image = $link['image'];
+				if(isset($link['image'])){
+						$image = $link['image'];
+				}
 				$sub_menu = '';
 				if($link['child']){
                                     $sub_menu = '';
@@ -1112,6 +1115,89 @@
 				$menu['child'] = $subs;
 			}
 		}
+
+
+		private function fill_brands_categories(&$menus){
+
+			/* call brands module */
+			$this->load->library('modulehelper');
+			$Modulehelper = Modulehelper::get_instance($this->registry);
+			$oc = $this;
+			$language_id = $this->config->get('config_language_id');
+			$modulename  = 'duplicate_page1';
+			/* call brands module */
+
+
+			$current_active_paths = array();
+			if(isset($this->request->get['path'])){
+				$current_active_paths = explode('_', $this->request->get['path']);
+			}
+
+			foreach($menus as &$menu){
+
+				$menu['columns'] = 4;
+
+				// Skip those that have child or not category page
+				if( $menu['child'] || !strpos($menu['query'], '/information&information_id=16') ) continue;
+
+				$path = 0;
+
+				$query_break = explode('&path=', $menu['query']);
+
+				if(count($query_break) > 1 && isset($query_break[1]) ){
+					$path	=	(int)$query_break[1];
+				}
+
+				$menu['columns'] = 5;
+
+				$subs = array();
+
+
+				$main_categories = $Modulehelper->get_field ( $oc, $modulename, $language_id, 'main_categories');
+				// debug($main_categories);
+				foreach($main_categories as $category){
+					// debug($category);
+					$subs_childs = array();
+					$active = '';
+					$sub_categories =  $Modulehelper->get_field ( $oc, $modulename, $language_id, 'duplicate_page1');
+
+					foreach($sub_categories as $key=> $sub_category){
+						$sub_active = '';
+							// debug($sub_category);
+						if($category['id'] == $sub_category['main_categories'] ){
+									$subs_childs[] = array(
+										'level'		=>	2,
+										'label'		=>	$sub_category['sub_title'],
+										'name'	=>	$sub_category['sub_title'],
+										'query'	=>	'',
+										'new_tab'	=>	0,
+										'child'		=>	'',
+										'active'	=>	$sub_active,
+										'href'		=>	$this->url->link('information/information&information_id=16#about-sub-title'.$key),
+										'image'  =>   ''
+									);
+						}
+					}
+
+					$subs[] = array(
+						'level'		=>	1,
+						'label'		=>	$category['main_category_name'],
+						'name'	=>	$category['main_category_name'],
+						'query'	=>	'',
+						'new_tab'	=>	0,
+						'child'		=>	$subs_childs,
+						'active'	=>	$active,
+						'href'		=>	$this->url->link('information/information&information_id=16'),
+						'image'  =>   $category['main_category_img']
+					);
+
+
+				}
+
+				$menu['child'] = $subs;
+			}
+		}
+
 
 
 

@@ -79,7 +79,7 @@ class ControllerExtensionModuleDuplicatePage1 extends Controller {
 											array('type' => 'dropdown', 'label' => 'Main Category List', 'name' => 'main_categories', 'choices' => $main_categories_list),
                         array('type' => 'image', 'label' => 'Top Image', 'name' => 'top_image'),
                         array('type' => 'dropdown', 'label' => 'Align Image', 'name' => 'alignment', 'choices' => $align_list),
-                        array('type' => 'text', 'label' => 'Sub Title', 'name' => 'title'),
+                        array('type' => 'text', 'label' => 'Sub Title', 'name' => 'sub_title'),
                         array('type' => 'textarea', 'label' => 'Description', 'name' => 'description','ckeditor'=>true),
 												array('type' => 'dropdown', 'label' => 'Status', 'name' => 'module_status', 'choices' => $status),
                     )

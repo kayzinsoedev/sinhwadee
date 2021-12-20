@@ -21,8 +21,12 @@
 				<?php } ?>
 
 					<?php if ($articles['video']) { ?>
-						<!-- <?php debug("if");?> -->
+						<?php if(!empty($articles['thumb'])){ ?>
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');"></div>
+						<?php }else{ ?>
+								<div class="cover-bg center-bg pd-b80p" style="background-image:url('image/<?= $logo; ?>');"></div>
+						<?php  } ?>
+
 						<div class="cover-bg video-media center-bg pd-b80p hidden">
 									<img src="<?php echo $articles['thumb']; ?>" class="img-responsive"/ data-pop="<?=$articles['video']; ?>" >
 						</div>
@@ -30,8 +34,9 @@
 						<img class="article-image img-responsive" src="" title="<?php echo $articles['name']; ?>" alt="<?php echo $articles['name']; ?>" />
 						<?php */ ?>
 					<?php } else { ?>
-						<!-- <?php debug("else");?> -->
+
 						<?php if ($articles['thumb']) { ?>
+
 						<?php if($cat_id == "59" || $cat_id == "61"){ ?>
 							<!-- <?php debug("if");?> -->
 								<a href="<?php echo $articles['href']; ?>">
@@ -60,11 +65,11 @@
 										<?php */ ?>
 							</div>
 						<?php } ?>
-						<?php } ?>
+						<?php } else{ ?>
+        					 <div class="cover-bg center-bg pd-b80p" style="background-image:url('<?= $logo; ?>');"></div>
+						<?php }?>
 					<?php } ?>
 					<div class="to-overlay">
-								<!-- ID 59 is recipes -->
-								<!-- ID 61 is newsletter -->
 								<?php if($cat_id == "59" || $cat_id == "61"){ ?>
 								<a href="<?php echo $articles['href']; ?>">
 										<div class="absolute position-center-center colorblack"><i class="fa fa-search fa-2em"></i><p> View More</p></div>
@@ -143,15 +148,13 @@
 
 
 
-
-
-
 <script>
     $(function() {
 		$('.archive-img').on('click', function() {
 					console.log('<?=$articles['video'];?>');
 					if('<?=$articles['video'];?>' !=""){
 								$('.embeddmediaVideo').html('<?=$articles['video'];?>');
+								// $('.embeddmediaVideo').html('<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$articles['video'];?>" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 								$('#videomodal').modal('show');
 					}else{
 								$('.imagepreview').attr('src', $(this).find('img').attr('data-pop'));
