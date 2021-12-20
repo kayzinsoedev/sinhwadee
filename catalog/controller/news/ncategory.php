@@ -874,7 +874,7 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 
-			debug($data['article']);die;
+			// debug($data['article']);die;
 
 			$limit = 10;
 			$start = ($page - 1) * $limit;
