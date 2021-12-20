@@ -835,12 +835,13 @@ class ControllerNewsNcategory extends Controller {
 
 				$canhref =  $this->url->link('news/article','news_id=' . $result['news_id']);
 
+				$embed_link = "https://www.youtube.com/embed/".$result["video"];
 
 				$data['article'][] = array(
 					'article_id'  => $result['news_id'],
 					'name'        => $name,
 					'thumb'       => $image,
-					'video'       => '<iframe width="100%" height="450" src="https://www.youtube.com/embed/<?=$result["video"];?>?autoplay=1" frameborder="0" allowfullscreen></iframe>',
+					'video'       => '<iframe width="100%" height="450" src="'.$embed_link.'" frameborder="0" allowfullscreen></iframe>',
 					// 'static_video' => '<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"  width="560" height="315" frameborder="0" allowfullscreen></iframe>',
 					'date_added'  => $da,
 					'du'          => $du,
@@ -859,6 +860,8 @@ class ControllerNewsNcategory extends Controller {
 					'total_comments' => $com,
 					'download_file'		=>$result['download_file']
 				);
+
+				//var_dump($data['article']);
 
 			}else{
 					// $data['article'][] =array();

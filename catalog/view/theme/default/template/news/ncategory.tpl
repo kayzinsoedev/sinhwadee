@@ -23,6 +23,9 @@
 					<?php if ($articles['video']) { ?>
 						<?php if(!empty($articles['thumb'])){ ?>
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');"></div>
+								<div class="video-pop-up">
+											<?=$articles['video'];?>
+								</div>
 						<?php }else{ ?>
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?= $logo; ?>');"></div>
 						<?php  } ?>
@@ -153,7 +156,7 @@
     $(function() {
 		$('.archive-img').on('click', function() {
 					if('<?=$articles['video'];?>' !=""){
-								$('.embeddmediaVideo').html('<?=$articles['video'];?>');
+								$('.embeddmediaVideo').html($(this).find('.video-pop-up').html());
 								$('#videomodal').modal('show');
 					}else{
 								$('.imagepreview').attr('src', $(this).find('img').attr('data-pop'));

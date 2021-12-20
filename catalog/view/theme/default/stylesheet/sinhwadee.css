@@ -1095,6 +1095,10 @@ body.product-product .colorblack
   padding: 0;
 }
 
+.video-pop-up{
+  display: none;
+}
+
 #articles-column-left .list-group-item a {
     /* padding-left: 0; */
     font-size: calc(4px + (30 - 18) * (100vw - 320px) / (1920 - 320));
