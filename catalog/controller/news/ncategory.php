@@ -169,25 +169,29 @@ class ControllerNewsNcategory extends Controller {
 
 
 
-						if(isset($this->request->post['recipes_sauce'])
+
+						if(isset($this->request->get['recipes_sauce'])
+							||isset($this->request->get['recipes_cooking_method'])
+							||isset($this->request->get['recipes_main_ingredient'])
+							||isset($this->request->get['keyword'])
+					  ){
+						/*if(isset($this->request->get['recipes_sauce'])
 							||isset($this->request->get['sauce'])
-							||isset($this->request->post['recipes_cooking_method'])
+							//||isset($this->request->get['recipes_cooking_method'])
 							||isset($this->request->get['method'])
-							||isset($this->request->post['recipes_main_ingredient'])
+							//||isset($this->request->get['recipes_main_ingredient'])
 							||isset($this->request->get['main'])
-							||isset($this->request->post['keyword'])
+							//||isset($this->request->get['keyword'])
 							||isset($this->request->get['keyword'])
 
 
-					  ){
-
+					  ){*/
 								//debug("search");
-
 
 								$data['receipt_filter'] = "true";
 								/*sauce*/
-								if(isset($this->request->post['recipes_sauce'])){
-											$sau_id= $this->request->post['recipes_sauce'];
+								if(isset($this->request->get['recipes_sauce'])){
+											$sau_id= $this->request->get['recipes_sauce'];
 								}
 								elseif (isset($this->request->get['sauce'])) {
 										$sau_id= $this->request->get['sauce'];
@@ -198,8 +202,8 @@ class ControllerNewsNcategory extends Controller {
 
 
 								/*cooking*/
-								if(isset($this->request->post['recipes_cooking_method'])){
-											$cooking_id= $this->request->post['recipes_cooking_method'];
+								if(isset($this->request->get['recipes_cooking_method'])){
+											$cooking_id= $this->request->get['recipes_cooking_method'];
 								}
 								elseif (isset($this->request->get['method'])) {
 										$cooking_id= $this->request->get['method'];
@@ -211,8 +215,8 @@ class ControllerNewsNcategory extends Controller {
 
 
 								/*ingredient*/
-								if(isset($this->request->post['recipes_main_ingredient'])){
-											$ingre_id= $this->request->post['recipes_main_ingredient'];
+								if(isset($this->request->get['recipes_main_ingredient'])){
+											$ingre_id= $this->request->get['recipes_main_ingredient'];
 								}
 								elseif (isset($this->request->get['main'])) {
 										$ingre_id= $this->request->get['main'];
@@ -255,11 +259,12 @@ class ControllerNewsNcategory extends Controller {
 										}
 								}
 
-								$keyword = isset($this->request->post['keyword']) ? $this->request->post['keyword'] : null ;
+								$keyword = isset($this->request->get['keyword']) ? $this->request->get['keyword'] : null ;
 
-								$data['description'] = $this->getpagecontent($settings,$news_ids,$keyword);
+								$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
 								$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
+								// debug($data['recipes_articles']);die;
 								$data['filter_recipes_list'] = array();
 								if(!empty($news_ids)){
 										foreach($data['recipes_articles']['recipes_result'] as $key=> $value){
@@ -277,6 +282,9 @@ class ControllerNewsNcategory extends Controller {
 					              );
 					           }
 								 }
+
+
+								 // debug($data['filter_recipes_list']);die;
 
 
 								if (isset($this->request->get['page'])) {
@@ -309,13 +317,13 @@ class ControllerNewsNcategory extends Controller {
 							 $pagination->limit = 4;
 
 							 if ($ncategory_id) {
-								 $pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id );
+								 $pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id );
 							 } elseif($author_pid) {
-								 $pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+								 $pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 							 } elseif($year) {
-								 $pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter_page='.$filter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+								 $pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter_page='.$filter_page.'&keyword='. $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 							 } else {
-								 $pagination->url = $this->url->link('news/ncategory', $url . '&page={page}&filter_page='.$filter_page.'&keyword='.$keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+								 $pagination->url = $this->url->link('news/ncategory', $url . '&page={page}&filter_page='.$filter_page.'&keyword='.$keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 							 }
 							 $data['pagination'] = $pagination->render();
 
@@ -333,13 +341,13 @@ class ControllerNewsNcategory extends Controller {
 			 		 		 $filter_recipes_pagination->limit = $recipes_limit; /* recipes table */
 
 			 		 		if ($ncategory_id) {
-			 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+			 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 			 				} elseif($author_pid) {
-		 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 		 		 			} elseif($year) {
-		 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 		 		 			} else {
-		 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+		 		 				$filter_recipes_pagination->url = $this->url->link('news/ncategory', $url . '&page='.$page.'&filter_page={filter_page}&keyword='. $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 		 		 			}
 
 		 		 			$data['filter_recipes_pagination'] = $filter_recipes_pagination->render();
@@ -350,14 +358,16 @@ class ControllerNewsNcategory extends Controller {
 
 					} /* recipes search */
 					else{
-								debug("not search");
+
 								$data['description'] = $this->getPageContent($settings);
+
 					}
 
 			}  /*recipes page */
 			else{
-						$data['description'] = $this->getPageContent($settings);
+				$data['description'] = $this->getPageContent($settings);
 			}
+
 
 
 
@@ -376,10 +386,10 @@ class ControllerNewsNcategory extends Controller {
 
 			if($data['cat_id'] == "59"){  /*recipes page */
 
-						$data['keyword'] = isset($this->request->post['keyword']) ? $this->request->post['keyword'] : null ;
-						$data['recipes_filter_sauce'] = isset($this->request->post['recipes_sauce']) ? $this->request->post['recipes_sauce'] : null ;
-						$data['recipes_filter_cooking_method'] = isset($this->request->post['recipes_cooking_method']) ? $this->request->post['recipes_cooking_method'] : null ;
-						$data['recipes_filter_main_ingredient'] = isset($this->request->post['recipes_main_ingredient']) ? $this->request->post['recipes_main_ingredient'] : null ;
+						$data['keyword'] = isset($this->request->get['keyword']) ? $this->request->get['keyword'] : null ;
+						$data['recipes_filter_sauce'] = isset($this->request->get['recipes_sauce']) ? $this->request->get['recipes_sauce'] : null ;
+						$data['recipes_filter_cooking_method'] = isset($this->request->get['recipes_cooking_method']) ? $this->request->get['recipes_cooking_method'] : null ;
+						$data['recipes_filter_main_ingredient'] = isset($this->request->get['recipes_main_ingredient']) ? $this->request->get['recipes_main_ingredient'] : null ;
 
 						if(isset($this->request->get['route'])){
 								$data['route']=$this->request->get['route'];
@@ -404,9 +414,9 @@ class ControllerNewsNcategory extends Controller {
 						$recipes_main_ingredient_modulename  = 'recipes_main_ingredient';
 						$data['recipes_main_ingredients'] = $Modulehelper->get_field ($oc, $recipes_main_ingredient_modulename, $language_id, 'recipes_main_ingredient');
 
+
 			}
 			/*recipes page */
-
 
 			if (!$this->config->get('ncategory_bnews_tplpick')) {
 				if (version_compare(VERSION, '2.2.0.0') >= 0) {
@@ -479,7 +489,7 @@ class ControllerNewsNcategory extends Controller {
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
 
 		if(isset($this->request->get['route'])) {
-			if(strpos(strtolower($this->request->get['route']), 'getpagecontent')) {
+			if(strpos(strtolower($this->request->get['route']), 'getPageContent')) {
 				$this->response->redirect($this->url->link('news/ncategory'));
 			}
 		}
@@ -638,13 +648,11 @@ class ControllerNewsNcategory extends Controller {
 					$news_total = $this->model_catalog_news->getTotalNews($sdata,$keyword);
 			}
 
-			 // debug($sdata);
 			if(isset($news_ids) || $keyword){
-					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
+				$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 			}else{
 				$results = $this->model_catalog_news->getNews($sdata);
 			}
-
 
 			foreach ($results as $result) {
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
@@ -760,8 +768,8 @@ class ControllerNewsNcategory extends Controller {
 
 				if($data['cat_id'] == "59"){  /*recipes page */
 							/*sauce*/
-							if(isset($this->request->post['recipes_sauce'])){
-										$sau_id= $this->request->post['recipes_sauce'];
+							if(isset($this->request->get['recipes_sauce'])){
+										$sau_id= $this->request->get['recipes_sauce'];
 							}
 							elseif (isset($this->request->get['sauce'])) {
 									$sau_id= $this->request->get['sauce'];
@@ -771,8 +779,8 @@ class ControllerNewsNcategory extends Controller {
 							}
 
 							/*cooking*/
-							if(isset($this->request->post['recipes_cooking_method'])){
-										$cooking_id= $this->request->post['recipes_cooking_method'];
+							if(isset($this->request->get['recipes_cooking_method'])){
+										$cooking_id= $this->request->get['recipes_cooking_method'];
 							}
 							elseif (isset($this->request->get['method'])) {
 									$cooking_id= $this->request->get['method'];
@@ -784,8 +792,8 @@ class ControllerNewsNcategory extends Controller {
 
 
 							/*ingredient*/
-							if(isset($this->request->post['recipes_main_ingredient'])){
-										$ingre_id= $this->request->post['recipes_main_ingredient'];
+							if(isset($this->request->get['recipes_main_ingredient'])){
+										$ingre_id= $this->request->get['recipes_main_ingredient'];
 							}
 							elseif (isset($this->request->get['main'])) {
 									$ingre_id= $this->request->get['main'];
@@ -811,25 +819,44 @@ class ControllerNewsNcategory extends Controller {
 							}
 
 
-							if(isset($this->request->post['recipes_sauce'])
-								||isset($this->request->get['sauce'])
-								||isset($this->request->post['recipes_cooking_method'])
-								||isset($this->request->get['method'])
-								||isset($this->request->post['recipes_main_ingredient'])
-								||isset($this->request->get['main'])
-								||isset($this->request->post['keyword'])
+							$news_ids_array = $this->model_catalog_ncategory->getRecipesBySearch($sau_id,$cooking_id,$ingre_id);
+							$news_ids = array();
+							if(count($news_ids_array) > 0){
+									if(isset($news_ids_array['news_id'])){
+											$news_ids = explode(",",$news_ids_array['news_id']);
+									}else{
+											if(!empty($news_ids_array)){
+													foreach($news_ids_array as $value){
+															$news_ids[]= $value['news_id'];
+															$news_ids=array_unique($news_ids);
+													}
+											}else{
+														$news_ids = null;
+											}
+									}
+							}
+
+
+
+
+
+							if(isset($this->request->get['recipes_sauce'])
+								||isset($this->request->get['recipes_cooking_method'])
+								||isset($this->request->get['recipes_main_ingredient'])
 								||isset($this->request->get['keyword'])
 
 						  ){
 
-									// debug($news_ids);
+
 									 if (isset($this->request->get['filter_page'])) {
 										 $filter_page = (int)$this->request->get['filter_page'];
 									 } else {
 										 $filter_page = 1;
 									 }
 
+
 									$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
+									// debug($data['recipes_articles']);die;
 
 									$data['filter_recipes_list'] = array();
 				 					if(!empty($news_ids)){
@@ -859,7 +886,8 @@ class ControllerNewsNcategory extends Controller {
 
 									$limit = 4;
  									$start = ($page - 1) * $limit;
- 									$data['article'] = array_slice($data['article'], $start, $limit);
+
+ 									//$data['article'] = array_slice($data['article'], $start, $limit);
 
 									$url = '';
 									$pagination = new RecipePagination();
@@ -871,13 +899,13 @@ class ControllerNewsNcategory extends Controller {
 									$pagination->limit = $limit;
 
 									if ($ncategory_id) {
-										$pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id );
+										$pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id );
 									} elseif($author_pid) {
-										$pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+										$pagination->url = $this->url->link('news/ncategory', 'author=' . $author_pid . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 									} elseif($year) {
-										$pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter_page='.$filter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+										$pagination->url = $this->url->link('news/ncategory', 'archive=' . $year . ($month ? '-' . $month : '') . $url . '&page={page}&filter_page='.$filter_page.'&keyword='. $keyword. '&sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 									} else {
-										$pagination->url = $this->url->link('news/ncategory', $url . '&page={page}&filter_page='.$filter_page.'&keyword='.$keyword. '&sauce='.$sau_id .'&method='.$cooking_id. '&main='.$ingre_id);
+										$pagination->url = $this->url->link('news/ncategory', $url . '&page={page}&filter_page='.$filter_page.'&keyword='.$keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id);
 									}
 
 									$data['pagination'] = $pagination->render();
@@ -953,12 +981,10 @@ class ControllerNewsNcategory extends Controller {
 
 	protected function getFilterRecipesList($settings,$news_ids=null,$keyword=null) {
 
-		// debug($news_ids);die;
-
 		$data['action'] = $this->url->link('news/ncategory&ncat=59', '', true);
 
 		if(isset($this->request->get['route'])) {
-			if(strpos(strtolower($this->request->get['route']), 'getpagecontent')) {
+			if(strpos(strtolower($this->request->get['route']), 'getPageContent')) {
 				$this->response->redirect($this->url->link('news/ncategory'));
 			}
 		}
@@ -1002,14 +1028,13 @@ class ControllerNewsNcategory extends Controller {
 			$page = 1;
 		}
 
-		// $limit = 10;
 
 		if (isset($this->request->get['ncat']) && empty($this->request->get['archive'])) {
 			$parts = explode('_', (string)$this->request->get['ncat']);
 			$ncategory_id = array_pop($parts);
 
 			$settings['ncategory_id'] = $ncategory_id;
-			// $settings['limit'] = 10;
+
 			$ncategory_info = $settings;
 
 
@@ -1112,18 +1137,18 @@ class ControllerNewsNcategory extends Controller {
 
 			$news_total = $this->model_catalog_news->getTotalNews($sdata);
 
-// debug($sdata);
+
 			if(isset($news_ids) || $keyword){
 					$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
 					$data['recipes_result'] = $results;
 					$data['recipes_filter'] = "true";
 					// debug("stop");
-					// return $data;exit;
+					return $data;exit;
 			}else{
 				$results = $this->model_catalog_news->getNews($sdata);
 			}
 
-			// debug($results);die;
+
 			foreach ($results as $key=> $result) {
 				if(!empty($result)){
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
@@ -1236,7 +1261,6 @@ class ControllerNewsNcategory extends Controller {
 
 
 
-
 			$this->load->library('modulehelper');
 			$Modulehelper = Modulehelper::get_instance($this->registry);
 			$oc = $this;
@@ -1278,6 +1302,17 @@ class ControllerNewsNcategory extends Controller {
 			$data['pagination'] = $pagination->render();
 
 			$data['pag_results'] = sprintf($this->language->get('text_pagination'), ($news_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($news_total - $limit)) ? $news_total : ((($page - 1) * $limit) + $limit), $news_total, ceil($news_total / $limit));
+
+
+			if (version_compare(VERSION, '2.2.0.0') >= 0) {
+				return $this->load->view('news/ncategory', $data);
+			} else {
+				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/ncategory.tpl')) {
+					return $this->load->view($this->config->get('config_template') . '/template/news/ncategory.tpl', $data);
+				} else {
+					return $this->load->view('default/template/news/ncategory.tpl', $data);
+				}
+			}
 
 	 }
 

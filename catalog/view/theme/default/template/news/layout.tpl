@@ -15,7 +15,7 @@
       <?php if(isset($route)){ ?>
       <?php if($route != "news/article" ){ ?>
       <div class="container-fluid">
-            <form action="<?=$action;?>" method="post">
+            <!--<form action="<?=$action;?>" method="get">-->
                   <div class="row filter-section">
                       <div class="keyword-filter-option">
                           <div class="form-group">
@@ -83,9 +83,9 @@
 
                <div class="row filter-btn">
                    <a href="index.php?route=news/ncategory&ncat=59" class="recipes-clear-bn">Clear</a>
-                   <input type="submit" class="recipes-filter-btn" value="Search">
+                   <button class="recipes-filter-btn">Search</button>
                </div>
-            </form>
+            <!--</form>-->
         </div>
         <?php } ?>
         <?php } ?>
@@ -117,4 +117,24 @@
 
     <?php echo $content_bottom; ?>
 </div>
+<script>
+    $('.recipes-filter-btn').on('click',function(){
+     var url = '<?= $action; ?>';
+
+     if($("input[name='keyword']").val()){
+         url += '&keyword='+$("input[name='keyword']").val();
+     }
+
+     if($("select[name='recipes_sauce']").val()){
+         url += '&recipes_sauce='+$("select[name='recipes_sauce']").val();
+     }
+     if($("select[name='recipes_cooking_method']").val()){
+         url += '&recipes_cooking_method='+$("select[name='recipes_cooking_method']").val();
+     }
+     if($("select[name='recipes_main_ingredient']").val()){
+         url += '&recipes_main_ingredient='+$("select[name='recipes_main_ingredient']").val();
+     }
+     window.location.href=url;
+    });
+</script>
 <?php echo $footer; ?>
