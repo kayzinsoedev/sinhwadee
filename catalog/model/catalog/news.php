@@ -102,7 +102,7 @@ class ModelCatalogNews extends Model {
 
 	}
 
-	public function getNews($data = array(),$news_ids=array(),$keyword='') {
+	public function getNews($data = array(),$news_ids=array(),$keyword='',$filter='') {
 
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
@@ -206,6 +206,7 @@ class ModelCatalogNews extends Model {
 	        $sql .= " AND n.news_id IN (".implode(',',$news_ids).")";
 	    }
 
+
 		// debug($this->config->get('ncategory_bnews_order'));die;
 		if (!$this->config->get('ncategory_bnews_order')) {
 			$sql .= " ORDER BY n.date_added DESC ";
@@ -227,27 +228,28 @@ class ModelCatalogNews extends Model {
 		}
 
 
-		// debug($sql);
-
 
 		$articles_data = array();
 
 		$query = $this->db->query($sql);
 
 
+		foreach ($query->rows as $result) {
+			 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],'');
+		}
 
-		/*if($news_ids){
-			foreach ($news_ids as $key=> $result) {
-				$articles_data[$result] = $this->getNewsStory($result,$keyword);
-			}
-		}else{*/
-			foreach ($query->rows as $result) {
-				 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],'');
-			}
- 		//}
+		if($filter == "true"){
+				if( count($news_ids) == 0){
+						return array();
+				}else{
+						return $articles_data;
+				}
+		}else{
+				return $articles_data;
+		}
 
-		return $articles_data;
 	}
+	
 	public function getNewsLayoutId($news_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "sb_news_to_layout WHERE news_id = '" . (int)$news_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
 

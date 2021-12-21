@@ -184,9 +184,8 @@ class ControllerNewsNcategory extends Controller {
 							//||isset($this->request->get['keyword'])
 							||isset($this->request->get['keyword'])
 
-
 					  ){*/
-								//debug("search");
+
 
 								$data['receipt_filter'] = "true";
 								/*sauce*/
@@ -226,6 +225,7 @@ class ControllerNewsNcategory extends Controller {
 								}
 
 
+
 								$sauce_news_ids = array();
 								if($sau_id !="all"){
 										$sauce_news_ids= $this->model_catalog_ncategory->getSauceNews($sau_id);
@@ -243,6 +243,7 @@ class ControllerNewsNcategory extends Controller {
 
 
 								$news_ids_array = $this->model_catalog_ncategory->getRecipesBySearch($sau_id,$cooking_id,$ingre_id);
+
 								$news_ids = array();
 								if(count($news_ids_array) > 0){
 										if(isset($news_ids_array['news_id'])){
@@ -260,7 +261,6 @@ class ControllerNewsNcategory extends Controller {
 								}
 
 								$keyword = isset($this->request->get['keyword']) ? $this->request->get['keyword'] : null ;
-
 								$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
 								$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
@@ -284,9 +284,6 @@ class ControllerNewsNcategory extends Controller {
 								 }
 
 
-								 // debug($data['filter_recipes_list']);die;
-
-
 								if (isset($this->request->get['page'])) {
 			 			 			$page = (int)$this->request->get['page'];
 			 			 		} else {
@@ -299,7 +296,14 @@ class ControllerNewsNcategory extends Controller {
 	 		 					 $filter_page = 1;
 	 		 				 }
 
+							 // debug(count($data['description']));die;
 
+							 $limit = 4;
+							 $sdata = array(
+		 						'filter_ncategory_id' => $ncategory_id,
+		 						'start'           => ($page - 1) * $limit,
+		 						'limit'           => $limit
+		 					);
 							 if($news_ids){
 		 								$news_total = count($news_ids);
 			 				 }else{
@@ -313,8 +317,7 @@ class ControllerNewsNcategory extends Controller {
 							 $pagination->type = "";
 							 $pagination->filter_page = $filter_page;
 							 $pagination->page = $page;
-
-							 $pagination->limit = 4;
+							 $pagination->limit = $limit;
 
 							 if ($ncategory_id) {
 								 $pagination->url = $this->url->link('news/ncategory', 'ncat=' . $ncategory_id . $url . '&page={page}&filter_page='.$filter_page.'&keyword=' . $keyword. '&recipes_sauce='.$sau_id .'&recipes_cooking_method='.$cooking_id. '&recipes_main_ingredient='.$ingre_id );
@@ -330,7 +333,6 @@ class ControllerNewsNcategory extends Controller {
 
 
 							 /*pagination for sauce, ingredient list */
-
 							 $recipes_limit = 4;
 
 			 				 $filter_recipes_pagination = new RecipePagination();
@@ -358,7 +360,6 @@ class ControllerNewsNcategory extends Controller {
 
 					} /* recipes search */
 					else{
-
 								$data['description'] = $this->getPageContent($settings);
 
 					}
@@ -640,19 +641,20 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 
-
-			// $news_total = $this->model_catalog_news->getTotalNews($sdata);
 			if($news_ids){
 						$news_total = count($news_ids);
 			}else{
 					$news_total = $this->model_catalog_news->getTotalNews($sdata,$keyword);
 			}
 
+
 			if(isset($news_ids) || $keyword){
-				$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword);
+				$results = $this->model_catalog_news->getNews($sdata,$news_ids,$keyword,$filter="true");
 			}else{
 				$results = $this->model_catalog_news->getNews($sdata);
 			}
+
+			// debug(count($results));die;
 
 			foreach ($results as $result) {
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
@@ -856,7 +858,7 @@ class ControllerNewsNcategory extends Controller {
 
 
 									$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
-									// debug($data['recipes_articles']);die;
+
 
 									$data['filter_recipes_list'] = array();
 				 					if(!empty($news_ids)){
@@ -876,14 +878,16 @@ class ControllerNewsNcategory extends Controller {
 				 		           }
 				 					 }
 
-									/*recipes filter table*/
-									$recipes_limit = 10;
-									$filter_start = ($filter_page - 1) * $recipes_limit;
-									$data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
-									/*recipes filter table*/
 
-									$data['ncat'] = $this->request->get['ncat'];
+									/*recipes filter table*/
+									// $recipes_limit = 4;
+									// $filter_start = ($filter_page - 1) * $recipes_limit;
+									// $data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
+									// /*recipes filter table*/
+									//
+									// $data['ncat'] = $this->request->get['ncat'];
 
+									/*pagination for above filter */
 									$limit = 4;
  									$start = ($page - 1) * $limit;
 
@@ -895,7 +899,6 @@ class ControllerNewsNcategory extends Controller {
 									$pagination->type = "";
 									$pagination->filter_page = $filter_page;
 									$pagination->page = $page;
-
 									$pagination->limit = $limit;
 
 									if ($ncategory_id) {

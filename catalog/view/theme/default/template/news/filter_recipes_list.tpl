@@ -1,5 +1,4 @@
-
-<?php if(isset($filter_recipes_list)){ ?>
+<?php if(count($filter_recipes_list) > 0){ ?>
 						<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="display:none;">
 									<div class="row filter-recipes-title">
 												<div class="col-md-3 recipes-list-title"><h3>Recipes</h3></div>

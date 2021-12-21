@@ -123,7 +123,7 @@
 		<?php } ?>
   </div>
 
-	<?=$articles['video_id'];?>
+
 
 	<div class="modal fade" id="videomodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="absolute position-center-center">
