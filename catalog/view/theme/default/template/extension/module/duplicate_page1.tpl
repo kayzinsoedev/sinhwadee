@@ -7,7 +7,7 @@
 
             <?php foreach ($services as $key=> $service) { ?>
                   <?php if($main_category['id'] == $service['main_categories'] ){ ?>
-                        <a href="index.php?route=information/information&information_id=7#about-sub-title<?=$key;?>"><p class="sidebar-aboutsub_title"><?= $service['title']; ?></p></a>
+                        <a href="index.php?route=information/information&information_id=16#about-sub-title<?=$key;?>"><p class="sidebar-aboutsub_title"><?= $service['title']; ?></p></a>
                   <?php } ?>
             <?php }?>
         </div>
