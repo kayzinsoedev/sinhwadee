@@ -23,6 +23,9 @@
 							<div class="mg-b30 relative hover-overlay">
 				<?php } ?>
 
+					<div class="video-pop-up">
+								<?=$articles['video'];?>
+					</div>
 					<?php if ($articles['video_id']) { ?>
 						<?php if(!empty($articles['thumb'])){ ?>
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');"></div>
