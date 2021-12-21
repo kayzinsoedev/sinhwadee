@@ -27,7 +27,7 @@
             </div>
 
             <div class="related_content">
-              <div class="article-name bold pd-b15"><a href=""><?=$blog_related['title'];?></a></div>
+              <div class="article-name bold pd-b15"><a href="<?=$blog_related['href'];?>"><?=$blog_related['title'];?></a></div>
               <div class="pd-b15">
                 <img src="image/catalog/project/general/calendar.png" alt="calendar"/>
                 <span class="img-calendar"><?=$blog_related['date_added'];?></span>
