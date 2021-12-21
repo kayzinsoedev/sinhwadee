@@ -103,6 +103,7 @@ class ModelCatalogNews extends Model {
 	}
 
 	public function getNews($data = array(),$news_ids=array(),$keyword='') {
+
 		$group_restriction = $this->config->get('ncategory_bnews_restrictgroup') ? " AND n2g.group_id = '" . (int)$this->config->get('config_customer_group_id') . "' " : '';
 
 		$group_restriction_join = $this->config->get('ncategory_bnews_restrictgroup') ? " LEFT JOIN " . DB_PREFIX . "sb_news_to_group n2g ON (n.news_id = n2g.news_id) " : '';
@@ -195,15 +196,15 @@ class ModelCatalogNews extends Model {
 			}
 		}
 
-
+		// debug($sql);die;
 
 		if($keyword) {
 			$sql .= " AND (LOWER(nd.title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%' OR LOWER(nd.description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
 		}
 
-        if(count($news_ids)){
-            $sql .= " AND n.news_id IN (".implode(',',$news_ids).")";
-        }
+	    if(count($news_ids)){
+	        $sql .= " AND n.news_id IN (".implode(',',$news_ids).")";
+	    }
 
 		// debug($this->config->get('ncategory_bnews_order'));die;
 		if (!$this->config->get('ncategory_bnews_order')) {
@@ -211,6 +212,7 @@ class ModelCatalogNews extends Model {
 			} else {
 			$sql .= " ORDER BY n.sort_order";
 		}
+		// die;
 
 		if (isset($data['start']) || isset($data['limit'])) {
 				if ($data['start'] < 0) {
@@ -224,9 +226,15 @@ class ModelCatalogNews extends Model {
 				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
 
+
+		// debug($sql);
+
+
 		$articles_data = array();
 
 		$query = $this->db->query($sql);
+
+
 
 		/*if($news_ids){
 			foreach ($news_ids as $key=> $result) {
@@ -360,6 +368,8 @@ class ModelCatalogNews extends Model {
 			$sql .= " AND n.nauthor_id = '" . (int)$data['filter_author_id'] . "'";
 		}
 
+
+
 		if (!empty($data['filter_year']) && !empty($data['filter_month'])) {
 			$m = (int)$data['filter_month'] > 9 ? (int)$data['filter_month'] : '0'.(int)$data['filter_month'];
 			$y = (int)$data['filter_year'];
@@ -374,6 +384,8 @@ class ModelCatalogNews extends Model {
 		}
 
 		$query = $this->db->query($sql);
+
+
 
 		return $query->row['total'];
 	}

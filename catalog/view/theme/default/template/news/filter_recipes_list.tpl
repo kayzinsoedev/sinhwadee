@@ -59,7 +59,7 @@
 
 <script>
 $(document).ready(function() {
-		var $ncat = '<?php echo $ncat; ?>';
+		 var $ncat = '<?php echo $ncat; ?>';
 			if($ncat == "59"){
 					document.getElementById("filter-rec-list").style.display = 'block';
 			}
