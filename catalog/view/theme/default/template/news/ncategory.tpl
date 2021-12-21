@@ -1,6 +1,7 @@
 <?php if ($article) { ?>
 	<div class="news-list-wrap flex flex-wrap">
 		<?php foreach ($article as $articles) { ?>
+
 			<?php if(!empty($articles)){ ?>
 			<!-- id=61 ->newsletter -->
 			<?php if($cat_id == "61"){ ?>
@@ -11,7 +12,9 @@
 			<?php }elseif($cat_id == "66"){ ?>
 						<div class="download-img news-post b4-col b4-col-100p b4-col-50p-md pd-t15 pd-b15">
 			<?php }else{ ?>
-						<div class="archive-img news-post b4-col b4-col-100p pd-t15 pd-b15">
+						<!-- <div class="archive-img news-post b4-col b4-col-100p pd-t15 pd-b15" onclick="getVideoID(this, '<?=$articles['video_id'];?>')"> -->
+						<div class="archive-img news-post b4-col b4-col-100p pd-t15 pd-b15" data-id="<?php echo $articles['video_id'];?>" >
+						<input type="hidden" value="<?=$articles['video_id'];?>" id="video-id">
 			<?php } ?>
 
 				<?php if($cat_id == "61"){ ?>
@@ -20,7 +23,7 @@
 							<div class="mg-b30 relative hover-overlay">
 				<?php } ?>
 
-					<?php if ($articles['video']) { ?>
+					<?php if ($articles['video_id']) { ?>
 						<?php if(!empty($articles['thumb'])){ ?>
 								<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');"></div>
 								<div class="video-pop-up">
@@ -112,13 +115,13 @@
 				</div>
 			</div>
 
-
 		<?php } ?>
+
 		<?php } ?>
   </div>
 
+	<?=$articles['video_id'];?>
 
-	<?php if ($articles['video']) { ?>
 	<div class="modal fade" id="videomodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="absolute position-center-center">
 					<div class="modal-dialog">
@@ -131,30 +134,32 @@
 					</div>
 			</div>
 	</div>
-<?php }else{ ?>
-		<div class="modal fade" id="archivemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="absolute position-center-center">
-						<div class="modal-dialog">
-								<div class="modal-content">
-										<div class="modal-body">
-												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-												<img src="" class="imagepreview" style="width: 100%;" >
-										</div>
-								</div>
-						</div>
-				</div>
-		</div>
-<?php } ?>
+
+	<div class="modal fade" id="archivemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="absolute position-center-center">
+					<div class="modal-dialog">
+							<div class="modal-content">
+									<div class="modal-body">
+											<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+											<img src="" class="imagepreview" style="width: 100%;" >
+									</div>
+							</div>
+					</div>
+			</div>
+	</div>
+
   <div class="text-center pd-b60"><?php echo $pagination; ?></div>
 
 <?php } ?>
 
 
-
 <script>
-    $(function() {
+		$(function() {
 		$('.archive-img').on('click', function() {
-					if('<?=$articles['video'];?>' !=""){
+			// console.log($(this));
+					$videoId = $(this).data("id");
+					// console.log(document.getElementById("video-id").value);
+					if($videoId !=""){
 								$('.embeddmediaVideo').html($(this).find('.video-pop-up').html());
 								$('#videomodal').modal('show');
 					}else{
@@ -162,5 +167,7 @@
 								$('#archivemodal').modal('show');
 					}
 				});
-    });
+		});
+
+
 </script>
