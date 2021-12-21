@@ -264,7 +264,7 @@ class ControllerNewsNcategory extends Controller {
 								$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
 								$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
-								// debug($data['recipes_articles']);die;
+
 								$data['filter_recipes_list'] = array();
 								if(!empty($news_ids)){
 										foreach($data['recipes_articles']['recipes_result'] as $key=> $value){
@@ -1039,12 +1039,13 @@ class ControllerNewsNcategory extends Controller {
 
 
 		if ($ncategory_info) {
+
 				$data['is_category'] = true;
 
-				$limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
-				// $limit = 10;
+				// $limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
+				$limit = 10;
 
-
+				// debug($limit);die;
 				$data['ncategories'] = array();
 
 				$results = $this->model_catalog_ncategory->getncategories($ncategory_id);
