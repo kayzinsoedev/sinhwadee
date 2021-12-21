@@ -145,7 +145,6 @@
 				</div>
 		</div>
 <?php } ?>
-
   <div class="text-center pd-b60"><?php echo $pagination; ?></div>
 
 <?php } ?>

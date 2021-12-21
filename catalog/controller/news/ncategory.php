@@ -317,12 +317,9 @@ class ControllerNewsNcategory extends Controller {
 
 					}
 
-					//debug($news_ids);
-
 					$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
 					$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
-
 
 
 					$data['filter_recipes_list'] = array();
@@ -434,8 +431,6 @@ class ControllerNewsNcategory extends Controller {
 			$data['recipes_filter_main_ingredient'] = isset($this->request->post['recipes_main_ingredient']) ? $this->request->post['recipes_main_ingredient'] : null ;
 
 
-
-			// debug($data['article']);
 
 			/*Fiter by custom option */
 
@@ -753,7 +748,6 @@ class ControllerNewsNcategory extends Controller {
 				$results = $this->model_catalog_news->getNews($sdata);
 			}
 
-
 			foreach ($results as $key=> $result) {
 				if(!empty($result)){
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
@@ -842,7 +836,6 @@ class ControllerNewsNcategory extends Controller {
 					'name'        => $name,
 					'thumb'       => $image,
 					'video'       => '<iframe width="100%" height="450" src="'.$embed_link.'" frameborder="0" allowfullscreen></iframe>',
-					// 'static_video' => '<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"  width="560" height="315" frameborder="0" allowfullscreen></iframe>',
 					'date_added'  => $da,
 					'du'          => $du,
 					'author'      => $author,
@@ -861,16 +854,14 @@ class ControllerNewsNcategory extends Controller {
 					'download_file'		=>$result['download_file']
 				);
 
-				//var_dump($data['article']);
 
 			}else{
-					// $data['article'][] =array();
 			}
 
 			}
 
 
-			// debug($data['article']);die;
+
 
 			$limit = 10;
 			$start = ($page - 1) * $limit;
@@ -1288,7 +1279,7 @@ class ControllerNewsNcategory extends Controller {
 					);
 
 				}else{
-						// $data['article'][] =array();
+
 				}
 
 				}
