@@ -1,3 +1,4 @@
+<?php if(isset($filter_recipes_list)){ ?>
 <?php if(count($filter_recipes_list) > 0){ ?>
 						<?php if($ncat== "59"){?>
 									<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="display:block;">
@@ -54,6 +55,9 @@
 
 
 <?php } ?>
+
+<?php } ?>
+
 <?php if(isset($filter_recipes_pagination)){ ?>
 		<div class="text-center pd-b60"><?=$filter_recipes_pagination; ?></div>
 <?php } ?>
