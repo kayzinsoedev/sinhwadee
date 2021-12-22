@@ -110,9 +110,7 @@
     <?php echo $column_right; ?></div>
 
 
-
     <?php include_once('filter_recipes_list.tpl'); ?>
-
 
 
     <?php echo $content_bottom; ?>

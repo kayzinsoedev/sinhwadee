@@ -196,7 +196,7 @@ class ModelCatalogNews extends Model {
 			}
 		}
 
-		// debug($sql);die;
+
 
 		if($keyword) {
 			$sql .= " AND (LOWER(nd.title) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%' OR LOWER(nd.description) LIKE '%" . $this->db->escape(strtolower($keyword)) . "%')";
@@ -206,6 +206,7 @@ class ModelCatalogNews extends Model {
 	        $sql .= " AND n.news_id IN (".implode(',',$news_ids).")";
 	    }
 
+			// debug($sql);
 
 		// debug($this->config->get('ncategory_bnews_order'));die;
 		if (!$this->config->get('ncategory_bnews_order')) {
@@ -233,7 +234,6 @@ class ModelCatalogNews extends Model {
 
 		$query = $this->db->query($sql);
 
-
 		foreach ($query->rows as $result) {
 			 $articles_data[$result['news_id']] = $this->getNewsStory($result['news_id'],'');
 		}
@@ -249,7 +249,7 @@ class ModelCatalogNews extends Model {
 		}
 
 	}
-	
+
 	public function getNewsLayoutId($news_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "sb_news_to_layout WHERE news_id = '" . (int)$news_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
 

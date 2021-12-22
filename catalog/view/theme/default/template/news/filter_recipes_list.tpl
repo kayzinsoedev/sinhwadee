@@ -1,5 +1,5 @@
 <?php if(count($filter_recipes_list) > 0){ ?>
-						<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="display:none;">
+						<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="">
 									<div class="row filter-recipes-title">
 												<div class="col-md-3 recipes-list-title"><h3>Recipes</h3></div>
 												<div class="col-md-3 recipes-list-title"><h3>Sauce</h3></div>
@@ -55,14 +55,12 @@
 <?php } ?>
 
 
-
 <script>
 $(document).ready(function() {
 		 var $ncat = '<?php echo $ncat; ?>';
 			if($ncat == "59"){
 					document.getElementById("filter-rec-list").style.display = 'block';
 			}
-
 });
 
 </script>
