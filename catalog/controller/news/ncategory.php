@@ -149,6 +149,9 @@ class ControllerNewsNcategory extends Controller {
 			if(isset($this->request->get['ncat'])){
 					$data['cat_id']=$this->request->get['ncat'];
 			}
+
+			$data['column_left'] = $this->load->controller('common/column_left');
+
 			if($data['cat_id'] == "59"){  /*recipes page */
 
 						$this->load->library('modulehelper');
@@ -166,7 +169,6 @@ class ControllerNewsNcategory extends Controller {
 						/*Receipt Filter By Ingredient*/
 						$recipes_main_ingredient_modulename  = 'recipes_main_ingredient';
 						$data['recipes_main_ingredients'] = $Modulehelper->get_field ($oc, $recipes_main_ingredient_modulename, $language_id, 'recipes_main_ingredient');
-
 
 
 
@@ -374,7 +376,7 @@ class ControllerNewsNcategory extends Controller {
 
 
 
-			// $data['column_left'] = $this->load->controller('common/column_left');
+
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
@@ -472,7 +474,7 @@ class ControllerNewsNcategory extends Controller {
 
 			$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . '/1.1 404 Not Found');
 
-			$data['column_left'] = $this->load->controller('common/column_left');
+			// $data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
