@@ -415,7 +415,7 @@ class ControllerNewsArticle extends Controller {
 			$result['text'] = unserialize($result['text']);
 			$result['text'] = isset($result['text'][$this->config->get('config_language_id')]) ? $result['text'][$this->config->get('config_language_id')] : '' ;
 			// $code = '<iframe frameborder="0" allowfullscreen src="' . str_replace("watch?v=","embed/",$result['video']) . '" height="'.$result['height'].'"width="100%" style="max-width:'.$result['width'].'px"></iframe>';
-			$code = '<iframe width="100%" height="450" src="'.$embed_link.'" frameborder="0" allowfullscreen style="max-width:'.$result['width'].'px"></iframe>'
+			$code = '<iframe width="100%" height="450" src="'.$embed_link.'" frameborder="0" allowfullscreen style="max-width:'.$result['width'].'px"></iframe>';
 			$data['article_videos'][] = array(
 					'text'  => $result['text'],
 					'code' => $code
