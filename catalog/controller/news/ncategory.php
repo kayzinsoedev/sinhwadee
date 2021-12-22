@@ -264,7 +264,7 @@ class ControllerNewsNcategory extends Controller {
 								$data['description'] = $this->getPageContent($settings,$news_ids,$keyword);
 
 								$data['recipes_articles'] = $this->getFilterRecipesList($settings,$news_ids,$keyword);
-
+								// debug($data['recipes_articles']);die;
 								$data['filter_recipes_list'] = array();
 								if(!empty($news_ids)){
 										foreach($data['recipes_articles']['recipes_result'] as $key=> $value){
@@ -282,6 +282,7 @@ class ControllerNewsNcategory extends Controller {
 					              );
 					           }
 								 }
+
 
 
 								if (isset($this->request->get['page'])) {
@@ -354,10 +355,10 @@ class ControllerNewsNcategory extends Controller {
 
 		 		 			$data['filter_recipes_pagination'] = $filter_recipes_pagination->render();
 
-							// debug($data['filter_recipes_list']);die;
-							// $filter_start = ($filter_page - 1) * $recipes_limit;
-							// $data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
-							// $data['ncat'] = $this->request->get['ncat'];
+					
+							$filter_start = ($filter_page - 1) * $recipes_limit;
+							$data['filter_recipes_list'] = array_slice($data['filter_recipes_list'], $filter_start, $recipes_limit);
+							$data['ncat'] = $this->request->get['ncat'];
 
 					} /* recipes search */
 					else{
@@ -1032,17 +1033,17 @@ class ControllerNewsNcategory extends Controller {
 		$data['fbcom_posts'] = $this->config->get('ncategory_bnews_fbcom_posts');
 		$date_format = $this->config->get('ncategory_bnews_date_format') ? $this->config->get('ncategory_bnews_date_format') : 'd.m.Y';
 
-		// if (isset($this->request->get['page'])) {
-		// 	$page = (int)$this->request->get['page'];
-		// } else {
-		// 	$page = 1;
-		// }
-
-		if (isset($this->request->get['filter_page'])) {
-			$page = (int)$this->request->get['filter_page'];
+		if (isset($this->request->get['page'])) {
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
+
+		// if (isset($this->request->get['filter_page'])) {
+		// 	$page = (int)$this->request->get['filter_page'];
+		// } else {
+		// 	$page = 1;
+		// }
 
 
 
@@ -1059,8 +1060,8 @@ class ControllerNewsNcategory extends Controller {
 
 				$data['is_category'] = true;
 
-				$limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
-				// $limit = 10;
+				// $limit = $this->config->get('ncategory_bnews_catalog_limit') ? $this->config->get('ncategory_bnews_catalog_limit') : ($this->config->get('config_product_limit') ? $this->config->get('config_product_limit') : $this->config->get($this->config->get('config_theme') . '_product_limit'));
+				$limit = 10;
 
 				// debug($limit);die;
 				$data['ncategories'] = array();
@@ -1153,7 +1154,7 @@ class ControllerNewsNcategory extends Controller {
 				$elements = array("name","image","da","du","author","category","desc","button","com","custom1","custom2","custom3","custom4");
 			}
 
-
+				// debug($news_ids);die;
 			$news_total = $this->model_catalog_news->getTotalNews($sdata);
 
 
@@ -1167,7 +1168,7 @@ class ControllerNewsNcategory extends Controller {
 			}
 
 
-			// debug($results);die;
+
 
 			foreach ($results as $key=> $result) {
 				if(!empty($result)){

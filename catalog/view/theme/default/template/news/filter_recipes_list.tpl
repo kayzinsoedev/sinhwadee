@@ -1,5 +1,9 @@
 <?php if(count($filter_recipes_list) > 0){ ?>
-						<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="">
+						<?php if($ncat== "59"){?>
+									<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="display:block;">
+						<?php }else{ ?>
+									<div id="filter-rec-list" class="col-md-12 filter-recipes-list" style="display:none;">
+						<?php } ?>
 									<div class="row filter-recipes-title">
 												<div class="col-md-3 recipes-list-title"><h3>Recipes</h3></div>
 												<div class="col-md-3 recipes-list-title"><h3>Sauce</h3></div>
