@@ -106,8 +106,10 @@
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
     <div id="content" class="<?php echo $class; ?>">
-      <?php echo $description; ?></div>
-    <?php echo $column_right; ?></div>
+      <?php echo $description; ?>
+    </div>
+    <?php echo $column_right; ?>
+  </div>
 
 
     <?php include_once('filter_recipes_list.tpl'); ?>
