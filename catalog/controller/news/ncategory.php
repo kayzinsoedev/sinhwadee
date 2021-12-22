@@ -336,7 +336,7 @@ class ControllerNewsNcategory extends Controller {
 
 
 							 /*pagination for sauce, ingredient list */
-							 $recipes_limit = 4;
+							 $recipes_limit = 10;
 
 			 				 $filter_recipes_pagination = new RecipePagination();
 			 		 		 $filter_recipes_pagination->total = $news_total;
@@ -895,11 +895,10 @@ class ControllerNewsNcategory extends Controller {
 
 
 									/*pagination for above filter */
-									$limit = 4;
+									$limit = 10;
  									$start = ($page - 1) * $limit;
 
  									//$data['article'] = array_slice($data['article'], $start, $limit);
-
 
 									$url = '';
 									$pagination = new RecipePagination();

@@ -115,7 +115,8 @@ body.product-category #filter-groups .panel, #filter-groups .list-group, #filter
 
 body.information-information.iid-4 .fixed-header,
 body.information-information.iid-7 .fixed-header,
-body.information-information.iid-8 .fixed-header
+body.information-information.iid-8 .fixed-header,
+body.information-information.iid-16 .fixed-header
 {
     background: white;
     position: absolute !important;
