@@ -494,6 +494,11 @@ class ControllerNewsNcategory extends Controller {
   	}
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
 
+
+		$this->load->model('tool/image');
+		$data['logo'] = $this->model_tool_image->resize($this->config->get('config_no_image'), '450', '450');
+
+
 		if(isset($this->request->get['route'])) {
 			if(strpos(strtolower($this->request->get['route']), 'getPageContent')) {
 				$this->response->redirect($this->url->link('news/ncategory'));

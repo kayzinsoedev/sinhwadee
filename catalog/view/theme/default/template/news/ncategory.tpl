@@ -45,7 +45,6 @@
 					<?php } else { ?>
 
 						<?php if ($articles['thumb']) { ?>
-
 						<?php if($cat_id == "59" || $cat_id == "61"){ ?>
 								<a href="<?php echo $articles['href']; ?>">
 										<?php if(!empty($articles['thumb'])){ ?>
@@ -66,7 +65,12 @@
 								</a>
 						<?php }else{ ?>
 							<div>
-										<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
+										<?php if(!empty($articles['thumb'])){ ?>
+														<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?php echo $articles['thumb']; ?>');" data-pop="<?php echo $articles['thumb']; ?>"></div>
+										<?php }else{ ?>
+														<div class="cover-bg center-bg pd-b80p" style="background-image:url('<?= $logo; ?>');"> </div>
+										<?php  } ?>
+
 										<div class="cover-bg center-bg pd-b80p hide">
 													<img src="<?php echo $articles['thumb']; ?>" class="img-responsive"/ data-pop="<?php echo $articles['thumb']; ?>">
 										</div>
