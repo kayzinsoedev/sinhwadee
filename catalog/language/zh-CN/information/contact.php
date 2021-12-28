@@ -14,7 +14,7 @@ $_['text_fax']       = '传真';
 $_['text_open']      = '营业时间';
 $_['text_comment']   = '评论';
 $_['text_success']   = '<p>您的查询已成功发送到商店的店主 ！</p>';
-$_['text_store_email']      = 'Email';
+$_['text_store_email']      = '邮件';
 
 // Entry
 $_['entry_name']     = '您的姓名';
@@ -22,6 +22,7 @@ $_['entry_email']    = '电子邮件地址';
 $_['entry_enquiry']  = '查询';
 $_['entry_subject']  = '事项';
 $_['entry_captcha']  = '请在下面的框中输入代码';
+$_['entry_telephone']  = '联络号码';
 
 // Email
 $_['email_subject']  = '查询 %s';
