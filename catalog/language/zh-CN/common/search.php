@@ -1,3 +1,3 @@
 <?php
 // Text
-$_['text_search'] = '搜索';
+$_['text_search'] = '产品搜寻';
