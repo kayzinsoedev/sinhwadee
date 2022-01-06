@@ -14,3 +14,12 @@ $_['text_posted_pon']   = 'Posted on';
 $_['text_posted_in']    = 'Added in';
 $_['text_updated_on']   = 'Updated on';
 $_['go_to_headlines']   = 'Go to Education';
+
+
+$_['keyword']   = '关键词';
+$_['sauces']   = '酱汁';
+$_['cooking_method']   = '烹调方法';
+$_['ingredient']   = '材料';
+$_['all_sauces']   = '全部的酱汁';
+$_['all_cooking_method']   = '全部的烹调方法';
+$_['all_ingredient']   = '全部的材料';

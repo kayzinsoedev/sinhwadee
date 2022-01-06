@@ -57,7 +57,7 @@
           },
 
         nav: true,
-        navText: ['<div class="pointer absolute position-top-left h100 slider-nav slider-nav-left hover-show"><div class="absolute position-center-center navs"><img src="image/catalog/project/general/prev-active.png" alt="previous" /></div></div>', 
+        navText: ['<div class="pointer absolute position-top-left h100 slider-nav slider-nav-left hover-show"><div class="absolute position-center-center navs"><img src="image/catalog/project/general/prev-active.png" alt="previous" /></div></div>',
                 '<div class="pointer absolute position-top-right h100 slider-nav slider-nav-right hover-show"><div class="absolute position-center-center navs"><img src="image/catalog/project/general/next-active.png" alt="next"/></div></div>'],
         dots: false,
         dotsClass: 'slider-dots slider-custom-dots absolute float-sm-right list-inline text-center',

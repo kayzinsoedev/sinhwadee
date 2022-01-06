@@ -423,6 +423,16 @@ class ControllerNewsNcategory extends Controller {
 			}
 			/*recipes page */
 
+
+			$data['keyword'] = $this->language->get('keyword');
+			$data['sauces'] = $this->language->get('sauces');
+			$data['cooking_method'] = $this->language->get('cooking_method');
+			$data['ingredient'] = $this->language->get('ingredient');
+			$data['all_sauces'] = $this->language->get('all_sauces');
+			$data['all_cooking_method'] = $this->language->get('all_cooking_method');
+			$data['all_ingredient'] = $this->language->get('all_ingredient');
+
+
 			if (!$this->config->get('ncategory_bnews_tplpick')) {
 				if (version_compare(VERSION, '2.2.0.0') >= 0) {
 					// debug($data['filter_recipes_list']);die;

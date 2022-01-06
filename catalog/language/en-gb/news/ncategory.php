@@ -14,3 +14,11 @@ $_['text_posted_pon']   = 'Posted on';
 $_['text_posted_in']    = 'Added in';
 $_['text_updated_on']   = 'Updated on';
 $_['go_to_headlines']   = 'Go to Recipes';
+
+$_['keyword']   = 'Keyword';
+$_['sauces']   = 'Sauces';
+$_['cooking_method']   = 'Cooking Method';
+$_['ingredient']   = 'Ingredient';
+$_['all_sauces']   = 'All Sauces';
+$_['all_cooking_method']   = 'All Cooking Method';
+$_['all_ingredient']   = 'All Ingredient';

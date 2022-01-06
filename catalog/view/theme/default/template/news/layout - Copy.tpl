@@ -15,11 +15,11 @@
       <?php if(isset($route)){ ?>
       <?php if($route != "news/article" ){ ?>
       <div class="container-fluid">
-            <!--<form action="<?=$action;?>" method="get">-->
+            <form action="<?=$action;?>" method="post">
                   <div class="row filter-section">
                       <div class="keyword-filter-option">
                           <div class="form-group">
-                              <label for="recipes_sauce" class="recipes-filter"><?php echo $keyword;?></label>
+                              <label for="recipes_sauce" class="recipes-filter">Keyword</label>
                               <input type="text" class="form-control" placeholder="" name="keyword" value="<?=$keyword;?>">
                           </div>
                       </div>
@@ -27,9 +27,9 @@
                   <div class="row filter-section">
            						 <div class="filter-option">
            								 <div class="form-group">
-           										<label for="recipes_sauce" class="recipes-filter"><?php echo $sauces;?></label>
+           										<label for="recipes_sauce" class="recipes-filter">Sauces</label>
            											<select name="recipes_sauce" class="form-control">
-                                  <option value="all"><?php echo $all_sauces;?></option>
+                                  <option value="all">All Sauces</option>
            												<?php foreach($recipes_sauces as $key=> $recipes_sauce){ ?>
                                         <?php if($recipes_sauce['id'] === $recipes_filter_sauce){ ?>
                                             <?php $selected ="selected"; ?>
@@ -44,9 +44,9 @@
            							</div>
            						 <div class="filter-option">
            								 <div class="form-group">
-           											<label for="recipes_sauce" class="recipes-filter"><?php echo $cooking_method;?></label>
+           											<label for="recipes_sauce" class="recipes-filter">Cooking Method</label>
            												<select name="recipes_cooking_method" class="form-control">
-                                         <option value="all"><?php echo $all_cooking_method;?></option>
+                                         <option value="all">All Cooking Method</option>
            												 <?php foreach($recipes_cooking_methods as $key=> $recipes_cooking_method){ ?>
 
                                          <?php if($recipes_cooking_method['id'] === $recipes_filter_cooking_method){ ?>
@@ -63,9 +63,9 @@
            						 </div>
            						 <div class="filter-option">
            								<div class="form-group">
-           										 <label for="recipes_sauce" class="recipes-filter"><?php echo $ingredient;?></label>
+           										 <label for="recipes_sauce" class="recipes-filter">Main Ingredients</label>
            											 <select name="recipes_main_ingredient" class="form-control">
-                                        <option value="all"><?php echo $all_ingredient;?></option>
+                                        <option value="all">All Main Ingredients</option>
            												 <?php foreach($recipes_main_ingredients as $key=> $recipes_main_ingredient){ ?>
                                        <?php if($recipes_main_ingredient['id'] === $recipes_filter_main_ingredient){ ?>
                                            <?php $selected ="selected"; ?>
@@ -83,14 +83,15 @@
 
                <div class="row filter-btn">
                    <a href="index.php?route=news/ncategory&ncat=59" class="recipes-clear-bn">Clear</a>
-                   <button class="recipes-filter-btn">Search</button>
+                   <input type="submit" class="recipes-filter-btn" value="Search">
                </div>
-            <!--</form>-->
+            </form>
         </div>
         <?php } ?>
         <?php } ?>
 
   <?php } ?>
+
 
 
   <br>
@@ -105,35 +106,15 @@
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
     <div id="content" class="<?php echo $class; ?>">
-      <?php echo $description; ?>
-    </div>
-    <?php echo $column_right; ?>
-  </div>
+      <?php echo $description; ?></div>
+    <?php echo $column_right; ?></div>
+
 
 
     <?php include_once('filter_recipes_list.tpl'); ?>
 
 
+
     <?php echo $content_bottom; ?>
 </div>
-<script>
-    $('.recipes-filter-btn').on('click',function(){
-     var url = '<?= $action; ?>';
-
-     if($("input[name='keyword']").val()){
-         url += '&keyword='+$("input[name='keyword']").val();
-     }
-
-     if($("select[name='recipes_sauce']").val()){
-         url += '&recipes_sauce='+$("select[name='recipes_sauce']").val();
-     }
-     if($("select[name='recipes_cooking_method']").val()){
-         url += '&recipes_cooking_method='+$("select[name='recipes_cooking_method']").val();
-     }
-     if($("select[name='recipes_main_ingredient']").val()){
-         url += '&recipes_main_ingredient='+$("select[name='recipes_main_ingredient']").val();
-     }
-     window.location.href=url;
-    });
-</script>
 <?php echo $footer; ?>
