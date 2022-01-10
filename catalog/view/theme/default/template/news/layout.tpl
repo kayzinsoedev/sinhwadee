@@ -20,7 +20,7 @@
                       <div class="keyword-filter-option">
                           <div class="form-group">
                               <label for="recipes_sauce" class="recipes-filter"><?php echo $keyword;?></label>
-                              <input type="text" class="form-control" placeholder="" name="keyword" value="<?=$keyword;?>">
+                              <input type="text" class="form-control" placeholder="" name="keyword" value="<?=$input_keyword;?>">
                           </div>
                       </div>
                   </div>

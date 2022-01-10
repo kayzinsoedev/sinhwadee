@@ -177,6 +177,7 @@ class ControllerNewsNcategory extends Controller {
 							||isset($this->request->get['recipes_main_ingredient'])
 							||isset($this->request->get['keyword'])
 					  ){
+
 						/*if(isset($this->request->get['recipes_sauce'])
 							||isset($this->request->get['sauce'])
 							//||isset($this->request->get['recipes_cooking_method'])
@@ -373,10 +374,6 @@ class ControllerNewsNcategory extends Controller {
 				$data['description'] = $this->getPageContent($settings);
 			}
 
-
-
-
-
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
@@ -390,7 +387,6 @@ class ControllerNewsNcategory extends Controller {
 
 
 			if($data['cat_id'] == "59"){  /*recipes page */
-
 						$data['keyword'] = isset($this->request->get['keyword']) ? $this->request->get['keyword'] : null ;
 						$data['recipes_filter_sauce'] = isset($this->request->get['recipes_sauce']) ? $this->request->get['recipes_sauce'] : null ;
 						$data['recipes_filter_cooking_method'] = isset($this->request->get['recipes_cooking_method']) ? $this->request->get['recipes_cooking_method'] : null ;
@@ -432,6 +428,7 @@ class ControllerNewsNcategory extends Controller {
 			$data['all_cooking_method'] = $this->language->get('all_cooking_method');
 			$data['all_ingredient'] = $this->language->get('all_ingredient');
 
+			$data['input_keyword'] = isset($this->request->get['keyword']) ? $this->request->get['keyword'] : null ;
 
 			if (!$this->config->get('ncategory_bnews_tplpick')) {
 				if (version_compare(VERSION, '2.2.0.0') >= 0) {
@@ -503,6 +500,7 @@ class ControllerNewsNcategory extends Controller {
 		}
   	}
 	protected function getPageContent($settings,$news_ids=null,$keyword=null) {
+
 
 
 		$this->load->model('tool/image');
@@ -674,7 +672,6 @@ class ControllerNewsNcategory extends Controller {
 				$results = $this->model_catalog_news->getNews($sdata);
 			}
 
-			// debug(count($results));die;
 
 			foreach ($results as $result) {
 				$name = (in_array("name", $elements) && $result['title']) ? $result['title'] : '';
