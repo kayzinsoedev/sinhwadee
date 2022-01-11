@@ -427,6 +427,10 @@ class ControllerNewsNcategory extends Controller {
 			$data['all_sauces'] = $this->language->get('all_sauces');
 			$data['all_cooking_method'] = $this->language->get('all_cooking_method');
 			$data['all_ingredient'] = $this->language->get('all_ingredient');
+			$data['search_btn'] = $this->language->get('search_btn');
+			$data['clear_btn'] = $this->language->get('clear_btn');
+
+
 
 			$data['input_keyword'] = isset($this->request->get['keyword']) ? $this->request->get['keyword'] : null ;
 

@@ -22,3 +22,5 @@ $_['ingredient']   = 'Ingredient';
 $_['all_sauces']   = 'All Sauces';
 $_['all_cooking_method']   = 'All Cooking Method';
 $_['all_ingredient']   = 'All Ingredient';
+$_['search_btn']   = 'Search';
+$_['clear_btn']   = 'Clear';

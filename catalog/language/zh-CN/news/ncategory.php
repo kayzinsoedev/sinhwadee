@@ -23,3 +23,5 @@ $_['ingredient']   = '材料';
 $_['all_sauces']   = '全部的酱汁';
 $_['all_cooking_method']   = '全部的烹调方法';
 $_['all_ingredient']   = '全部的材料';
+$_['search_btn']   = '搜寻';
+$_['clear_btn']   = '清除';

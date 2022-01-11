@@ -82,8 +82,8 @@
            			 </div>
 
                <div class="row filter-btn">
-                   <a href="index.php?route=news/ncategory&ncat=59" class="recipes-clear-bn">Clear</a>
-                   <button class="recipes-filter-btn">Search</button>
+                   <a href="index.php?route=news/ncategory&ncat=59" class="recipes-clear-bn"><?php echo $clear_btn;?></a>
+                   <button class="recipes-filter-btn"><?php echo $search_btn;?></button>
                </div>
             <!--</form>-->
         </div>
